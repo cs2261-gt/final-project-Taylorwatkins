@@ -6,6 +6,7 @@
 extern int hOff;
 extern int vOff;
 extern int winG;
+extern int loseG;
 extern OBJ_ATTR shadowOAM[128];
 extern ANISPRITE pikachu;
 

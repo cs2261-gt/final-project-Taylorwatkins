@@ -1,5 +1,7 @@
 #include "myLib.h"
 #include "game.h"
+#include "collisions.h"
+#include "collisionLose.h"
 // Variables
 int hOff;
 int vOff;
@@ -7,6 +9,7 @@ OBJ_ATTR shadowOAM[128];
 ANISPRITE climber;
 ANISPRITE rocks;
 int winG;
+int loseG;
 
 void initGame() {
 
@@ -14,6 +17,7 @@ void initGame() {
     vOff = MAPHEIGHT - SCREENHEIGHT;
     hOff = 0;
     winG = 0;
+    loseG = 0;
 
     initPlayer();
 }
@@ -48,104 +52,69 @@ void initPlayer() {
 void updatePlayer() {
 
     if(BUTTON_HELD(BUTTON_UP)) {
-        if (climber.worldRow > 0 ){
-        //&& collisionmapBitmap[OFFSET(climber.worldCol, climber.worldRow - climber.rdel, MAPWIDTH)] 
-        //&& collisionmapBitmap[OFFSET(climber.worldCol + climber.width - 1, climber.worldRow - climber.rdel, MAPWIDTH)]) {
+        if (climber.worldRow > 0 
+        && collisionsBitmap[OFFSET(climber.worldCol, climber.worldRow - climber.rdel, MAPWIDTH)] 
+        && collisionsBitmap[OFFSET(climber.worldCol + climber.width - 1, climber.worldRow - climber.rdel, MAPWIDTH)]){
             climber.worldRow -= climber.rdel; 
   
-        /*Delete that 1, then:
-            for TODO 1.0, make sure climber doesn't go off the map here,
-            for TODO 2.2, check collision map here as well*/
-
-            // Update climber's world position if the above is true
-
-
 
             if (vOff >= 0 && climber.screenRow < SCREENHEIGHT / 2) {
                 vOff--;
-            } /*Delete that 1, then:
-                for TODO 1.0, make sure the background offset doesn't show past the edge,
-                and only update the offset variables if climber is in the right spot*/
-                // Update background offset variable if the above is true
+            } 
             
         }
         if (climber.worldRow == 0) {
             winG = 1;
         }
+
     }
     if(BUTTON_HELD(BUTTON_DOWN)) {
-        if (climber.worldRow < MAPHEIGHT - climber.height){
-        //&& collisionmapBitmap[OFFSET(climber.worldCol, climber.worldRow + climber.height - 1 - climber.rdel, MAPWIDTH)]
-        //&& collisionmapBitmap[OFFSET(climber.worldCol + climber.width - 1, climber.worldRow  + climber.height - 1 - climber.rdel, MAPWIDTH)]){
+        if (climber.worldRow < MAPHEIGHT - climber.height
+        && collisionsBitmap[OFFSET(climber.worldCol, climber.worldRow + climber.height - 1 + climber.rdel, MAPWIDTH)]
+        && collisionsBitmap[OFFSET(climber.worldCol + climber.width - 1, climber.worldRow  + climber.height - 1 + climber.rdel, MAPWIDTH)]){
             climber.worldRow += climber.rdel;
-       
-            /*Delete that 1, then:
-            for TODO 1.0, make sure climber doesn't go off the map here,
-            for TODO 2.2, check collision map here as well*/
-
-            // Update climber's world position if the above is true
-
-
 
             if (vOff < MAPHEIGHT - SCREENHEIGHT &&  climber.screenRow > SCREENHEIGHT / 2){
                 vOff++;
-                /*Delete that 1, then:
-                for TODO 1.0, make sure the background offset doesn't show past the edge,
-                and only update the offset variables if climber is in the right spot*/
-                // Update background offset variable if the above is true
             }
         }
+
     }
     if(BUTTON_HELD(BUTTON_LEFT)) {
-        if (climber.worldCol > 0 ){
-        //&& collisionmapBitmap[OFFSET(climber.worldCol - climber.cdel, climber.worldRow, MAPHEIGHT)]
-        //&& collisionmapBitmap[OFFSET(climber.worldCol - climber.cdel, climber.worldRow + climber.height - 1, MAPHEIGHT)]) {
+        if (climber.worldCol > 0 
+        && collisionsBitmap[OFFSET(climber.worldCol - climber.cdel, climber.worldRow, MAPWIDTH)]
+        && collisionsBitmap[OFFSET(climber.worldCol - climber.cdel, climber.worldRow + climber.height - 1, MAPWIDTH)]){
+
             climber.worldCol -= climber.cdel;
-    
-             /*Delete that 1, then:
-            for TODO 1.0, make sure climber doesn't go off the map here,
-            for TODO 2.2, check collision map here as well*/
-
-            // Update climber's world position if the above is true
-
-
 
             if (hOff >= 0 && climber.screenCol < SCREENWIDTH / 2) {
                 hOff--; 
-                /*Delete that 1, then:
-                for TODO 1.0, make sure the background offset doesn't show past the edge,
-                and only update the offset variables if climber is in the right spot*/
-                // Update background offset variable if the above is true
             }
+        }
+        if (!(collisionLoseBitmap[OFFSET(climber.worldCol, climber.worldRow, MAPWIDTH)]
+        && collisionLoseBitmap[OFFSET(climber.worldCol, climber.worldRow + climber.height - 1, MAPWIDTH)])) {
+            loseG = 1;
         }
     }
     if(BUTTON_HELD(BUTTON_RIGHT)) {
-        if (climber.worldCol < MAPWIDTH - climber.width) { 
-        //&& collisionmapBitmap[OFFSET(climber.worldCol + climber.width - 1 - climber.cdel, climber.worldRow, MAPHEIGHT)]
-        //&& collisionmapBitmap[OFFSET(climber.worldCol + climber.width - 1 - climber.cdel, climber.worldRow  + climber.height - 1, MAPHEIGHT)]){
+        if (climber.worldCol < MAPWIDTH - climber.width
+        && collisionsBitmap[OFFSET(climber.worldCol + climber.width - 1 + climber.cdel, climber.worldRow, MAPWIDTH)]
+        && collisionsBitmap[OFFSET(climber.worldCol + climber.width - 1 + climber.cdel, climber.worldRow  + climber.height - 1, MAPWIDTH)]) { 
             climber.worldCol += climber.cdel;
        
             
-
-
-
-
             if (hOff < MAPWIDTH - SCREENWIDTH &&  climber.screenCol > SCREENWIDTH / 2){
                 hOff++;
-                 /*Delete that 1, then:
-                for TODO 1.0, make sure the background offset doesn't show past the edge,
-                and only update the offset variables if climber is in the right spot*/
-                // Update background offset variable if the above is true
+
             }
         }
+
     }
 
     // TODO 1.0: Update screen row and screen col
 
     climber.screenRow = climber.worldRow - vOff;
     climber.screenCol = climber.worldCol - hOff;
-
-
 
 
     //animatePlayer();

@@ -119,6 +119,7 @@ int collision(int colA, int rowA, int widthA, int heightA, int colB, int rowB, i
 extern int hOff;
 extern int vOff;
 extern int winG;
+extern int loseG;
 extern OBJ_ATTR shadowOAM[128];
 extern ANISPRITE pikachu;
 
@@ -131,6 +132,14 @@ void updatePlayer();
 void animatePlayer();
 void drawPlayer();
 # 3 "game.c" 2
+# 1 "collisions.h" 1
+# 20 "collisions.h"
+extern const unsigned short collisionsBitmap[131072];
+# 4 "game.c" 2
+# 1 "collisionLose.h" 1
+# 20 "collisionLose.h"
+extern const unsigned short collisionLoseBitmap[131072];
+# 5 "game.c" 2
 
 int hOff;
 int vOff;
@@ -138,6 +147,7 @@ OBJ_ATTR shadowOAM[128];
 ANISPRITE climber;
 ANISPRITE rocks;
 int winG;
+int loseG;
 
 void initGame() {
 
@@ -145,6 +155,7 @@ void initGame() {
     vOff = 512 - 160;
     hOff = 0;
     winG = 0;
+    loseG = 0;
 
     initPlayer();
 }
@@ -179,80 +190,69 @@ void initPlayer() {
 void updatePlayer() {
 
     if((~((*(volatile unsigned short *)0x04000130)) & ((1<<6)))) {
-        if (climber.worldRow > 0 ){
-
-
+        if (climber.worldRow > 0
+        && collisionsBitmap[((climber.worldRow - climber.rdel)*(256)+(climber.worldCol))]
+        && collisionsBitmap[((climber.worldRow - climber.rdel)*(256)+(climber.worldCol + climber.width - 1))]){
             climber.worldRow -= climber.rdel;
-# 64 "game.c"
+
+
             if (vOff >= 0 && climber.screenRow < 160 / 2) {
                 vOff--;
             }
-
-
-
 
         }
         if (climber.worldRow == 0) {
             winG = 1;
         }
+
     }
     if((~((*(volatile unsigned short *)0x04000130)) & ((1<<7)))) {
-        if (climber.worldRow < 512 - climber.height){
-
-
+        if (climber.worldRow < 512 - climber.height
+        && collisionsBitmap[((climber.worldRow + climber.height - 1 + climber.rdel)*(256)+(climber.worldCol))]
+        && collisionsBitmap[((climber.worldRow + climber.height - 1 + climber.rdel)*(256)+(climber.worldCol + climber.width - 1))]){
             climber.worldRow += climber.rdel;
-# 90 "game.c"
+
             if (vOff < 512 - 160 && climber.screenRow > 160 / 2){
                 vOff++;
-
-
-
-
             }
         }
+
     }
     if((~((*(volatile unsigned short *)0x04000130)) & ((1<<5)))) {
-        if (climber.worldCol > 0 ){
-
+        if (climber.worldCol > 0
+        && collisionsBitmap[((climber.worldRow)*(256)+(climber.worldCol - climber.cdel))]
+        && collisionsBitmap[((climber.worldRow + climber.height - 1)*(256)+(climber.worldCol - climber.cdel))]){
 
             climber.worldCol -= climber.cdel;
-# 113 "game.c"
+
             if (hOff >= 0 && climber.screenCol < 240 / 2) {
                 hOff--;
-
-
-
-
             }
+        }
+        if (!(collisionLoseBitmap[((climber.worldRow)*(256)+(climber.worldCol))]
+        && collisionLoseBitmap[((climber.worldRow + climber.height - 1)*(256)+(climber.worldCol))])) {
+            loseG = 1;
         }
     }
     if((~((*(volatile unsigned short *)0x04000130)) & ((1<<4)))) {
-        if (climber.worldCol < 256 - climber.width) {
-
-
+        if (climber.worldCol < 256 - climber.width
+        && collisionsBitmap[((climber.worldRow)*(256)+(climber.worldCol + climber.width - 1 + climber.cdel))]
+        && collisionsBitmap[((climber.worldRow + climber.height - 1)*(256)+(climber.worldCol + climber.width - 1 + climber.cdel))]) {
             climber.worldCol += climber.cdel;
-
-
-
-
 
 
             if (hOff < 256 - 240 && climber.screenCol > 240 / 2){
                 hOff++;
 
-
-
-
             }
         }
+
     }
 
 
 
     climber.screenRow = climber.worldRow - vOff;
     climber.screenCol = climber.worldCol - hOff;
-
-
 
 
 

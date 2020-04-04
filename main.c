@@ -146,7 +146,7 @@ void game() {
         goToPause();
     if (winG)
         goToWin();
-    if (BUTTON_PRESSED(BUTTON_DOWN))
+    if (loseG)
         goToLose(); 
 }
 

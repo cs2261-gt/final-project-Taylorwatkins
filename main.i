@@ -1408,6 +1408,7 @@ extern const unsigned short RCspritesheetPal[256];
 extern int hOff;
 extern int vOff;
 extern int winG;
+extern int loseG;
 extern OBJ_ATTR shadowOAM[128];
 extern ANISPRITE pikachu;
 
@@ -1557,7 +1558,7 @@ void game() {
         goToPause();
     if (winG)
         goToWin();
-    if ((!(~(oldButtons)&((1<<7))) && (~buttons & ((1<<7)))))
+    if (loseG)
         goToLose();
 }
 
