@@ -8,7 +8,7 @@
 	.eabi_attribute 30, 2
 	.eabi_attribute 34, 0
 	.eabi_attribute 18, 4
-	.file	"startbg.c"
+	.file	"startBG.c"
 	.text
 	.global	startBGPal
 	.global	startBGMap
@@ -22,8 +22,8 @@ startBGPal:
 	.short	32625
 	.short	31528
 	.short	32731
-	.short	31531
 	.short	32662
+	.short	31531
 	.short	32767
 	.short	31567
 	.short	32696
@@ -731,73 +731,6 @@ startBGMap:
 	.short	0
 	.short	0
 	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
 	.short	107
 	.short	108
 	.short	109
@@ -810,38 +743,105 @@ startBGMap:
 	.short	116
 	.short	117
 	.short	118
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	0
 	.short	119
 	.short	120
 	.short	121
 	.short	122
 	.short	123
 	.short	124
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
 	.short	125
 	.short	126
 	.short	127
 	.short	128
 	.short	129
 	.short	130
+	.short	131
+	.short	132
+	.short	133
+	.short	134
+	.short	135
+	.short	136
+	.short	137
+	.short	138
+	.short	139
+	.short	140
+	.short	141
+	.short	142
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	143
+	.short	144
+	.short	145
+	.short	146
+	.short	147
+	.short	148
+	.short	149
+	.short	150
+	.short	151
+	.short	152
+	.short	153
+	.short	154
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	155
+	.short	156
+	.short	157
+	.short	158
+	.short	159
+	.short	160
+	.short	161
+	.short	162
+	.short	163
+	.short	164
+	.short	165
+	.short	166
 	.short	0
 	.short	0
 	.short	0
@@ -1302,7 +1302,7 @@ startBGMap:
 	.short	0
 	.short	0
 	.type	startBGTiles, %object
-	.size	startBGTiles, 4192
+	.size	startBGTiles, 5344
 startBGTiles:
 	.short	0
 	.short	0
@@ -1337,8 +1337,8 @@ startBGTiles:
 	.short	-28672
 	.short	26214
 	.short	0
-	.short	29760
-	.short	13312
+	.short	30032
+	.short	13568
 	.short	26214
 	.short	26215
 	.short	26214
@@ -1368,10 +1368,10 @@ startBGTiles:
 	.short	26214
 	.short	26214
 	.short	26214
-	.short	1098
+	.short	1370
 	.short	0
 	.short	26214
-	.short	70
+	.short	86
 	.short	26214
 	.short	-31130
 	.short	26214
@@ -1390,7 +1390,7 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	0
-	.short	86
+	.short	70
 	.short	0
 	.short	1638
 	.short	0
@@ -1399,22 +1399,22 @@ startBGTiles:
 	.short	26214
 	.short	6
 	.short	26214
-	.short	86
+	.short	70
 	.short	0
 	.short	0
-	.short	16384
+	.short	20480
 	.short	26214
-	.short	16384
+	.short	20480
 	.short	26214
-	.short	16384
+	.short	20480
 	.short	26214
-	.short	16384
+	.short	20480
 	.short	26214
-	.short	16384
+	.short	20480
 	.short	26214
-	.short	16384
+	.short	20480
 	.short	26214
-	.short	16384
+	.short	20480
 	.short	26214
 	.short	0
 	.short	0
@@ -1435,11 +1435,11 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	22
-	.short	16384
+	.short	20480
 	.short	22
 	.short	28672
 	.short	22
-	.short	20480
+	.short	16384
 	.short	22
 	.short	12288
 	.short	22
@@ -1450,11 +1450,11 @@ startBGTiles:
 	.short	24576
 	.short	0
 	.short	0
-	.short	4
+	.short	5
 	.short	0
 	.short	7
 	.short	0
-	.short	5
+	.short	4
 	.short	0
 	.short	3
 	.short	0
@@ -1467,41 +1467,41 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	0
-	.short	26176
+	.short	26192
 	.short	0
-	.short	26176
+	.short	26192
 	.short	0
-	.short	26176
+	.short	26192
 	.short	0
-	.short	26176
+	.short	26192
 	.short	0
-	.short	26176
+	.short	26192
 	.short	0
-	.short	26176
+	.short	26192
 	.short	0
-	.short	26176
-	.short	0
-	.short	0
-	.short	26214
-	.short	17482
-	.short	26214
-	.short	26214
-	.short	26214
-	.short	26214
-	.short	26214
-	.short	26214
-	.short	26214
-	.short	26214
-	.short	26214
-	.short	26214
-	.short	26214
-	.short	26214
+	.short	26192
 	.short	0
 	.short	0
-	.short	4
+	.short	26214
+	.short	21850
+	.short	26214
+	.short	26214
+	.short	26214
+	.short	26214
+	.short	26214
+	.short	26214
+	.short	26214
+	.short	26214
+	.short	26214
+	.short	26214
+	.short	26214
+	.short	26214
+	.short	0
+	.short	0
+	.short	5
 	.short	0
 	.short	-31130
-	.short	4
+	.short	5
 	.short	26214
 	.short	150
 	.short	26214
@@ -1515,19 +1515,19 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	0
-	.short	16384
+	.short	20480
 	.short	0
-	.short	16384
+	.short	20480
 	.short	0
-	.short	16384
+	.short	20480
 	.short	0
-	.short	16384
+	.short	20480
 	.short	1
-	.short	16384
-	.short	70
-	.short	16384
+	.short	20480
+	.short	86
+	.short	20480
 	.short	102
-	.short	16384
+	.short	20480
 	.short	0
 	.short	0
 	.short	26214
@@ -1544,7 +1544,7 @@ startBGTiles:
 	.short	22
 	.short	26214
 	.short	22
-	.short	25600
+	.short	25856
 	.short	26214
 	.short	26624
 	.short	26214
@@ -1556,7 +1556,7 @@ startBGTiles:
 	.short	26214
 	.short	26272
 	.short	26214
-	.short	26192
+	.short	26176
 	.short	26214
 	.short	26160
 	.short	26214
@@ -1567,15 +1567,15 @@ startBGTiles:
 	.short	26214
 	.short	26214
 	.short	2150
-	.short	25856
+	.short	25600
 	.short	102
 	.short	24576
 	.short	166
 	.short	-28672
-	.short	70
+	.short	86
 	.short	-32768
 	.short	38
-	.short	20480
+	.short	16384
 	.short	26214
 	.short	102
 	.short	26214
@@ -1592,17 +1592,17 @@ startBGTiles:
 	.short	9830
 	.short	26214
 	.short	9830
-	.short	16384
+	.short	20480
 	.short	26214
-	.short	16384
+	.short	20480
 	.short	26214
-	.short	16384
+	.short	20480
 	.short	26214
-	.short	16384
+	.short	20480
 	.short	26214
-	.short	16384
+	.short	20480
 	.short	26214
-	.short	16384
+	.short	20480
 	.short	26214
 	.short	0
 	.short	0
@@ -1657,7 +1657,7 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	22
-	.short	25600
+	.short	25856
 	.short	22
 	.short	26368
 	.short	22
@@ -1688,7 +1688,7 @@ startBGTiles:
 	.short	26214
 	.short	26214
 	.short	26211
-	.short	70
+	.short	86
 	.short	0
 	.short	166
 	.short	0
@@ -1700,26 +1700,26 @@ startBGTiles:
 	.short	0
 	.short	102
 	.short	0
-	.short	1126
+	.short	1382
 	.short	0
 	.short	1894
 	.short	0
 	.short	0
-	.short	26176
+	.short	26192
 	.short	0
-	.short	26176
+	.short	26192
 	.short	0
-	.short	26176
+	.short	26192
 	.short	0
-	.short	26176
+	.short	26192
 	.short	0
-	.short	26176
+	.short	26192
 	.short	0
-	.short	26176
+	.short	26192
 	.short	0
-	.short	26176
+	.short	26192
 	.short	0
-	.short	26176
+	.short	26192
 	.short	26214
 	.short	26214
 	.short	26214
@@ -1753,17 +1753,17 @@ startBGTiles:
 	.short	0
 	.short	26217
 	.short	358
-	.short	16384
+	.short	20480
 	.short	1638
-	.short	16384
-	.short	18022
-	.short	16384
+	.short	20480
+	.short	22118
+	.short	20480
 	.short	-22938
-	.short	16384
+	.short	20480
 	.short	-27034
-	.short	16384
+	.short	20480
 	.short	26214
-	.short	16384
+	.short	20480
 	.short	26214
 	.short	0
 	.short	26214
@@ -1828,38 +1828,38 @@ startBGTiles:
 	.short	26214
 	.short	26160
 	.short	26214
-	.short	26192
+	.short	26176
 	.short	26214
 	.short	26128
 	.short	26214
 	.short	38
-	.short	20480
-	.short	70
-	.short	20480
+	.short	16384
+	.short	86
+	.short	16384
 	.short	118
-	.short	20480
+	.short	16384
 	.short	166
-	.short	20480
+	.short	16384
 	.short	150
-	.short	20480
-	.short	1126
-	.short	20480
+	.short	16384
+	.short	1382
+	.short	16384
 	.short	1638
 	.short	0
 	.short	26214
-	.short	4
+	.short	5
 	.short	26214
-	.short	18022
+	.short	22118
 	.short	26214
-	.short	18022
+	.short	22118
 	.short	26214
-	.short	18022
+	.short	22118
 	.short	26214
-	.short	18022
+	.short	22118
 	.short	26214
-	.short	18022
+	.short	22118
 	.short	26214
-	.short	18022
+	.short	22118
 	.short	0
 	.short	0
 	.short	0
@@ -1897,11 +1897,11 @@ startBGTiles:
 	.short	26214
 	.short	9830
 	.short	0
-	.short	26176
+	.short	26192
 	.short	0
 	.short	26128
 	.short	0
-	.short	26192
+	.short	26176
 	.short	0
 	.short	26256
 	.short	0
@@ -1911,7 +1911,7 @@ startBGTiles:
 	.short	0
 	.short	26208
 	.short	0
-	.short	26212
+	.short	26213
 	.short	26214
 	.short	26209
 	.short	26214
@@ -1921,14 +1921,14 @@ startBGTiles:
 	.short	26214
 	.short	26160
 	.short	-27034
-	.short	26192
-	.short	22118
+	.short	26176
+	.short	18022
 	.short	26272
 	.short	5734
 	.short	26224
-	.short	18022
-	.short	26176
-	.short	1382
+	.short	22118
+	.short	26192
+	.short	1126
 	.short	0
 	.short	870
 	.short	0
@@ -1938,7 +1938,7 @@ startBGTiles:
 	.short	0
 	.short	1638
 	.short	0
-	.short	18022
+	.short	22118
 	.short	0
 	.short	5734
 	.short	0
@@ -1963,35 +1963,35 @@ startBGTiles:
 	.short	0
 	.short	26216
 	.short	0
-	.short	26213
+	.short	26212
 	.short	0
-	.short	26213
+	.short	26212
 	.short	0
-	.short	26213
+	.short	26212
 	.short	0
-	.short	26213
+	.short	26212
 	.short	0
-	.short	26213
+	.short	26212
 	.short	0
-	.short	26213
+	.short	26212
 	.short	0
 	.short	26211
 	.short	26214
 	.short	2
 	.short	26214
-	.short	4
+	.short	5
 	.short	26214
-	.short	4
+	.short	5
 	.short	26214
-	.short	4
+	.short	5
 	.short	26214
-	.short	4
+	.short	5
 	.short	26214
-	.short	4
-	.short	26214
-	.short	2
+	.short	5
 	.short	26214
 	.short	2
+	.short	26214
+	.short	2
 	.short	26112
 	.short	26214
 	.short	26112
@@ -2024,24 +2024,24 @@ startBGTiles:
 	.short	0
 	.short	9830
 	.short	0
-	.short	26176
+	.short	26192
 	.short	26214
 	.short	26112
 	.short	26214
 	.short	25344
 	.short	26214
-	.short	25600
+	.short	25856
 	.short	26214
 	.short	24576
 	.short	26214
-	.short	16384
+	.short	20480
 	.short	26214
 	.short	0
 	.short	26211
 	.short	0
 	.short	26208
 	.short	26214
-	.short	86
+	.short	70
 	.short	26214
 	.short	30310
 	.short	26214
@@ -2062,14 +2062,14 @@ startBGTiles:
 	.short	0
 	.short	41
 	.short	0
-	.short	1382
+	.short	1126
 	.short	0
 	.short	26214
-	.short	4
+	.short	5
 	.short	26214
 	.short	134
 	.short	26214
-	.short	18022
+	.short	22118
 	.short	26214
 	.short	26214
 	.short	0
@@ -2086,12 +2086,12 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	0
-	.short	5
+	.short	4
 	.short	0
 	.short	0
 	.short	26215
 	.short	0
-	.short	26213
+	.short	26212
 	.short	0
 	.short	26211
 	.short	0
@@ -2100,7 +2100,7 @@ startBGTiles:
 	.short	26214
 	.short	0
 	.short	26214
-	.short	16384
+	.short	20480
 	.short	26214
 	.short	28672
 	.short	26214
@@ -2117,8 +2117,8 @@ startBGTiles:
 	.short	2662
 	.short	25344
 	.short	1894
-	.short	25856
-	.short	1126
+	.short	25600
+	.short	1382
 	.short	24832
 	.short	-27034
 	.short	0
@@ -2127,7 +2127,7 @@ startBGTiles:
 	.short	26214
 	.short	0
 	.short	26214
-	.short	4
+	.short	5
 	.short	26214
 	.short	7
 	.short	26214
@@ -2140,7 +2140,7 @@ startBGTiles:
 	.short	26217
 	.short	0
 	.short	26214
-	.short	16384
+	.short	20480
 	.short	26214
 	.short	26368
 	.short	26214
@@ -2188,18 +2188,18 @@ startBGTiles:
 	.short	26214
 	.short	26214
 	.short	26214
-	.short	26213
+	.short	26212
 	.short	26214
-	.short	26176
+	.short	26192
 	.short	26214
 	.short	-32768
 	.short	26214
 	.short	0
-	.short	26212
+	.short	26213
 	.short	0
 	.short	26624
 	.short	0
-	.short	16384
+	.short	20480
 	.short	54
 	.short	0
 	.short	2406
@@ -2215,7 +2215,7 @@ startBGTiles:
 	.short	26214
 	.short	1638
 	.short	26214
-	.short	18022
+	.short	22118
 	.short	-24576
 	.short	26214
 	.short	-32768
@@ -2228,14 +2228,14 @@ startBGTiles:
 	.short	26214
 	.short	25088
 	.short	26214
-	.short	25600
+	.short	25856
 	.short	26214
 	.short	24832
 	.short	26214
 	.short	102
-	.short	25600
+	.short	25856
 	.short	102
-	.short	25600
+	.short	25856
 	.short	102
 	.short	24576
 	.short	54
@@ -2246,14 +2246,14 @@ startBGTiles:
 	.short	-28672
 	.short	118
 	.short	12288
-	.short	70
-	.short	20480
+	.short	86
+	.short	16384
 	.short	26214
 	.short	6
 	.short	26214
 	.short	6
 	.short	26214
-	.short	70
+	.short	86
 	.short	26214
 	.short	22
 	.short	26214
@@ -2294,14 +2294,14 @@ startBGTiles:
 	.short	26214
 	.short	26368
 	.short	26214
-	.short	16384
+	.short	20480
 	.short	26214
 	.short	26214
-	.short	17766
+	.short	21606
 	.short	26214
 	.short	0
 	.short	26214
-	.short	1158
+	.short	1414
 	.short	26214
 	.short	-27034
 	.short	26214
@@ -2320,7 +2320,7 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	0
-	.short	70
+	.short	86
 	.short	0
 	.short	614
 	.short	0
@@ -2336,13 +2336,13 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	0
-	.short	26176
+	.short	26192
 	.short	26214
-	.short	26176
+	.short	26192
 	.short	26214
-	.short	26176
+	.short	26192
 	.short	26214
-	.short	26176
+	.short	26192
 	.short	26214
 	.short	0
 	.short	0
@@ -2362,19 +2362,19 @@ startBGTiles:
 	.short	26214
 	.short	26240
 	.short	26214
-	.short	25600
+	.short	25856
 	.short	26214
 	.short	0
 	.short	26211
 	.short	0
-	.short	26192
-	.short	86
+	.short	26176
+	.short	70
 	.short	24832
-	.short	86
+	.short	70
 	.short	12288
-	.short	86
+	.short	70
 	.short	8192
-	.short	86
+	.short	70
 	.short	0
 	.short	26214
 	.short	-31130
@@ -2398,7 +2398,7 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	0
-	.short	4
+	.short	5
 	.short	0
 	.short	7
 	.short	0
@@ -2408,7 +2408,7 @@ startBGTiles:
 	.short	0
 	.short	3
 	.short	0
-	.short	25856
+	.short	25600
 	.short	26214
 	.short	26880
 	.short	26214
@@ -2418,16 +2418,16 @@ startBGTiles:
 	.short	26214
 	.short	26112
 	.short	26214
-	.short	26176
+	.short	26192
 	.short	26214
 	.short	26224
 	.short	26214
-	.short	26192
+	.short	26176
 	.short	26214
 	.short	6
 	.short	4096
 	.short	6
-	.short	16384
+	.short	20480
 	.short	6
 	.short	8192
 	.short	6
@@ -2455,7 +2455,7 @@ startBGTiles:
 	.short	26214
 	.short	1638
 	.short	26214
-	.short	18022
+	.short	22118
 	.short	0
 	.short	26214
 	.short	0
@@ -2465,13 +2465,13 @@ startBGTiles:
 	.short	0
 	.short	26211
 	.short	0
-	.short	26213
+	.short	26212
 	.short	0
-	.short	26213
+	.short	26212
 	.short	0
-	.short	26213
+	.short	26212
 	.short	0
-	.short	26213
+	.short	26212
 	.short	-27034
 	.short	0
 	.short	26214
@@ -2483,20 +2483,18 @@ startBGTiles:
 	.short	26214
 	.short	2
 	.short	26214
-	.short	4
+	.short	5
 	.short	26214
-	.short	4
+	.short	5
 	.short	26214
-	.short	4
-	.short	26176
+	.short	5
+	.short	26192
 	.short	26214
-	.short	26176
-	.short	26214
-	.short	26144
+	.short	26192
 	.short	26214
 	.short	26144
 	.short	26214
-	.short	26112
+	.short	26144
 	.short	26214
 	.short	26112
 	.short	26214
@@ -2504,15 +2502,17 @@ startBGTiles:
 	.short	26214
 	.short	26112
 	.short	26214
-	.short	86
+	.short	26112
+	.short	26214
+	.short	70
 	.short	0
-	.short	86
+	.short	70
 	.short	0
-	.short	86
+	.short	70
 	.short	0
-	.short	86
+	.short	70
 	.short	0
-	.short	86
+	.short	70
 	.short	0
 	.short	134
 	.short	0
@@ -2524,7 +2524,7 @@ startBGTiles:
 	.short	26214
 	.short	26216
 	.short	26214
-	.short	26213
+	.short	26212
 	.short	26214
 	.short	26218
 	.short	26214
@@ -2560,7 +2560,7 @@ startBGTiles:
 	.short	26214
 	.short	26208
 	.short	26214
-	.short	26212
+	.short	26213
 	.short	26214
 	.short	26215
 	.short	26214
@@ -2571,7 +2571,7 @@ startBGTiles:
 	.short	26214
 	.short	5734
 	.short	26214
-	.short	22118
+	.short	18022
 	.short	26214
 	.short	-27034
 	.short	26214
@@ -2585,53 +2585,53 @@ startBGTiles:
 	.short	26214
 	.short	26214
 	.short	0
-	.short	26176
+	.short	26192
 	.short	0
-	.short	26176
+	.short	26192
 	.short	0
-	.short	26176
+	.short	26192
 	.short	0
-	.short	26176
+	.short	26192
 	.short	0
-	.short	26176
+	.short	26192
 	.short	2
-	.short	26176
+	.short	26192
 	.short	7
-	.short	26176
+	.short	26192
 	.short	10
-	.short	26176
+	.short	26192
 	.short	0
-	.short	26213
+	.short	26212
 	.short	0
-	.short	26213
+	.short	26212
 	.short	0
-	.short	26213
+	.short	26212
 	.short	0
-	.short	26213
+	.short	26212
 	.short	0
-	.short	26213
+	.short	26212
 	.short	0
-	.short	26213
+	.short	26212
 	.short	0
-	.short	26213
+	.short	26212
 	.short	0
-	.short	26213
+	.short	26212
 	.short	26214
-	.short	4
+	.short	5
 	.short	26214
-	.short	4
+	.short	5
 	.short	26214
-	.short	4
+	.short	5
 	.short	26214
-	.short	4
+	.short	5
 	.short	26214
-	.short	4
+	.short	5
 	.short	26214
-	.short	4
+	.short	5
 	.short	26214
-	.short	4
+	.short	5
 	.short	26214
-	.short	4
+	.short	5
 	.short	26624
 	.short	26214
 	.short	26368
@@ -2647,9 +2647,9 @@ startBGTiles:
 	.short	0
 	.short	26208
 	.short	0
-	.short	26176
+	.short	26192
 	.short	102
-	.short	16384
+	.short	20480
 	.short	870
 	.short	25088
 	.short	26214
@@ -2673,16 +2673,16 @@ startBGTiles:
 	.short	26214
 	.short	-27034
 	.short	26214
-	.short	18022
+	.short	22118
 	.short	26214
 	.short	2406
 	.short	26214
-	.short	1126
+	.short	1382
 	.short	26214
-	.short	70
+	.short	86
 	.short	7
 	.short	0
-	.short	4
+	.short	5
 	.short	0
 	.short	0
 	.short	0
@@ -2705,11 +2705,11 @@ startBGTiles:
 	.short	0
 	.short	8192
 	.short	0
-	.short	16384
+	.short	20480
 	.short	0
 	.short	4096
 	.short	0
-	.short	20480
+	.short	16384
 	.short	0
 	.short	12288
 	.short	26217
@@ -2742,40 +2742,40 @@ startBGTiles:
 	.short	0
 	.short	3
 	.short	0
-	.short	5
+	.short	4
 	.short	0
 	.short	26211
 	.short	26214
 	.short	26216
 	.short	26214
-	.short	26213
+	.short	26212
 	.short	26214
 	.short	26209
 	.short	26214
 	.short	26215
 	.short	26214
-	.short	26212
+	.short	26213
 	.short	26214
 	.short	26210
 	.short	26214
 	.short	26208
 	.short	26214
 	.short	8
-	.short	26176
+	.short	26192
 	.short	6
-	.short	26176
+	.short	26192
 	.short	6
-	.short	26176
+	.short	26192
 	.short	6
-	.short	26176
-	.short	70
-	.short	26176
-	.short	22
-	.short	26176
+	.short	26192
 	.short	86
-	.short	26176
+	.short	26192
+	.short	22
+	.short	26192
+	.short	70
+	.short	26192
 	.short	150
-	.short	26176
+	.short	26192
 	.short	0
 	.short	24576
 	.short	0
@@ -2794,14 +2794,14 @@ startBGTiles:
 	.short	0
 	.short	26214
 	.short	26214
-	.short	26213
+	.short	26212
 	.short	26214
 	.short	25376
 	.short	26214
 	.short	0
 	.short	26209
 	.short	0
-	.short	16384
+	.short	20480
 	.short	0
 	.short	0
 	.short	0
@@ -2816,7 +2816,7 @@ startBGTiles:
 	.short	26214
 	.short	26214
 	.short	26214
-	.short	26244
+	.short	26245
 	.short	26214
 	.short	0
 	.short	0
@@ -2832,7 +2832,7 @@ startBGTiles:
 	.short	26214
 	.short	26214
 	.short	1894
-	.short	17542
+	.short	21894
 	.short	0
 	.short	0
 	.short	0
@@ -2841,7 +2841,7 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	26214
-	.short	4
+	.short	5
 	.short	2150
 	.short	0
 	.short	35
@@ -2895,7 +2895,7 @@ startBGTiles:
 	.short	0
 	.short	24576
 	.short	0
-	.short	25600
+	.short	25856
 	.short	0
 	.short	0
 	.short	0
@@ -2908,7 +2908,7 @@ startBGTiles:
 	.short	0
 	.short	7
 	.short	0
-	.short	4
+	.short	5
 	.short	0
 	.short	2
 	.short	0
@@ -2937,13 +2937,503 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	102
-	.short	26176
+	.short	26192
 	.short	102
-	.short	26176
+	.short	26192
 	.short	614
+	.short	26192
+	.short	1382
+	.short	26192
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	26212
+	.short	0
+	.short	26212
+	.short	0
+	.short	26212
+	.short	0
+	.short	26212
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	26214
+	.short	5
+	.short	26214
+	.short	5
+	.short	26214
+	.short	5
+	.short	26214
+	.short	5
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	26112
+	.short	26214
+	.short	26112
+	.short	26214
+	.short	26112
+	.short	26214
+	.short	26112
+	.short	26214
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	9830
+	.short	0
+	.short	9830
+	.short	0
+	.short	9830
+	.short	0
+	.short	9830
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	26112
+	.short	1382
+	.short	26112
+	.short	9824
+	.short	26112
+	.short	9824
+	.short	26112
+	.short	9824
+	.short	26112
+	.short	10086
+	.short	26112
+	.short	8192
+	.short	26112
+	.short	8192
+	.short	26112
+	.short	8192
+	.short	0
+	.short	0
+	.short	21862
+	.short	-26992
+	.short	22118
+	.short	25193
+	.short	102
+	.short	25190
+	.short	102
+	.short	26214
+	.short	102
+	.short	102
+	.short	102
+	.short	24678
+	.short	102
+	.short	24681
+	.short	0
+	.short	0
+	.short	25856
+	.short	150
+	.short	13830
+	.short	9317
+	.short	26118
+	.short	20480
+	.short	26886
+	.short	70
+	.short	-32768
+	.short	2150
+	.short	6
+	.short	1639
+	.short	13830
+	.short	10336
+	.short	0
+	.short	0
+	.short	-31126
+	.short	28672
+	.short	25622
+	.short	16389
+	.short	54
+	.short	28672
+	.short	5734
+	.short	0
+	.short	26256
+	.short	7
+	.short	25600
+	.short	4100
+	.short	25878
+	.short	28679
+	.short	18020
+	.short	0
+	.short	24998
+	.short	25857
+	.short	24854
+	.short	26116
+	.short	358
+	.short	26144
+	.short	26216
+	.short	26149
+	.short	26624
+	.short	26152
+	.short	25878
+	.short	26147
+	.short	26534
+	.short	26120
+	.short	8192
+	.short	102
+	.short	8326
+	.short	102
+	.short	10338
+	.short	-24474
+	.short	9826
+	.short	12390
+	.short	9830
+	.short	12390
+	.short	8192
+	.short	12390
+	.short	9824
+	.short	12390
+	.short	10592
+	.short	-24474
+	.short	0
+	.short	0
+	.short	22120
+	.short	26624
+	.short	25430
+	.short	22144
+	.short	25430
+	.short	22069
+	.short	26214
+	.short	22069
+	.short	86
+	.short	22064
+	.short	25686
+	.short	22069
+	.short	26710
+	.short	30373
+	.short	16384
+	.short	70
+	.short	16422
+	.short	70
+	.short	25955
+	.short	102
+	.short	16995
+	.short	70
+	.short	16384
+	.short	70
+	.short	16384
+	.short	70
+	.short	16996
+	.short	70
+	.short	16484
+	.short	70
+	.short	13984
+	.short	0
+	.short	1632
+	.short	26272
+	.short	13925
+	.short	5221
+	.short	9824
+	.short	5217
+	.short	9824
+	.short	5217
+	.short	9824
+	.short	5217
+	.short	9824
+	.short	5217
+	.short	9824
+	.short	5223
+	.short	0
+	.short	0
+	.short	24842
+	.short	68
+	.short	24950
+	.short	102
+	.short	24902
+	.short	9
+	.short	24902
+	.short	4
+	.short	24902
+	.short	4
+	.short	24902
+	.short	4
+	.short	24950
+	.short	4
+	.short	22112
+	.short	0
+	.short	22112
+	.short	17249
+	.short	22112
+	.short	21345
+	.short	22112
+	.short	21601
+	.short	22112
+	.short	21601
+	.short	22112
+	.short	21601
+	.short	22112
+	.short	21601
+	.short	22112
+	.short	21601
+	.short	0
+	.short	0
+	.short	-24490
+	.short	2150
+	.short	25222
+	.short	22081
+	.short	25910
+	.short	3
+	.short	24630
+	.short	358
+	.short	54
+	.short	30313
+	.short	54
+	.short	17984
+	.short	25142
+	.short	30289
+	.short	1637
+	.short	0
+	.short	1637
+	.short	17766
+	.short	22118
+	.short	18022
+	.short	1637
+	.short	1382
+	.short	1637
+	.short	102
+	.short	1637
+	.short	102
+	.short	1637
+	.short	102
+	.short	1637
+	.short	102
+	.short	0
+	.short	0
+	.short	17763
+	.short	-24554
+	.short	17763
+	.short	26390
+	.short	17763
+	.short	24854
+	.short	17763
+	.short	24854
+	.short	17763
+	.short	24854
+	.short	17763
+	.short	24854
+	.short	-31389
+	.short	25878
+	.short	0
+	.short	1637
+	.short	358
+	.short	1637
+	.short	22036
+	.short	22118
+	.short	5652
+	.short	1637
+	.short	4
+	.short	1637
+	.short	4
+	.short	1637
+	.short	5716
+	.short	1637
+	.short	22104
+	.short	1637
+	.short	355
+	.short	0
+	.short	0
+	.short	-22934
+	.short	20835
+	.short	24902
+	.short	4451
+	.short	24902
+	.short	4451
+	.short	24902
+	.short	4451
+	.short	24902
+	.short	4451
+	.short	24902
+	.short	29027
+	.short	24902
+	.short	0
+	.short	0
+	.short	13840
+	.short	1380
+	.short	13847
+	.short	2149
+	.short	17940
+	.short	869
+	.short	17940
+	.short	869
+	.short	17940
+	.short	869
+	.short	17940
+	.short	869
+	.short	17943
+	.short	869
+	.short	0
+	.short	0
+	.short	-27035
+	.short	0
+	.short	25910
+	.short	4
+	.short	102
+	.short	0
+	.short	18025
+	.short	0
+	.short	26240
+	.short	8
+	.short	26368
+	.short	6
+	.short	24630
+	.short	8
+	.short	26112
+	.short	8192
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	102
+	.short	26160
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	24834
+	.short	150
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	-31132
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	-31126
+	.short	25088
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	8246
+	.short	102
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	5732
+	.short	26624
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	20566
+	.short	102
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	9824
 	.short	26176
-	.short	1126
-	.short	26176
 	.short	0
 	.short	0
 	.short	0
@@ -2953,28 +3443,12 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	0
-	.short	26213
-	.short	0
-	.short	26213
-	.short	0
-	.short	26213
-	.short	0
-	.short	26213
 	.short	0
 	.short	0
 	.short	0
 	.short	0
 	.short	0
-	.short	0
-	.short	0
-	.short	0
-	.short	26214
-	.short	4
-	.short	26214
-	.short	4
-	.short	26214
-	.short	4
-	.short	26214
+	.short	24836
 	.short	4
 	.short	0
 	.short	0
@@ -2984,14 +3458,14 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	0
-	.short	26112
-	.short	26214
-	.short	26112
-	.short	26214
-	.short	26112
-	.short	26214
-	.short	26112
-	.short	26214
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	22112
+	.short	21601
 	.short	0
 	.short	0
 	.short	0
@@ -3000,13 +3474,115 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	0
-	.short	9830
 	.short	0
-	.short	9830
 	.short	0
-	.short	9830
 	.short	0
-	.short	9830
+	.short	0
+	.short	0
+	.short	0
+	.short	16438
+	.short	2150
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	22112
+	.short	102
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	-27803
+	.short	-24554
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	2662
+	.short	22112
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	355
+	.short	18020
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	17936
+	.short	869
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	-27039
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
+	.short	0
 	.short	0
 	.short	0
 	.short	0
@@ -3027,11 +3603,11 @@ startBGTiles:
 	.short	24576
 	.short	-22938
 	.short	24576
-	.short	26694
+	.short	26710
 	.short	24576
-	.short	25926
+	.short	25686
 	.short	24576
-	.short	26694
+	.short	26710
 	.short	0
 	.short	0
 	.short	0
@@ -3042,12 +3618,12 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	0
-	.short	18018
-	.short	26629
+	.short	22114
+	.short	26628
 	.short	26210
-	.short	18085
-	.short	18018
-	.short	17968
+	.short	22180
+	.short	22114
+	.short	22064
 	.short	0
 	.short	0
 	.short	0
@@ -3058,12 +3634,12 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	0
-	.short	70
+	.short	86
 	.short	-22936
 	.short	4195
 	.short	26150
-	.short	21603
-	.short	86
+	.short	17763
+	.short	70
 	.short	0
 	.short	0
 	.short	0
@@ -3075,7 +3651,7 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	26880
-	.short	70
+	.short	86
 	.short	9776
 	.short	102
 	.short	30304
@@ -3093,9 +3669,9 @@ startBGTiles:
 	.short	1632
 	.short	24678
 	.short	1632
-	.short	25702
+	.short	25958
 	.short	13920
-	.short	24580
+	.short	24581
 	.short	0
 	.short	0
 	.short	0
@@ -3104,14 +3680,14 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	0
-	.short	70
+	.short	86
 	.short	0
-	.short	16454
+	.short	20566
 	.short	870
 	.short	24678
-	.short	-31115
-	.short	25670
-	.short	13893
+	.short	-31116
+	.short	25942
+	.short	13908
 	.short	0
 	.short	0
 	.short	0
@@ -3121,13 +3697,13 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	0
-	.short	22096
-	.short	18018
-	.short	22100
+	.short	17984
+	.short	22114
+	.short	17989
 	.short	26210
-	.short	26212
+	.short	26213
 	.short	1634
-	.short	22096
+	.short	17984
 	.short	0
 	.short	0
 	.short	0
@@ -3137,13 +3713,13 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	24576
-	.short	70
+	.short	86
 	.short	24576
-	.short	16454
-	.short	25600
+	.short	20566
+	.short	25856
 	.short	24678
 	.short	24576
-	.short	25158
+	.short	25174
 	.short	0
 	.short	0
 	.short	0
@@ -3170,11 +3746,11 @@ startBGTiles:
 	.short	0
 	.short	-22938
 	.short	9824
-	.short	26694
+	.short	26710
 	.short	9826
-	.short	25926
+	.short	25686
 	.short	9826
-	.short	26694
+	.short	26710
 	.short	9826
 	.short	0
 	.short	0
@@ -3202,22 +3778,22 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	0
-	.short	1616
+	.short	1600
 	.short	0
 	.short	2352
 	.short	0
 	.short	2144
 	.short	0
 	.short	24576
-	.short	22118
+	.short	18022
 	.short	24576
-	.short	70
+	.short	86
 	.short	24576
-	.short	70
+	.short	86
 	.short	24576
-	.short	70
+	.short	86
 	.short	24576
-	.short	70
+	.short	86
 	.short	0
 	.short	0
 	.short	0
@@ -3227,27 +3803,27 @@ startBGTiles:
 	.short	1632
 	.short	26160
 	.short	1632
-	.short	17968
+	.short	22064
 	.short	1632
-	.short	17968
+	.short	22064
 	.short	1632
-	.short	18080
+	.short	22176
 	.short	1632
-	.short	25856
+	.short	25600
 	.short	0
 	.short	0
 	.short	0
 	.short	0
 	.short	0
 	.short	0
-	.short	17510
+	.short	21862
 	.short	9830
 	.short	0
-	.short	26212
-	.short	1125
+	.short	26213
+	.short	1380
 	.short	25344
-	.short	5224
-	.short	25894
+	.short	5480
+	.short	25638
 	.short	22
 	.short	-22941
 	.short	0
@@ -3256,23 +3832,23 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	0
-	.short	26192
+	.short	26176
 	.short	3
 	.short	27136
 	.short	102
-	.short	4
+	.short	5
 	.short	102
 	.short	1584
 	.short	102
 	.short	26144
-	.short	70
+	.short	86
 	.short	0
 	.short	0
 	.short	0
 	.short	0
 	.short	0
 	.short	0
-	.short	26176
+	.short	26192
 	.short	24630
 	.short	28672
 	.short	24678
@@ -3281,21 +3857,21 @@ startBGTiles:
 	.short	1632
 	.short	24678
 	.short	26880
-	.short	-24506
+	.short	-24490
 	.short	0
 	.short	0
 	.short	0
 	.short	0
 	.short	0
 	.short	0
-	.short	70
+	.short	86
 	.short	13921
-	.short	24646
+	.short	24662
 	.short	13993
-	.short	25670
-	.short	13893
-	.short	25158
-	.short	13896
+	.short	25942
+	.short	13908
+	.short	25174
+	.short	13912
 	.short	12390
 	.short	13990
 	.short	0
@@ -3305,15 +3881,15 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	1634
-	.short	22096
+	.short	17984
 	.short	1634
-	.short	22096
+	.short	17984
 	.short	1634
-	.short	22096
+	.short	17984
 	.short	1634
-	.short	22096
+	.short	17984
 	.short	1634
-	.short	26176
+	.short	26192
 	.short	0
 	.short	0
 	.short	0
@@ -3321,13 +3897,13 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	24576
-	.short	25158
+	.short	25174
 	.short	24576
-	.short	25158
+	.short	25174
 	.short	24576
-	.short	25158
+	.short	25174
 	.short	24576
-	.short	24646
+	.short	24662
 	.short	-24576
 	.short	28774
 	.short	0
@@ -3352,15 +3928,15 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	0
-	.short	22118
+	.short	18022
 	.short	9824
-	.short	70
+	.short	86
 	.short	9824
-	.short	70
+	.short	86
 	.short	9824
-	.short	70
+	.short	86
 	.short	9824
-	.short	70
+	.short	86
 	.short	9824
 	.short	0
 	.short	0
@@ -3368,16 +3944,16 @@ startBGTiles:
 	.short	0
 	.short	0
 	.short	0
-	.short	25408
+	.short	25424
 	.short	27174
 	.short	24936
-	.short	25638
+	.short	25894
 	.short	24681
 	.short	24614
 	.short	24675
 	.short	-28634
-	.short	14436
-	.short	20518
+	.short	14437
+	.short	16422
 	.short	0
 	.short	26112
 	.short	0
@@ -3388,7 +3964,7 @@ startBGTiles:
 	.short	0
 	.short	1895
 	.short	0
-	.short	1128
+	.short	1384
 	.short	0
 	.short	102
 	.short	0

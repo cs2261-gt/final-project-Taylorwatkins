@@ -29,7 +29,7 @@ goToStart:
 	ldr	r1, .L4+4
 	mov	lr, pc
 	bx	r4
-	mov	r3, #2096
+	mov	r3, #2672
 	mov	r2, #100663296
 	mov	r0, #3
 	ldr	r1, .L4+8
@@ -673,4 +673,6 @@ instructions:
 	.comm	oldButtons,2,2
 	.comm	buttons,2,2
 	.comm	state,4,4
+	.comm	timeToNextBall,4,4
+	.comm	time,4,4
 	.ident	"GCC: (devkitARM release 53) 9.1.0"

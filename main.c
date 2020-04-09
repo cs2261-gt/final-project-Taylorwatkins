@@ -82,6 +82,7 @@ void goToStart() {
     int hOff = 0;
     int vOff = 0;
     
+    
 
     DMANow(3, startBGPal, PALETTE, 256);
     DMANow(3, startBGTiles, &CHARBLOCK[0], startBGTilesLen / 2);

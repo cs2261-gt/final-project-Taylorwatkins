@@ -1334,7 +1334,7 @@ int collision(int colA, int rowA, int widthA, int heightA, int colB, int rowB, i
 # 4 "main.c" 2
 # 1 "startbg.h" 1
 # 22 "startbg.h"
-extern const unsigned short startBGTiles[2096];
+extern const unsigned short startBGTiles[2672];
 
 
 extern const unsigned short startBGMap[1024];
@@ -1405,12 +1405,56 @@ extern const unsigned short RCspritesheetPal[256];
 
 
 
+
+
+typedef struct {
+    int screenRow;
+    int screenCol;
+    int worldRow;
+    int worldCol;
+    int rdel;
+    int cdel;
+    int width;
+    int height;
+    int aniCounter;
+    int aniState;
+    int prevAniState;
+    int curFrame;
+    int numFrames;
+    int hide;
+    int active;
+
+} ROCK;
+
+typedef struct {
+    int screenRow;
+    int screenCol;
+    int worldRow;
+    int worldCol;
+    int rdel;
+    int cdel;
+    int width;
+    int height;
+    int aniCounter;
+    int aniState;
+    int prevAniState;
+    int curFrame;
+    int numFrames;
+    int hide;
+    int active;
+    int prevWorldCol;
+} SPIDER;
+
+
 extern int hOff;
 extern int vOff;
 extern int winG;
 extern int loseG;
 extern OBJ_ATTR shadowOAM[128];
-extern ANISPRITE pikachu;
+extern ANISPRITE climber;
+extern ROCK rocks[5];
+int time;
+int timeToNextBall;
 
 
 void initGame();
@@ -1495,8 +1539,9 @@ void goToStart() {
     int vOff = 0;
 
 
+
     DMANow(3, startBGPal, ((unsigned short *)0x5000000), 256);
-    DMANow(3, startBGTiles, &((charblock *)0x6000000)[0], 4192 / 2);
+    DMANow(3, startBGTiles, &((charblock *)0x6000000)[0], 5344 / 2);
     DMANow(3, startBGMap, &((screenblock *)0x6000000)[28], 1024 * 4);
 
 
