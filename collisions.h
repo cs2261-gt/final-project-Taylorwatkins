@@ -3,11 +3,11 @@
 
 //======================================================================
 //
-//	collisions, 256x512@16, 
+//	collisions, 256x1024@16, 
 //	+ bitmap not compressed
-//	Total size: 262144 = 262144
+//	Total size: 524288 = 524288
 //
-//	Time-stamp: 2020-04-04, 10:15:33
+//	Time-stamp: 2020-04-12, 14:23:41
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -16,8 +16,8 @@
 #ifndef GRIT_COLLISIONS_H
 #define GRIT_COLLISIONS_H
 
-#define collisionsBitmapLen 262144
-extern const unsigned short collisionsBitmap[131072];
+#define collisionsBitmapLen 524288
+extern const unsigned short collisionsBitmap[262144];
 
 #endif // GRIT_COLLISIONS_H
 

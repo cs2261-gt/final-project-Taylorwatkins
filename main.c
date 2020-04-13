@@ -5,10 +5,13 @@
 #include "loseBG.h"
 #include "pausebg.h"
 #include "winbg.h"
+#include "gameBGXL.h"
 #include "gameBG.h"
 #include "instructionBG.h"
-#include "RCspritesheet.h"
+#include "spritesheet.h"
 #include "game.h"
+#include "game2.h"
+
 
 // Prototypes
 void initialize();
@@ -18,6 +21,8 @@ void goToStart();
 void start();
 void goToGame();
 void game();
+void goToGame2();
+void game2();
 void goToPause();
 void pause();
 void goToWin();
@@ -28,7 +33,7 @@ void goToInstructions();
 void instructions();
 
 // States
-enum {START, GAME, PAUSE, WIN, LOSE, INSTRUCTIONS};
+enum {START, GAME, GAME2, PAUSE, WIN, LOSE, INSTRUCTIONS};
 int state;
 
 // Button Variables
@@ -54,6 +59,9 @@ int main() {
                 break;
             case GAME:
                 game();
+                break;
+            case GAME2:
+                game2();
                 break;
             case PAUSE:
                 pause();
@@ -104,25 +112,30 @@ void goToStart() {
 void start() {
 
     // State transitions
-    if (BUTTON_PRESSED(BUTTON_START)) {
+    if (BUTTON_PRESSED(BUTTON_LEFT)) {
         goToGame();
         initGame();
     }
-    if (BUTTON_PRESSED(BUTTON_SELECT)) {
+    if (BUTTON_PRESSED(BUTTON_RIGHT)) {
+        goToGame2();
+        initGame2();
+    }
+    if (BUTTON_PRESSED(BUTTON_UP)) {
         goToInstructions();
     }
 }
 
 void goToGame() {
-    DMANow(3, gameBGPal, PALETTE, 256);
-    DMANow(3, gameBGTiles, &CHARBLOCK[0], gameBGTilesLen / 2);
-    DMANow(3, gameBGMap, &SCREENBLOCK[30], 1024 * 4);
+    DMANow(3, gameBGXLPal, PALETTE, 256);
+    DMANow(3, gameBGXLTiles, &CHARBLOCK[0], gameBGXLTilesLen / 2);
+    DMANow(3, gameBGXLMap, &SCREENBLOCK[28], 1024 * 4);
     
+
 
     REG_BG0CNT= BG_CHARBLOCK(0) | BG_SCREENBLOCK(30) | BG_SIZE_TALL | BG_4BPP;
    
-    DMANow(3, RCspritesheetPal, SPRITEPALETTE, 256);
-    DMANow(3, RCspritesheetTiles, &CHARBLOCK[4], RCspritesheetTilesLen / 2);
+    DMANow(3, spritesheetPal, SPRITEPALETTE, 256);
+    DMANow(3, spritesheetTiles, &CHARBLOCK[4], spritesheetTilesLen / 2);
 
 	hideSprites();
 
@@ -148,6 +161,46 @@ void game() {
     if (winG)
         goToWin();
     if (loseG)
+        goToLose(); 
+}
+
+void goToGame2() {
+    DMANow(3, gameBGPal, PALETTE, 256);
+    DMANow(3, gameBGTiles, &CHARBLOCK[0], gameBGTilesLen / 2);
+    DMANow(3, gameBGMap, &SCREENBLOCK[28], 1024 * 4);
+    
+
+
+    REG_BG0CNT= BG_CHARBLOCK(0) | BG_SCREENBLOCK(28) | BG_SIZE_TALL | BG_4BPP;
+   
+    DMANow(3, spritesheetPal, SPRITEPALETTE, 256);
+    DMANow(3, spritesheetTiles, &CHARBLOCK[4], spritesheetTilesLen / 2);
+
+	hideSprites();
+
+    
+    REG_DISPCTL = MODE0 | BG0_ENABLE | SPRITE_ENABLE; 
+
+    state = GAME2;
+}
+
+// Runs every frame of the game state
+void game2() {
+
+
+
+    updateGame2();
+    drawGame2();
+
+    waitForVBlank();
+    DMANow(3, shadowOAM, OAM, 512);
+
+    // State transitions
+    if (BUTTON_PRESSED(BUTTON_START))
+        goToPause();
+    if (winG2)
+        goToWin();
+    if (loseG2)
         goToLose(); 
 }
 

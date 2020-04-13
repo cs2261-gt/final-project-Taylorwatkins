@@ -1,5 +1,5 @@
 // Constants
-#define MAPHEIGHT 512
+#define MAPHEIGHT 1024
 #define MAPWIDTH 256
 #define ROCKCOUNT 5
 #define SPIDERCOUNT 3

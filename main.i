@@ -1372,16 +1372,26 @@ extern const unsigned short winBGMap[1024];
 
 extern const unsigned short winBGPal[256];
 # 8 "main.c" 2
+# 1 "gameBGXL.h" 1
+# 22 "gameBGXL.h"
+extern const unsigned short gameBGXLTiles[14240];
+
+
+extern const unsigned short gameBGXLMap[4096];
+
+
+extern const unsigned short gameBGXLPal[256];
+# 9 "main.c" 2
 # 1 "gameBG.h" 1
 # 22 "gameBG.h"
-extern const unsigned short gameBGTiles[9056];
+extern const unsigned short gameBGTiles[2992];
 
 
 extern const unsigned short gameBGMap[2048];
 
 
 extern const unsigned short gameBGPal[256];
-# 9 "main.c" 2
+# 10 "main.c" 2
 # 1 "instructionBG.h" 1
 # 22 "instructionBG.h"
 extern const unsigned short instructionBGTiles[4096];
@@ -1391,14 +1401,14 @@ extern const unsigned short instructionBGMap[1024];
 
 
 extern const unsigned short instructionBGPal[256];
-# 10 "main.c" 2
-# 1 "RCspritesheet.h" 1
-# 21 "RCspritesheet.h"
-extern const unsigned short RCspritesheetTiles[16384];
-
-
-extern const unsigned short RCspritesheetPal[256];
 # 11 "main.c" 2
+# 1 "spritesheet.h" 1
+# 21 "spritesheet.h"
+extern const unsigned short spritesheetTiles[16384];
+
+
+extern const unsigned short spritesheetPal[256];
+# 12 "main.c" 2
 # 1 "game.h" 1
 
 
@@ -1464,7 +1474,43 @@ void initPlayer();
 void updatePlayer();
 void animatePlayer();
 void drawPlayer();
-# 12 "main.c" 2
+# 13 "main.c" 2
+# 1 "game2.h" 1
+
+
+
+typedef struct {
+    int screenRow;
+    int screenCol;
+    int worldRow;
+    int worldCol;
+    int rdel;
+    int cdel;
+    int width;
+    int height;
+    int aniCounter;
+    int aniState;
+    int prevAniState;
+    int curFrame;
+    int numFrames;
+    int hide;
+} PLAYER;
+
+extern int hOff;
+extern int vOff;
+extern int winG2;
+extern int loseG2;
+
+
+void initGame2();
+void updateGame2();
+void drawGame2();
+void initPlayer2();
+void updatePlayer2();
+void animatePlayer2();
+void drawPlayer2();
+# 14 "main.c" 2
+
 
 
 void initialize();
@@ -1474,6 +1520,8 @@ void goToStart();
 void start();
 void goToGame();
 void game();
+void goToGame2();
+void game2();
 void goToPause();
 void pause();
 void goToWin();
@@ -1484,7 +1532,7 @@ void goToInstructions();
 void instructions();
 
 
-enum {START, GAME, PAUSE, WIN, LOSE, INSTRUCTIONS};
+enum {START, GAME, GAME2, PAUSE, WIN, LOSE, INSTRUCTIONS};
 int state;
 
 
@@ -1510,6 +1558,9 @@ int main() {
                 break;
             case GAME:
                 game();
+                break;
+            case GAME2:
+                game2();
                 break;
             case PAUSE:
                 pause();
@@ -1560,25 +1611,30 @@ void goToStart() {
 void start() {
 
 
-    if ((!(~(oldButtons)&((1<<3))) && (~buttons & ((1<<3))))) {
+    if ((!(~(oldButtons)&((1<<5))) && (~buttons & ((1<<5))))) {
         goToGame();
         initGame();
     }
-    if ((!(~(oldButtons)&((1<<2))) && (~buttons & ((1<<2))))) {
+    if ((!(~(oldButtons)&((1<<4))) && (~buttons & ((1<<4))))) {
+        goToGame2();
+        initGame2();
+    }
+    if ((!(~(oldButtons)&((1<<6))) && (~buttons & ((1<<6))))) {
         goToInstructions();
     }
 }
 
 void goToGame() {
-    DMANow(3, gameBGPal, ((unsigned short *)0x5000000), 256);
-    DMANow(3, gameBGTiles, &((charblock *)0x6000000)[0], 18112 / 2);
-    DMANow(3, gameBGMap, &((screenblock *)0x6000000)[30], 1024 * 4);
+    DMANow(3, gameBGXLPal, ((unsigned short *)0x5000000), 256);
+    DMANow(3, gameBGXLTiles, &((charblock *)0x6000000)[0], 28480 / 2);
+    DMANow(3, gameBGXLMap, &((screenblock *)0x6000000)[28], 1024 * 4);
+
 
 
     (*(volatile unsigned short*)0x4000008)= ((0)<<2) | ((30)<<8) | (2<<14) | (0<<7);
 
-    DMANow(3, RCspritesheetPal, ((unsigned short *)0x5000200), 256);
-    DMANow(3, RCspritesheetTiles, &((charblock *)0x6000000)[4], 32768 / 2);
+    DMANow(3, spritesheetPal, ((unsigned short *)0x5000200), 256);
+    DMANow(3, spritesheetTiles, &((charblock *)0x6000000)[4], 32768 / 2);
 
  hideSprites();
 
@@ -1604,6 +1660,46 @@ void game() {
     if (winG)
         goToWin();
     if (loseG)
+        goToLose();
+}
+
+void goToGame2() {
+    DMANow(3, gameBGPal, ((unsigned short *)0x5000000), 256);
+    DMANow(3, gameBGTiles, &((charblock *)0x6000000)[0], 5984 / 2);
+    DMANow(3, gameBGMap, &((screenblock *)0x6000000)[28], 1024 * 4);
+
+
+
+    (*(volatile unsigned short*)0x4000008)= ((0)<<2) | ((28)<<8) | (2<<14) | (0<<7);
+
+    DMANow(3, spritesheetPal, ((unsigned short *)0x5000200), 256);
+    DMANow(3, spritesheetTiles, &((charblock *)0x6000000)[4], 32768 / 2);
+
+ hideSprites();
+
+
+    (*(unsigned short *)0x4000000) = 0 | (1<<8) | (1<<12);
+
+    state = GAME2;
+}
+
+
+void game2() {
+
+
+
+    updateGame2();
+    drawGame2();
+
+    waitForVBlank();
+    DMANow(3, shadowOAM, ((OBJ_ATTR*)(0x7000000)), 512);
+
+
+    if ((!(~(oldButtons)&((1<<3))) && (~buttons & ((1<<3)))))
+        goToPause();
+    if (winG2)
+        goToWin();
+    if (loseG2)
         goToLose();
 }
 

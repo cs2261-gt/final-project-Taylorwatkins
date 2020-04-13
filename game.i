@@ -178,11 +178,11 @@ void drawPlayer();
 # 3 "game.c" 2
 # 1 "collisions.h" 1
 # 20 "collisions.h"
-extern const unsigned short collisionsBitmap[131072];
+extern const unsigned short collisionsBitmap[262144];
 # 4 "game.c" 2
 # 1 "collisionLose.h" 1
 # 20 "collisionLose.h"
-extern const unsigned short collisionLoseBitmap[131072];
+extern const unsigned short collisionLoseBitmap[262144];
 # 5 "game.c" 2
 
 int hOff;
@@ -195,11 +195,17 @@ int winG;
 int loseG;
 int time;
 int timeToNextBall;
+int count;
+int playerVOff;
+int screenBlock;
 
 void initGame() {
 
 
-    vOff = 512 - 160;
+    count = 0;
+    vOff = 512 - 160 - 1;
+    playerVOff = 1024 + 160;
+    screenBlock = 30;
     hOff = 0;
     winG = 0;
     loseG = 0;
@@ -223,7 +229,22 @@ void updateGame() {
     for (int i = 0; i < 3; i++)
   updateSpider(&spiders[i]);
 
+    if (count > 256 && screenBlock != 28) {
 
+  screenBlock--;
+  count = 0;
+  vOff += 256;
+  (*(volatile unsigned short*)0x4000008) = ((0)<<2) | ((screenBlock)<<8) | (2<<14);
+
+
+ }
+
+    if (playerVOff < 256) {
+        playerVOff -= 256;
+    }
+
+ (*(volatile unsigned short *)0x04000010) = hOff;
+ (*(volatile unsigned short *)0x04000012) = vOff;
 
 }
 
@@ -234,11 +255,11 @@ void drawGame() {
   drawRocks(&rocks[i]);
 
 
-  drawSpiders();
+ drawSpiders();
 
 
-    (*(volatile unsigned short *)0x04000010) = hOff;
-    (*(volatile unsigned short *)0x04000012) = vOff;
+
+
 }
 
 void initPlayer() {
@@ -246,62 +267,58 @@ void initPlayer() {
     climber.height = 16;
     climber.rdel = 1;
     climber.cdel = 1;
-    climber.worldRow = vOff + 160 - climber.height;
-    climber.worldCol = hOff;
+    climber.worldRow = 1024 - climber.height;
+    climber.worldCol = 240 / 2;
+
+
 }
 
 
 void updatePlayer() {
 
     if((~((*(volatile unsigned short *)0x04000130)) & ((1<<6)))) {
-        if (climber.worldRow > 0
-        && collisionsBitmap[((climber.worldRow - climber.rdel)*(256)+(climber.worldCol))]
+        if (climber.worldRow > 0 && collisionsBitmap[((climber.worldRow - climber.rdel)*(256)+(climber.worldCol))]
         && collisionsBitmap[((climber.worldRow - climber.rdel)*(256)+(climber.worldCol + climber.width - 1))]){
+
             climber.worldRow -= climber.rdel;
 
-
-            if (vOff >= 0 && climber.screenRow < 160 / 2) {
-                vOff--;
+            if (vOff > 0 && climber.screenRow < 160 / 2) {
+                count++;
+          vOff--;
+                playerVOff--;
             }
 
-        }
+
         if (climber.worldRow == 0) {
-            winG = 1;
+            winG = 0;
         }
 
     }
-    if((~((*(volatile unsigned short *)0x04000130)) & ((1<<7)))) {
-        if (climber.worldRow < 512 - climber.height
-        && collisionsBitmap[((climber.worldRow + climber.height - 1 + climber.rdel)*(256)+(climber.worldCol))]
-        && collisionsBitmap[((climber.worldRow + climber.height - 1 + climber.rdel)*(256)+(climber.worldCol + climber.width - 1))]){
-            climber.worldRow += climber.rdel;
+}
 
-            if (vOff < 512 - 160 && climber.screenRow > 160 / 2){
-                vOff++;
-            }
-        }
-
-    }
     if((~((*(volatile unsigned short *)0x04000130)) & ((1<<5)))) {
         if (climber.worldCol > 0
         && collisionsBitmap[((climber.worldRow)*(256)+(climber.worldCol - climber.cdel))]
-        && collisionsBitmap[((climber.worldRow + climber.height - 1)*(256)+(climber.worldCol - climber.cdel))]){
+        && collisionsBitmap[((climber.worldRow + climber.height - 1)*(256)+(climber.worldCol - climber.cdel))] ){
 
             climber.worldCol -= climber.cdel;
 
             if (hOff >= 0 && climber.screenCol < 240 / 2) {
                 hOff--;
             }
+
+
         }
-        if (!(collisionLoseBitmap[((climber.worldRow)*(256)+(climber.worldCol))]
-        && collisionLoseBitmap[((climber.worldRow + climber.height - 1)*(256)+(climber.worldCol))])) {
-            loseG = 1;
-        }
+
+
+
+
     }
     if((~((*(volatile unsigned short *)0x04000130)) & ((1<<4)))) {
         if (climber.worldCol < 256 - climber.width
         && collisionsBitmap[((climber.worldRow)*(256)+(climber.worldCol + climber.width - 1 + climber.cdel))]
-        && collisionsBitmap[((climber.worldRow + climber.height - 1)*(256)+(climber.worldCol + climber.width - 1 + climber.cdel))]) {
+        && collisionsBitmap[((climber.worldRow + climber.height - 1)*(256)+(climber.worldCol + climber.width - 1 + climber.cdel))]
+        ) {
             climber.worldCol += climber.cdel;
 
 
@@ -313,24 +330,9 @@ void updatePlayer() {
 
     }
 
-    if ((!(~(oldButtons)&((1<<0))) && (~buttons & ((1<<0))))) {
-        if (climber.worldRow > 0
-        && collisionsBitmap[((climber.worldRow - climber.rdel)*(256)+(climber.worldCol))]
-        && collisionsBitmap[((climber.worldRow - climber.rdel)*(256)+(climber.worldCol + climber.width - 1))]){
-            climber.worldRow -= climber.rdel * 10;
 
-
-            if (vOff >= 0 && climber.screenRow < 160 / 2) {
-                vOff-- * 10;
-            }
-        }
-
-    }
-
-    climber.screenRow = climber.worldRow - vOff;
+    climber.screenRow = climber.worldRow - playerVOff;
     climber.screenCol = climber.worldCol - hOff;
-
-
 
 
 
@@ -363,12 +365,12 @@ void initRocks() {
 void drawRocks(ROCK* r) {
     for (int i = 0; i < 5; i++) {
         if((r[i].screenRow < -r[i].height) || !r[i].active){
-           shadowOAM[1+i].attr0 |= (2<<8);
+           shadowOAM[2+i].attr0 |= (2<<8);
         }
         else {
-            shadowOAM[1+i].attr0 = (0xFF & r[i].screenRow) | (0<<14);
-            shadowOAM[1+i].attr1 = (0x1FF & r[i].screenCol) | (0<<14);
-            shadowOAM[1+i].attr2 = ((0)<<12) | ((1)*32+(0));
+            shadowOAM[2+i].attr0 = (0xFF & r[i].screenRow) | (0<<14);
+            shadowOAM[2+i].attr1 = (0x1FF & r[i].screenCol) | (0<<14);
+            shadowOAM[2+i].attr2 = ((0)<<12) | ((0)*32+(2));
         }
     }
 }
@@ -385,7 +387,7 @@ void updateRock(ROCK* r) {
 
     if(r->active) {
    r->worldRow += r->rdel;
-  if( r->worldRow > 512 - r->height) {
+  if( r->worldRow > 1024 - r->height) {
    r->active = 0;
    r->worldRow = -(r->height);
   }
@@ -393,13 +395,11 @@ void updateRock(ROCK* r) {
         if (collision(r->worldCol, r->worldRow, r->width, r->height, climber.worldCol, climber.worldRow, climber.width, climber.height)) {
             r->active = 0;
 
-            loseG = 1;
+
         }
     }
     r->screenRow = r->worldRow - vOff;
     r->screenCol = r->worldCol - hOff;
-
-
 
 }
 
@@ -419,11 +419,6 @@ void makeBallsFall() {
 }
 
 
-
-
-
-
-
 void initSpiders() {
     for (int i = 0; i < 3; i++) {
         spiders[i].active = 1;
@@ -441,23 +436,17 @@ void initSpiders() {
 void drawSpiders() {
     for (int i = 0; i < 3; i++) {
         if(!spiders[i].active){
-           shadowOAM[7+i].attr0 = (2<<8);
+           shadowOAM[8+i].attr0 = (2<<8);
         }
         else {
-            shadowOAM[7+i].attr0 = (0xFF & spiders[i].screenRow) | (0<<14);
-            shadowOAM[7+i].attr1 = (0x1FF & spiders[i].screenCol) | (0<<14);
-            shadowOAM[7+i].attr2 = ((0)<<12) | ((1)*32+(0));
+            shadowOAM[8+i].attr0 = (0xFF & spiders[i].screenRow) | (0<<14);
+            shadowOAM[8+i].attr1 = (0x1FF & spiders[i].screenCol) | (0<<14);
+            shadowOAM[8+i].attr2 = ((0)<<12) | ((0)*32+(3));
         }
     }
 }
 
 void updateSpider(SPIDER* s) {
-
-
-
-
-
-
 
     if(s->active){
 
@@ -472,13 +461,9 @@ void updateSpider(SPIDER* s) {
             s->cdel *= -1;
         }
         s->worldCol += s->cdel;
-
-
-
-
         if (collision(s->screenCol, s->screenRow, s->width, s->height, climber.screenCol, climber.screenRow, climber.width, climber.height)) {
             s->active = 0;
-            loseG = 1;
+
         }
 
 
@@ -486,5 +471,6 @@ void updateSpider(SPIDER* s) {
 
     s->screenRow = s->worldRow - vOff;
     s->screenCol = s->worldCol - hOff;
-# 317 "game.c"
+
+
 }
