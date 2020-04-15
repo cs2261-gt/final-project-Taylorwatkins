@@ -17,13 +17,15 @@ int count;
 int winCount;
 int playerVOff;
 int screenBlock;
+int totalVOff;
 
 void initGame() {
 
 	// Place screen on map
     count = 0;
     vOff = 512 - SCREENHEIGHT - 1; // get to beginning of sb 31
-    playerVOff = 1024 + SCREENHEIGHT; // initialize to almost the bottom of the screen! because that's where we are stating!
+    playerVOff = 1024 - SCREENHEIGHT - 1; // initialize to almost the bottom of the screen! because that's where we are stating!
+    totalVOff = 1024 - SCREENHEIGHT - 1;
     screenBlock = 30;   
     hOff = 0;
     winG = 0;
@@ -100,16 +102,17 @@ void updatePlayer() {
             climber.worldRow -= climber.rdel;
             winCount--;
 
-            if (vOff > 0 && climber.screenRow < SCREENHEIGHT / 2) {
+            if ((vOff > 0 && climber.screenRow < SCREENHEIGHT / 2) || climber.worldRow < 384) { // weird hack to get bg to move once you reach last screenblock - 384 is 512 - 256/2
                 count++; 
-		        vOff--; 
+		        vOff--;
+                totalVOff--; 
                 playerVOff--;
                 
             }
             
 
     
-        if (winCount == 150) {
+        if (winCount == 100) {
 
             winG = 1;
         }
@@ -130,10 +133,10 @@ void updatePlayer() {
 
 
         }
-/*         if (!(collisionLoseBitmap[OFFSET(climber.worldCol, climber.worldRow, MAPWIDTH)]
+        if (!(collisionLoseBitmap[OFFSET(climber.worldCol, climber.worldRow, MAPWIDTH)]
         && collisionLoseBitmap[OFFSET(climber.worldCol, climber.worldRow + climber.height - 1, MAPWIDTH)])) {
             loseG = 1;
-        } */
+        } 
     }
     if(BUTTON_HELD(BUTTON_RIGHT)) {
         if (climber.worldCol < MAPWIDTH - climber.width
@@ -214,9 +217,9 @@ void updateRock(ROCK* r) {
 			r->worldRow = -(r->height);
 		} 
 		//Check for collision with player 
-        if (collision(r->worldCol, r->worldRow, r->width, r->height, climber.worldCol, climber.worldRow, climber.width, climber.height)) {
+        if (collision(r->worldCol, r->worldRow, r->width, r->height, climber.worldCol - hOff, climber.worldRow - totalVOff, climber.width, climber.height)) {
             r->active = 0;
-            //loseG = 1;
+            loseG = 1;
         }
     } 
     r->screenRow = r->worldRow - vOff;
@@ -247,14 +250,15 @@ void initSpiders() {
         spiders[i].height = 8;
         spiders[i].cdel = 1;
         spiders[i].rdel = 0;
-        spiders[i].worldCol = rand()%100 + hOff + 100;
-        spiders[i].worldRow = rand()%100 + vOff;
+        spiders[i].worldCol = rand() % 100 + 100 + hOff;
+        spiders[i].worldRow = 80 + vOff;
     }
+
 }
 
 void drawSpiders() {
     for (int i = 0; i < SPIDERCOUNT; i++) {
-        if(!spiders[i].active){
+        if(!spiders[i].active && spiders[i].screenRow > 0){
            shadowOAM[8+i].attr0 = ATTR0_HIDE; 
         }
         else {
@@ -265,34 +269,7 @@ void drawSpiders() {
     }
 }
 
-/*void updateSpider(SPIDER* s) {
 
-    if(s->active){
-/*         if(s->screenRow>SCREENHEIGHT){
-            s->active=0;
-        } 
-
-        if(s->worldCol > MAPWIDTH - 2) {
-            s->cdel *= -1;
-        }
-        if(s->worldCol < 100) {
-            s->cdel *= -1;
-        }  
-        s->worldCol += s->cdel;
-
-        if (collision(s->worldCol, s->worldRow - 18, s->width, s->height, climber.worldCol, climber.worldRow, climber.width, climber.height)) {
-            s->active = 0;
-            //loseG = 1;
-        }
-
-
-    }
-
-    s->screenRow = s->worldRow - vOff;
-    s->screenCol = s->worldCol - hOff;
-
-
-}*/
 
 void updateSpider() {
     for(int i = 0; i < SPIDERCOUNT; i++) {
@@ -305,9 +282,9 @@ void updateSpider() {
             }
             spiders[i].worldCol += spiders[i].cdel;
 
-            if (collision(spiders[i].worldCol, spiders[i].worldRow - 180, spiders[i].width, spiders[i].height, climber.worldCol, climber.worldRow, climber.width, climber.height)) {
-            spiders[i].active = 0;
-            //loseG = 1;
+            if (collision(spiders[i].screenCol, spiders[i].screenRow, spiders[i].width, spiders[i].height, climber.worldCol - hOff, climber.worldRow - totalVOff, climber.width, climber.height)) {
+                spiders[i].active = 0;
+                loseG = 1;
             }
         }
 

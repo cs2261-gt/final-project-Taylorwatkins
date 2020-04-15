@@ -1,6 +1,7 @@
 #include "myLib.h"
 #include "game2.h"
 #include "collision2.h"
+#include "sportCollision.h"
 
 PLAYER player;
 int amJumping;
@@ -116,8 +117,12 @@ void updatePlayer2() {
         onBar=0;
     }
 
+
+
     if(BUTTON_HELD(BUTTON_LEFT)) {
-        if (player.worldCol > 0 ) {
+        if (player.worldCol > 0 
+        && sportCollisionBitmap[OFFSET(player.worldCol - player.cdel, SHIFTDOWN(player.worldRow), MAPWIDTH2)]
+        && sportCollisionBitmap[OFFSET(player.worldCol - player.cdel, SHIFTDOWN(player.worldRow + player.height - 1), MAPWIDTH2)]) {
             player.worldCol -= player.cdel;
     
             if (hOff >= 0 && player.screenCol < SCREENWIDTH / 2) {
@@ -126,7 +131,9 @@ void updatePlayer2() {
         }
     }
     if(BUTTON_HELD(BUTTON_RIGHT)) {
-        if (player.worldCol < MAPWIDTH2 - player.width) {
+        if (player.worldCol < MAPWIDTH2 - player.width
+        && sportCollisionBitmap[OFFSET(player.worldCol + player.width - 1 + player.cdel, SHIFTDOWN(player.worldRow), MAPWIDTH2)]
+        && sportCollisionBitmap[OFFSET(player.worldCol + player.width - 1 + player.cdel, SHIFTDOWN(player.worldRow  + player.height - 1), MAPWIDTH2)]) {
             player.worldCol += player.cdel;
 
             if (hOff < MAPWIDTH2 - SCREENWIDTH &&  player.screenCol > SCREENWIDTH / 2){

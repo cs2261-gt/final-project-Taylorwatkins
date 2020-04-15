@@ -206,13 +206,15 @@ int count;
 int winCount;
 int playerVOff;
 int screenBlock;
+int totalVOff;
 
 void initGame() {
 
 
     count = 0;
     vOff = 512 - 160 - 1;
-    playerVOff = 1024 + 160;
+    playerVOff = 1024 - 160 - 1;
+    totalVOff = 1024 - 160 - 1;
     screenBlock = 30;
     hOff = 0;
     winG = 0;
@@ -289,16 +291,17 @@ void updatePlayer() {
             climber.worldRow -= climber.rdel;
             winCount--;
 
-            if (vOff > 0 && climber.screenRow < 160 / 2) {
+            if ((vOff > 0 && climber.screenRow < 160 / 2) || climber.worldRow < 384) {
                 count++;
           vOff--;
+                totalVOff--;
                 playerVOff--;
 
             }
 
 
 
-        if (winCount == 150) {
+        if (winCount == 100) {
 
             winG = 1;
         }
@@ -319,10 +322,10 @@ void updatePlayer() {
 
 
         }
-
-
-
-
+        if (!(collisionLoseBitmap[((climber.worldRow)*(256)+(climber.worldCol))]
+        && collisionLoseBitmap[((climber.worldRow + climber.height - 1)*(256)+(climber.worldCol))])) {
+            loseG = 1;
+        }
     }
     if((~((*(volatile unsigned short *)0x04000130)) & ((1<<4)))) {
         if (climber.worldCol < 256 - climber.width
@@ -403,9 +406,9 @@ void updateRock(ROCK* r) {
    r->worldRow = -(r->height);
   }
 
-        if (collision(r->worldCol, r->worldRow, r->width, r->height, climber.worldCol, climber.worldRow, climber.width, climber.height)) {
+        if (collision(r->worldCol, r->worldRow, r->width, r->height, climber.worldCol - hOff, climber.worldRow - totalVOff, climber.width, climber.height)) {
             r->active = 0;
-
+            loseG = 1;
         }
     }
     r->screenRow = r->worldRow - vOff;
@@ -436,14 +439,15 @@ void initSpiders() {
         spiders[i].height = 8;
         spiders[i].cdel = 1;
         spiders[i].rdel = 0;
-        spiders[i].worldCol = rand()%100 + hOff + 100;
-        spiders[i].worldRow = rand()%100 + vOff;
+        spiders[i].worldCol = rand() % 100 + 100 + hOff;
+        spiders[i].worldRow = 80 + vOff;
     }
+
 }
 
 void drawSpiders() {
     for (int i = 0; i < 3; i++) {
-        if(!spiders[i].active){
+        if(!spiders[i].active && spiders[i].screenRow > 0){
            shadowOAM[8+i].attr0 = (2<<8);
         }
         else {
@@ -453,7 +457,9 @@ void drawSpiders() {
         }
     }
 }
-# 297 "game.c"
+
+
+
 void updateSpider() {
     for(int i = 0; i < 3; i++) {
         if (spiders[i].active) {
@@ -465,9 +471,9 @@ void updateSpider() {
             }
             spiders[i].worldCol += spiders[i].cdel;
 
-            if (collision(spiders[i].worldCol, spiders[i].worldRow - 180, spiders[i].width, spiders[i].height, climber.worldCol, climber.worldRow, climber.width, climber.height)) {
-            spiders[i].active = 0;
-
+            if (collision(spiders[i].screenCol, spiders[i].screenRow, spiders[i].width, spiders[i].height, climber.worldCol - hOff, climber.worldRow - totalVOff, climber.width, climber.height)) {
+                spiders[i].active = 0;
+                loseG = 1;
             }
         }
 

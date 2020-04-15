@@ -149,6 +149,10 @@ void drawPlayer2();
 # 20 "collision2.h"
 extern const unsigned short collision2Bitmap[131072];
 # 4 "game2.c" 2
+# 1 "sportCollision.h" 1
+# 20 "sportCollision.h"
+extern const unsigned short sportCollisionBitmap[131072];
+# 5 "game2.c" 2
 
 PLAYER player;
 int amJumping;
@@ -264,8 +268,12 @@ void updatePlayer2() {
         onBar=0;
     }
 
+
+
     if((~((*(volatile unsigned short *)0x04000130)) & ((1<<5)))) {
-        if (player.worldCol > 0 ) {
+        if (player.worldCol > 0
+        && sportCollisionBitmap[((((player.worldRow) >> 8))*(256)+(player.worldCol - player.cdel))]
+        && sportCollisionBitmap[((((player.worldRow + player.height - 1) >> 8))*(256)+(player.worldCol - player.cdel))]) {
             player.worldCol -= player.cdel;
 
             if (hOff >= 0 && player.screenCol < 240 / 2) {
@@ -274,7 +282,9 @@ void updatePlayer2() {
         }
     }
     if((~((*(volatile unsigned short *)0x04000130)) & ((1<<4)))) {
-        if (player.worldCol < 256 - player.width) {
+        if (player.worldCol < 256 - player.width
+        && sportCollisionBitmap[((((player.worldRow) >> 8))*(256)+(player.worldCol + player.width - 1 + player.cdel))]
+        && sportCollisionBitmap[((((player.worldRow + player.height - 1) >> 8))*(256)+(player.worldCol + player.width - 1 + player.cdel))]) {
             player.worldCol += player.cdel;
 
             if (hOff < 256 - 240 && player.screenCol > 240 / 2){

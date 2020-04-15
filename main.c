@@ -1,3 +1,18 @@
+/*So far I have created both proposed games with win and lose states
+  I have also created more detailed sprites but do not have the 
+  animation done yet. Also in the speed game, though you can win
+  or lose I still need to implement a game timer as proposed. 
+  I have instruction sheets but here's how to play: Once on the 
+  splash screen press the left key for the sport climb (outdoor) 
+  or press the right key for the speed game (indoor). For sport: 
+  attempt to get to the top of the XL screen without getting hit 
+  by any obstacles. for the speed: you use the same 3 keys but the up key 
+  makes you jump. I have a few bugs. In the sport game, the collision with 
+  the rocks aren't really working as they should, and in the the sport game 
+  the player can go above the screen which I need the fix. Also the collision
+  bitmap for the sport game is really really off. 
+  And I never got the chance to tell you that I don't climb competitively its
+  just a hobby that I miss since we're in quarentine :( */
 #include <stdlib.h>
 #include <stdio.h>
 #include "myLib.h"
@@ -8,6 +23,7 @@
 #include "gameBGXL.h"
 #include "gameBG.h"
 #include "instructionBG.h"
+#include "instructionBG2.h"
 #include "spritesheet.h"
 #include "game.h"
 #include "game2.h"
@@ -33,9 +49,11 @@ void goToLose();
 void lose();
 void goToInstructions();
 void instructions();
+void goToInstructions2();
+void instructions2();
 
 // States
-enum {START, GAME, GAME2, PAUSE, PAUSE2, WIN, LOSE, INSTRUCTIONS};
+enum {START, GAME, GAME2, PAUSE, PAUSE2, WIN, LOSE, INSTRUCTIONS, INSTRUCTIONS2};
 int state;
 
 // Button Variables
@@ -80,6 +98,9 @@ int main() {
             case INSTRUCTIONS:
                 instructions();
                 break;
+            case INSTRUCTIONS2:
+                instructions2();
+                break;
         }
 
     }
@@ -118,15 +139,12 @@ void start() {
 
     // State transitions
     if (BUTTON_PRESSED(BUTTON_LEFT)) {
-        goToGame();
-        initGame();
+        goToInstructions();
+
     }
     if (BUTTON_PRESSED(BUTTON_RIGHT)) {
-        goToGame2();
-        initGame2();
-    }
-    if (BUTTON_PRESSED(BUTTON_UP)) {
-        goToInstructions();
+        goToInstructions2();
+
     }
 }
 
@@ -335,8 +353,41 @@ void instructions() {
 
 
     // State transitions
-    if (BUTTON_PRESSED(BUTTON_START))
+    if (BUTTON_PRESSED(BUTTON_START)) {
         goToGame();
-    else if (BUTTON_PRESSED(BUTTON_SELECT))
+        initGame();
+    } else if (BUTTON_PRESSED(BUTTON_SELECT)) {
         goToStart();
+    }
+}
+
+void goToInstructions2() {
+    int hOff = 0;
+    int vOff = 0;
+
+    DMANow(3, instructionBG2Pal, PALETTE, 256);
+    DMANow(3, instructionBG2Tiles, &CHARBLOCK[0], instructionBG2TilesLen / 2);
+    DMANow(3, instructionBG2Map, &SCREENBLOCK[28], 1024 * 4);
+
+    REG_BG0CNT = BG_CHARBLOCK(0) | BG_SCREENBLOCK(28) | BG_4BPP | BG_SIZE_SMALL;
+    
+    REG_DISPCTL = MODE0 | BG0_ENABLE;
+    REG_BG0HOFF = hOff;
+    REG_BG0VOFF = vOff;
+
+    state = INSTRUCTIONS2;
+
+}
+
+void instructions2() {
+
+
+    // State transitions
+    if (BUTTON_PRESSED(BUTTON_START)) {
+        goToGame2();
+        initGame2();
+    } else if (BUTTON_PRESSED(BUTTON_SELECT)) {
+        goToStart();
+    }
+
 }
