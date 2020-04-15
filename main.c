@@ -25,6 +25,8 @@ void goToGame2();
 void game2();
 void goToPause();
 void pause();
+void goToPause2();
+void pause2();
 void goToWin();
 void win();
 void goToLose();
@@ -33,7 +35,7 @@ void goToInstructions();
 void instructions();
 
 // States
-enum {START, GAME, GAME2, PAUSE, WIN, LOSE, INSTRUCTIONS};
+enum {START, GAME, GAME2, PAUSE, PAUSE2, WIN, LOSE, INSTRUCTIONS};
 int state;
 
 // Button Variables
@@ -65,6 +67,9 @@ int main() {
                 break;
             case PAUSE:
                 pause();
+                break;
+            case PAUSE2:
+                pause2();
                 break;
             case WIN:
                 win();
@@ -188,7 +193,6 @@ void goToGame2() {
 void game2() {
 
 
-
     updateGame2();
     drawGame2();
 
@@ -197,7 +201,7 @@ void game2() {
 
     // State transitions
     if (BUTTON_PRESSED(BUTTON_START))
-        goToPause();
+        goToPause2();
     if (winG2)
         goToWin();
     if (loseG2)
@@ -228,6 +232,34 @@ void pause() {
     // State transitions
     if (BUTTON_PRESSED(BUTTON_START))
         goToGame();
+    else if (BUTTON_PRESSED(BUTTON_SELECT))
+        goToStart();
+}
+
+void goToPause2() {
+    int hOff = 0;
+    int vOff = 0;
+
+    DMANow(3, pauseBGPal, PALETTE, 256);
+    DMANow(3, pauseBGTiles, &CHARBLOCK[0], pauseBGTilesLen / 2);
+    DMANow(3, pauseBGMap, &SCREENBLOCK[28], 1024 * 4);
+
+    REG_BG0CNT = BG_CHARBLOCK(0) | BG_SCREENBLOCK(28) | BG_4BPP | BG_SIZE_SMALL;
+    
+    REG_DISPCTL = MODE0 | BG0_ENABLE;
+    REG_BG0HOFF = hOff;
+    REG_BG0VOFF = vOff;
+
+    state = PAUSE2;
+
+}
+
+void pause2() {
+
+
+    // State transitions
+    if (BUTTON_PRESSED(BUTTON_START))
+        goToGame2();
     else if (BUTTON_PRESSED(BUTTON_SELECT))
         goToStart();
 }

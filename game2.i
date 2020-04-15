@@ -145,9 +145,14 @@ void updatePlayer2();
 void animatePlayer2();
 void drawPlayer2();
 # 3 "game2.c" 2
+# 1 "collision2.h" 1
+# 20 "collision2.h"
+extern const unsigned short collision2Bitmap[131072];
+# 4 "game2.c" 2
 
 PLAYER player;
 int amJumping;
+int onBar;
 int ground;
 int idle = 2;
 
@@ -164,10 +169,16 @@ int winG2;
 
 void initGame2() {
     hOff = 0;
-    vOff = 512 - 160;
-    ground = (160 / 2 + vOff);
+    vOff = 512 - 160 - 1;
+
+
     amJumping = 1;
+
+    onBar = 0;
     initPlayer2();
+    winG2 = 0;
+    loseG2 = 0;
+
 }
 
 void drawGame2() {
@@ -183,8 +194,8 @@ void updateGame2() {
 void initPlayer2() {
     player.width = 16;
     player.height = 16;
-    player.worldRow = ((160 / 2 + vOff) << 8);
-    player.worldCol = 240 / 2 - player.height / 2 + hOff;
+    player.worldRow = ((160 -player.width + vOff) << 8);
+    player.worldCol = 240 / 2 - player.height / 2;
     player.rdel = 0;
     player.cdel = 1;
     player.aniCounter = 0;
@@ -194,24 +205,65 @@ void initPlayer2() {
 }
 
 void updatePlayer2() {
-    if (((player.worldRow + player.rdel) >> 8) < ground) {
-        player.worldRow += player.rdel;
-
-    } else {
-        player.rdel = 0;
-        amJumping = 0;
-
-    }
-
     if ((!(~(oldButtons)&((1<<6))) && (~buttons & ((1<<6)))) && !amJumping) {
-        player.rdel -= 1500;
+        player.rdel -= 1700;
         amJumping = 1;
 
 
-        if (vOff >= 0 && player.screenRow < 160 / 2) {
-             vOff--;
+    }
+
+
+    if(player.rdel > 0){
+        if (vOff + ((player.rdel) >> 8) < 512 -1 && player.screenRow > 160 / 2 && vOff < 512 - 160) {
+                vOff++;
+
+        }
+    } else if(player.rdel<0){
+        if (vOff >= 0 && player.screenRow < 160 / 2 && player.screenRow < vOff) {
+                vOff--;
+                if (player.screenRow < vOff) {
+                    vOff--;
+                }
         }
     }
+
+
+    if (player.worldRow <= 3) {
+        winG2 = 1;
+    }
+
+    if(!onBar){
+        player.rdel += 90;
+    }
+
+    if (((player.worldRow) >> 8) > vOff + 160 - 1) {
+            loseG2 = 1;
+    }
+
+
+
+    if(((player.worldRow + player.rdel) >> 8) + player.height-1 < 512 -1){
+        player.worldRow += player.rdel;
+    } else {
+        player.rdel = 0;
+        amJumping = 0;
+    }
+
+
+
+    if(player.rdel > 0 && !collision2Bitmap[((((player.worldRow+player.rdel) >> 8))*(256)+(player.worldCol))]
+        && !collision2Bitmap[((((player.worldRow+player.rdel) >> 8))*(256)+(player.worldCol + player.width - 1))]){
+        player.rdel = 0;
+        onBar = 1;
+        amJumping = 0;
+    }
+
+
+    if(collision2Bitmap[((((player.worldRow+player.rdel) >> 8))*(256)+(player.worldCol))]
+        && collision2Bitmap[((((player.worldRow+player.rdel) >> 8))*(256)+(player.worldCol + player.width - 1))]){
+        onBar=0;
+    }
+
     if((~((*(volatile unsigned short *)0x04000130)) & ((1<<5)))) {
         if (player.worldCol > 0 ) {
             player.worldCol -= player.cdel;
@@ -232,11 +284,11 @@ void updatePlayer2() {
         }
     }
 
-    player.rdel += 100;
 
-
-    player.screenRow = ((player.worldRow) >> 8) - vOff + 64;
+    player.screenRow = ((player.worldRow) >> 8) - vOff;
     player.screenCol = player.worldCol - hOff;
+
+
 }
 
 void drawPlayer2() {

@@ -1334,7 +1334,7 @@ int collision(int colA, int rowA, int widthA, int heightA, int colB, int rowB, i
 # 4 "main.c" 2
 # 1 "startbg.h" 1
 # 22 "startbg.h"
-extern const unsigned short startBGTiles[2672];
+extern const unsigned short startBGTiles[3424];
 
 
 extern const unsigned short startBGMap[1024];
@@ -1462,18 +1462,25 @@ extern int winG;
 extern int loseG;
 extern OBJ_ATTR shadowOAM[128];
 extern ANISPRITE climber;
-extern ROCK rocks[5];
+extern ROCK rocks[3];
 int time;
 int timeToNextBall;
 
 
 void initGame();
+void initSpiders();
+void initRocks();
 void updateGame();
+void updateSpider();
 void drawGame();
 void initPlayer();
 void updatePlayer();
 void animatePlayer();
 void drawPlayer();
+void drawRocks();
+void drawSpiders();
+void updateRock(ROCK* r);
+void makeBallsFall();
 # 13 "main.c" 2
 # 1 "game2.h" 1
 
@@ -1524,6 +1531,8 @@ void goToGame2();
 void game2();
 void goToPause();
 void pause();
+void goToPause2();
+void pause2();
 void goToWin();
 void win();
 void goToLose();
@@ -1532,7 +1541,7 @@ void goToInstructions();
 void instructions();
 
 
-enum {START, GAME, GAME2, PAUSE, WIN, LOSE, INSTRUCTIONS};
+enum {START, GAME, GAME2, PAUSE, PAUSE2, WIN, LOSE, INSTRUCTIONS};
 int state;
 
 
@@ -1565,6 +1574,9 @@ int main() {
             case PAUSE:
                 pause();
                 break;
+            case PAUSE2:
+                pause2();
+                break;
             case WIN:
                 win();
                 break;
@@ -1592,7 +1604,7 @@ void goToStart() {
 
 
     DMANow(3, startBGPal, ((unsigned short *)0x5000000), 256);
-    DMANow(3, startBGTiles, &((charblock *)0x6000000)[0], 5344 / 2);
+    DMANow(3, startBGTiles, &((charblock *)0x6000000)[0], 6848 / 2);
     DMANow(3, startBGMap, &((screenblock *)0x6000000)[28], 1024 * 4);
 
 
@@ -1687,7 +1699,6 @@ void goToGame2() {
 void game2() {
 
 
-
     updateGame2();
     drawGame2();
 
@@ -1696,7 +1707,7 @@ void game2() {
 
 
     if ((!(~(oldButtons)&((1<<3))) && (~buttons & ((1<<3)))))
-        goToPause();
+        goToPause2();
     if (winG2)
         goToWin();
     if (loseG2)
@@ -1727,6 +1738,34 @@ void pause() {
 
     if ((!(~(oldButtons)&((1<<3))) && (~buttons & ((1<<3)))))
         goToGame();
+    else if ((!(~(oldButtons)&((1<<2))) && (~buttons & ((1<<2)))))
+        goToStart();
+}
+
+void goToPause2() {
+    int hOff = 0;
+    int vOff = 0;
+
+    DMANow(3, pauseBGPal, ((unsigned short *)0x5000000), 256);
+    DMANow(3, pauseBGTiles, &((charblock *)0x6000000)[0], 5280 / 2);
+    DMANow(3, pauseBGMap, &((screenblock *)0x6000000)[28], 1024 * 4);
+
+    (*(volatile unsigned short*)0x4000008) = ((0)<<2) | ((28)<<8) | (0<<7) | (0<<14);
+
+    (*(unsigned short *)0x4000000) = 0 | (1<<8);
+    (*(volatile unsigned short *)0x04000010) = hOff;
+    (*(volatile unsigned short *)0x04000012) = vOff;
+
+    state = PAUSE2;
+
+}
+
+void pause2() {
+
+
+
+    if ((!(~(oldButtons)&((1<<3))) && (~buttons & ((1<<3)))))
+        goToGame2();
     else if ((!(~(oldButtons)&((1<<2))) && (~buttons & ((1<<2)))))
         goToStart();
 }

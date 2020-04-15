@@ -163,18 +163,25 @@ extern int winG;
 extern int loseG;
 extern OBJ_ATTR shadowOAM[128];
 extern ANISPRITE climber;
-extern ROCK rocks[5];
+extern ROCK rocks[3];
 int time;
 int timeToNextBall;
 
 
 void initGame();
+void initSpiders();
+void initRocks();
 void updateGame();
+void updateSpider();
 void drawGame();
 void initPlayer();
 void updatePlayer();
 void animatePlayer();
 void drawPlayer();
+void drawRocks();
+void drawSpiders();
+void updateRock(ROCK* r);
+void makeBallsFall();
 # 3 "game.c" 2
 # 1 "collisions.h" 1
 # 20 "collisions.h"
@@ -189,13 +196,14 @@ int hOff;
 int vOff;
 OBJ_ATTR shadowOAM[128];
 ANISPRITE climber;
-ROCK rocks[5];
+ROCK rocks[3];
 SPIDER spiders[3];
 int winG;
 int loseG;
 int time;
 int timeToNextBall;
 int count;
+int winCount;
 int playerVOff;
 int screenBlock;
 
@@ -209,6 +217,7 @@ void initGame() {
     hOff = 0;
     winG = 0;
     loseG = 0;
+    winCount = 1024;
 
     initPlayer();
     initRocks();
@@ -219,15 +228,15 @@ void initGame() {
 void updateGame() {
 
 
-
     makeBallsFall();
  updatePlayer();
-
-    for (int i = 0; i < 5; i++)
-  updateRock(&rocks[i]);
+    updateSpider();
 
     for (int i = 0; i < 3; i++)
-  updateSpider(&spiders[i]);
+  updateRock(&rocks[i]);
+
+
+
 
     if (count > 256 && screenBlock != 28) {
 
@@ -251,10 +260,7 @@ void updateGame() {
 void drawGame() {
 
     drawPlayer();
-    for (int i = 0; i < 5; i++)
-  drawRocks(&rocks[i]);
-
-
+ drawRocks();
  drawSpiders();
 
 
@@ -281,16 +287,20 @@ void updatePlayer() {
         && collisionsBitmap[((climber.worldRow - climber.rdel)*(256)+(climber.worldCol + climber.width - 1))]){
 
             climber.worldRow -= climber.rdel;
+            winCount--;
 
             if (vOff > 0 && climber.screenRow < 160 / 2) {
                 count++;
           vOff--;
                 playerVOff--;
+
             }
 
 
-        if (climber.worldRow == 0) {
-            winG = 0;
+
+        if (winCount == 150) {
+
+            winG = 1;
         }
 
     }
@@ -350,7 +360,7 @@ void drawPlayer() {
 }
 
 void initRocks() {
- for (int i = 0; i < 5; i++) {
+ for (int i = 0; i < 3; i++) {
   rocks[i].worldRow = 0;
   rocks[i].worldCol = 0;
   rocks[i].rdel = 2;
@@ -362,14 +372,15 @@ void initRocks() {
  }
 }
 
-void drawRocks(ROCK* r) {
-    for (int i = 0; i < 5; i++) {
-        if((r[i].screenRow < -r[i].height) || !r[i].active){
+void drawRocks() {
+
+    for (int i = 0; i < 3; i++) {
+        if((rocks[i].screenRow < -rocks[i].height) || !rocks[i].active){
            shadowOAM[2+i].attr0 |= (2<<8);
         }
         else {
-            shadowOAM[2+i].attr0 = (0xFF & r[i].screenRow) | (0<<14);
-            shadowOAM[2+i].attr1 = (0x1FF & r[i].screenCol) | (0<<14);
+            shadowOAM[2+i].attr0 = (0xFF & rocks[i].screenRow) | (0<<14);
+            shadowOAM[2+i].attr1 = (0x1FF & rocks[i].screenCol) | (0<<14);
             shadowOAM[2+i].attr2 = ((0)<<12) | ((0)*32+(2));
         }
     }
@@ -395,7 +406,6 @@ void updateRock(ROCK* r) {
         if (collision(r->worldCol, r->worldRow, r->width, r->height, climber.worldCol, climber.worldRow, climber.width, climber.height)) {
             r->active = 0;
 
-
         }
     }
     r->screenRow = r->worldRow - vOff;
@@ -405,7 +415,7 @@ void updateRock(ROCK* r) {
 
 void makeBallsFall() {
 
- for (int i = 0; i < 5; i++) {
+ for (int i = 0; i < 3; i++) {
   if (!rocks[i].active) {
             rocks[i].active = 1;
 
@@ -426,9 +436,7 @@ void initSpiders() {
         spiders[i].height = 8;
         spiders[i].cdel = 1;
         spiders[i].rdel = 0;
-
-
-        spiders[i].worldCol = 100;
+        spiders[i].worldCol = rand()%100 + hOff + 100;
         spiders[i].worldRow = rand()%100 + vOff;
     }
 }
@@ -445,32 +453,27 @@ void drawSpiders() {
         }
     }
 }
+# 297 "game.c"
+void updateSpider() {
+    for(int i = 0; i < 3; i++) {
+        if (spiders[i].active) {
+            if(spiders[i].worldCol > 256 - 2) {
+                spiders[i].cdel *= -1;
+            }
+            if(spiders[i].worldCol < 100) {
+                spiders[i].cdel *= -1;
+            }
+            spiders[i].worldCol += spiders[i].cdel;
 
-void updateSpider(SPIDER* s) {
+            if (collision(spiders[i].worldCol, spiders[i].worldRow - 180, spiders[i].width, spiders[i].height, climber.worldCol, climber.worldRow, climber.width, climber.height)) {
+            spiders[i].active = 0;
 
-    if(s->active){
-
-
-        if(s->screenRow>160){
-            s->active=0;
-        }
-        if(s->worldCol > 256 - 2) {
-            s->cdel *= -1;
-        }
-        if(s->worldCol < 100) {
-            s->cdel *= -1;
-        }
-        s->worldCol += s->cdel;
-        if (collision(s->screenCol, s->screenRow, s->width, s->height, climber.screenCol, climber.screenRow, climber.width, climber.height)) {
-            s->active = 0;
-
+            }
         }
 
 
+        spiders[i].screenRow = spiders[i].worldRow - vOff;
+        spiders[i].screenCol = spiders[i].worldCol - hOff;
     }
-
-    s->screenRow = s->worldRow - vOff;
-    s->screenCol = s->worldCol - hOff;
-
 
 }

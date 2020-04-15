@@ -109,30 +109,36 @@ updatePlayer:
 	cmp	ip, #0
 	beq	.L9
 	ldr	ip, .L35+16
-	ldr	r1, [ip]
-	cmp	r1, #0
-	str	r0, [r3, #8]
-	ble	.L10
-	ldr	r5, [r3]
-	cmp	r5, #79
-	bgt	.L10
 	ldr	r6, .L35+20
+	ldr	r1, [ip]
 	ldr	r5, [r6]
 	sub	r1, r1, #1
-	sub	lr, lr, #1
-	add	r5, r5, #1
+	cmp	r5, #0
+	str	r0, [r3, #8]
 	str	r1, [ip]
-	str	lr, [r4]
+	ble	.L10
+	ldr	ip, [r3]
+	cmp	ip, #79
+	bgt	.L10
+	ldr	r7, .L35+24
+	ldr	ip, [r7]
+	sub	r5, r5, #1
+	sub	lr, lr, #1
+	add	ip, ip, #1
 	str	r5, [r6]
+	str	lr, [r4]
+	str	ip, [r7]
 .L10:
-	cmp	r0, #0
-	ldreq	r1, .L35+24
-	streq	r0, [r1]
-	mov	r1, r0
+	cmp	r1, #150
+	moveq	r4, #1
+	moveq	r1, r0
+	movne	r1, r0
+	ldreq	ip, .L35+28
+	streq	r4, [ip]
 .L9:
 	ldr	r0, .L35
 	ldrh	r0, [r0, #48]
-	ldr	r4, .L35+28
+	ldr	r4, .L35+32
 	tst	r0, #32
 	ldr	ip, [r4]
 	bne	.L11
@@ -214,6 +220,7 @@ updatePlayer:
 	.word	climber
 	.word	playerVOff
 	.word	collisionsBitmap
+	.word	winCount
 	.word	vOff
 	.word	count
 	.word	winG
@@ -262,7 +269,7 @@ initRocks:
 	mov	ip, #2
 	mov	r1, #8
 	ldr	r3, .L47
-	add	r0, r3, #300
+	add	r0, r3, #180
 .L44:
 	str	r2, [r3, #8]
 	str	r2, [r3, #12]
@@ -294,38 +301,40 @@ drawRocks:
 	push	{r4, lr}
 	mov	r4, #2
 	ldr	r3, .L56
-	ldr	lr, .L56+4
-	add	ip, r0, #300
+	ldr	r2, .L56+4
+	ldr	lr, .L56+8
+	add	ip, r3, #180
 .L53:
-	ldr	r2, [r0, #28]
-	ldr	r1, [r0]
-	rsb	r2, r2, #0
-	cmp	r1, r2
+	ldr	r1, [r3, #28]
+	ldr	r0, [r3]
+	rsb	r1, r1, #0
+	cmp	r0, r1
 	blt	.L50
-	ldr	r2, [r0, #56]
-	cmp	r2, #0
+	ldr	r1, [r3, #56]
+	cmp	r1, #0
 	beq	.L50
-	ldr	r2, [r0, #4]
-	and	r1, r1, #255
-	and	r2, r2, lr
-	strh	r2, [r3, #18]	@ movhi
-	strh	r4, [r3, #20]	@ movhi
-	strh	r1, [r3, #16]	@ movhi
+	ldr	r1, [r3, #4]
+	and	r0, r0, #255
+	and	r1, r1, lr
+	strh	r4, [r2, #20]	@ movhi
+	strh	r1, [r2, #18]	@ movhi
+	strh	r0, [r2, #16]	@ movhi
 .L52:
-	add	r0, r0, #60
-	cmp	r0, ip
-	add	r3, r3, #8
+	add	r3, r3, #60
+	cmp	r3, ip
+	add	r2, r2, #8
 	bne	.L53
 	pop	{r4, lr}
 	bx	lr
 .L50:
-	ldrh	r2, [r3, #16]
-	orr	r2, r2, #512
-	strh	r2, [r3, #16]	@ movhi
+	ldrh	r1, [r2, #16]
+	orr	r1, r1, #512
+	strh	r1, [r2, #16]	@ movhi
 	b	.L52
 .L57:
 	.align	2
 .L56:
+	.word	rocks
 	.word	shadowOAM
 	.word	511
 	.size	drawRocks, .-drawRocks
@@ -414,33 +423,34 @@ makeBallsFall:
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
-	ldr	r0, .L81
-	mov	r2, r0
-	ldr	r1, [r2, #56]
-	cmp	r1, #0
-	mov	r3, #0
-	beq	.L80
-.L71:
-	add	r3, r3, #1
-	cmp	r3, #5
-	add	r2, r2, #60
-	bxeq	lr
-	ldr	r1, [r2, #56]
-	cmp	r1, #0
-	bne	.L71
-.L80:
-	mov	r1, #1
-	rsb	r3, r3, r3, lsl #4
+	ldr	r3, .L78
 	push	{r4, lr}
-	add	r4, r0, r3, lsl #2
+	ldr	r4, [r3, #56]
+	cmp	r4, #0
+	beq	.L71
+	ldr	r2, [r3, #116]
+	cmp	r2, #0
+	beq	.L73
+	ldr	r2, [r3, #176]
+	cmp	r2, #0
+	moveq	r4, #2
+	beq	.L71
+	pop	{r4, lr}
+	bx	lr
+.L73:
+	mov	r4, #1
+.L71:
+	mov	r1, #1
+	rsb	r4, r4, r4, lsl #4
+	add	r4, r3, r4, lsl #2
 	ldr	r3, [r4, #28]
 	rsb	r3, r3, #0
 	str	r3, [r4, #8]
-	ldr	r2, .L81+4
+	ldr	r2, .L78+4
 	str	r1, [r4, #56]
 	mov	lr, pc
 	bx	r2
-	ldr	r2, .L81+8
+	ldr	r2, .L78+8
 	smull	r3, r2, r0, r2
 	asr	r3, r0, #31
 	add	r2, r2, r0
@@ -450,9 +460,9 @@ makeBallsFall:
 	str	r0, [r4, #12]
 	pop	{r4, lr}
 	bx	lr
-.L82:
+.L79:
 	.align	2
-.L81:
+.L78:
 	.word	rocks
 	.word	rand
 	.word	-2004318071
@@ -467,44 +477,56 @@ initSpiders:
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
-	push	{r4, r5, r6, r7, r8, r9, r10, lr}
-	mov	r9, #1
-	mov	r8, #8
-	ldr	r4, .L87
-	ldr	r7, .L87+4
-	ldr	r10, .L87+8
-	ldr	r6, .L87+12
-	add	r5, r4, #192
-.L84:
-	mov	r3, #100
-	mov	r2, #0
-	str	r3, [r4, #12]
-	str	r2, [r4, #16]
-	str	r9, [r4, #56]
-	str	r8, [r4, #24]
-	str	r8, [r4, #28]
-	str	r9, [r4, #20]
+	push	{r3, r4, r5, r6, r7, r8, r9, r10, fp, lr}
+	mov	r10, #1
+	mov	r9, #8
+	ldr	r4, .L84
+	ldr	r6, .L84+4
+	ldr	r8, .L84+8
+	ldr	fp, .L84+12
+	ldr	r5, .L84+16
+	add	r7, r4, #192
+.L81:
+	mov	r3, #0
+	str	r10, [r4, #56]
+	str	r3, [r4, #16]
+	str	r9, [r4, #24]
+	str	r9, [r4, #28]
+	str	r10, [r4, #20]
 	mov	lr, pc
-	bx	r7
-	smull	r3, r2, r6, r0
+	bx	r6
+	smull	r3, r2, r5, r0
 	asr	r3, r0, #31
 	rsb	r3, r3, r2, asr #5
 	add	r3, r3, r3, lsl #2
-	ldr	r2, [r10]
 	add	r3, r3, r3, lsl #2
+	ldr	r2, [r8]
 	sub	r0, r0, r3, lsl #2
 	add	r0, r0, r2
-	str	r0, [r4, #8]
+	add	r0, r0, #100
+	str	r0, [r4, #12]
+	mov	lr, pc
+	bx	r6
+	smull	r3, r2, r5, r0
+	asr	r3, r0, #31
+	rsb	r3, r3, r2, asr #5
+	add	r3, r3, r3, lsl #2
+	ldr	r2, [fp]
+	add	r3, r3, r3, lsl #2
+	sub	r3, r0, r3, lsl #2
+	add	r3, r3, r2
+	str	r3, [r4, #8]
 	add	r4, r4, #64
-	cmp	r4, r5
-	bne	.L84
-	pop	{r4, r5, r6, r7, r8, r9, r10, lr}
+	cmp	r4, r7
+	bne	.L81
+	pop	{r3, r4, r5, r6, r7, r8, r9, r10, fp, lr}
 	bx	lr
-.L88:
+.L85:
 	.align	2
-.L87:
+.L84:
 	.word	spiders
 	.word	rand
+	.word	hOff
 	.word	vOff
 	.word	1374389535
 	.size	initSpiders, .-initSpiders
@@ -519,41 +541,44 @@ initGame:
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
 	mov	r3, #0
-	push	{r4, r5, r6, r7, r8, lr}
-	mov	r7, #1184
-	mov	r6, #30
+	push	{r4, r5, r6, r7, r8, r9, lr}
+	mov	r8, #1184
+	mov	r7, #30
+	mov	r6, #1024
 	mov	lr, #16
 	mov	r0, #1
 	mov	r4, #120
 	mov	r5, #1008
 	mov	ip, #2
 	mov	r1, #8
-	ldr	r8, .L93
-	str	r3, [r8]
-	ldr	r8, .L93+4
-	str	r3, [r8]
-	ldr	r8, .L93+8
-	str	r3, [r8]
-	ldr	r8, .L93+12
+	ldr	r9, .L90
+	str	r3, [r9]
+	ldr	r9, .L90+4
+	str	r3, [r9]
+	ldr	r9, .L90+8
+	str	r3, [r9]
+	ldr	r9, .L90+12
 	mov	r2, r3
-	str	r3, [r8]
-	ldr	r3, .L93+16
+	str	r3, [r9]
+	ldr	r3, .L90+16
+	str	r8, [r3]
+	ldr	r3, .L90+20
 	str	r7, [r3]
-	ldr	r3, .L93+20
+	ldr	r3, .L90+24
 	str	r6, [r3]
-	ldr	r3, .L93+24
+	ldr	r3, .L90+28
 	str	lr, [r3, #24]
 	str	lr, [r3, #28]
-	ldr	lr, .L93+28
+	ldr	lr, .L90+32
 	str	r4, [r3, #12]
 	str	r0, [r3, #16]
 	str	r0, [r3, #20]
 	str	r5, [r3, #8]
 	add	r4, r4, #231
-	ldr	r3, .L93+32
+	ldr	r3, .L90+36
 	str	r4, [lr]
-	add	r0, r3, #300
-.L90:
+	add	r0, r3, #180
+.L87:
 	str	r2, [r3, #8]
 	str	r2, [r3, #12]
 	str	ip, [r3, #16]
@@ -564,18 +589,19 @@ initGame:
 	str	r2, [r3, #56]
 	add	r3, r3, #60
 	cmp	r3, r0
-	bne	.L90
-	pop	{r4, r5, r6, r7, r8, lr}
+	bne	.L87
+	pop	{r4, r5, r6, r7, r8, r9, lr}
 	b	initSpiders
-.L94:
+.L91:
 	.align	2
-.L93:
+.L90:
 	.word	count
 	.word	hOff
 	.word	winG
 	.word	loseG
 	.word	playerVOff
 	.word	screenBlock
+	.word	winCount
 	.word	climber
 	.word	vOff
 	.word	rocks
@@ -593,11 +619,11 @@ drawSpiders:
 	push	{r4, r5, lr}
 	mov	r5, #3
 	mov	r4, #512
-	ldr	r3, .L101
-	ldr	r2, .L101+4
-	ldr	lr, .L101+8
+	ldr	r3, .L98
+	ldr	r2, .L98+4
+	ldr	lr, .L98+8
 	add	r0, r3, #24
-.L98:
+.L95:
 	ldr	r1, [r2, #56]
 	cmp	r1, #0
 	ldrne	r1, [r2, #4]
@@ -610,12 +636,12 @@ drawSpiders:
 	add	r3, r3, #8
 	cmp	r3, r0
 	add	r2, r2, #64
-	bne	.L98
+	bne	.L95
 	pop	{r4, r5, lr}
 	bx	lr
-.L102:
+.L99:
 	.align	2
-.L101:
+.L98:
 	.word	shadowOAM
 	.word	spiders
 	.word	511
@@ -630,41 +656,28 @@ drawGame:
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
-	ldr	r3, .L107
+	ldr	r3, .L104
 	ldr	r3, [r3, #52]
 	cmp	r3, #0
 	push	{r4, lr}
-	beq	.L104
-	ldr	r2, .L107+4
+	beq	.L101
+	ldr	r2, .L104+4
 	ldrh	r3, [r2]
 	orr	r3, r3, #512
 	strh	r3, [r2]	@ movhi
-.L105:
-	ldr	r0, .L107+8
-	bl	drawRocks
-	ldr	r0, .L107+12
-	bl	drawRocks
-	ldr	r0, .L107+16
-	bl	drawRocks
-	ldr	r0, .L107+20
-	bl	drawRocks
-	ldr	r0, .L107+24
 	bl	drawRocks
 	pop	{r4, lr}
 	b	drawSpiders
-.L104:
+.L101:
 	bl	drawPlayer.part.0
-	b	.L105
-.L108:
+	bl	drawRocks
+	pop	{r4, lr}
+	b	drawSpiders
+.L105:
 	.align	2
-.L107:
+.L104:
 	.word	climber
 	.word	shadowOAM
-	.word	rocks
-	.word	rocks+60
-	.word	rocks+120
-	.word	rocks+180
-	.word	rocks+240
 	.size	drawGame, .-drawGame
 	.align	2
 	.global	updateSpider
@@ -676,66 +689,69 @@ updateSpider:
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
-	push	{r4, r5, lr}
-	ldr	r3, [r0, #56]
+	push	{r4, r5, r6, r7, r8, r9, r10, lr}
+	mov	r10, #0
+	ldr	r4, .L119
+	ldr	r8, .L119+4
+	ldr	r7, .L119+8
+	ldr	r5, .L119+12
+	ldr	r9, .L119+16
+	sub	sp, sp, #16
+	add	r6, r4, #192
+.L112:
+	ldr	r3, [r4, #56]
 	cmp	r3, #0
-	mov	r4, r0
-	sub	sp, sp, #20
-	beq	.L111
-	ldr	r1, [r0]
-	cmp	r1, #160
-	movgt	r3, #0
-	strgt	r3, [r0, #56]
-	ldr	r3, [r0, #12]
+	beq	.L108
+	ldr	r3, [r4, #12]
 	cmp	r3, #254
-	ldr	r0, [r0, #20]
-	ble	.L113
-.L120:
+	ldr	r0, [r4, #20]
+	bgt	.L118
+	cmp	r3, #99
+	bgt	.L110
+.L118:
 	rsb	r0, r0, #0
 	str	r0, [r4, #20]
-.L114:
-	ldr	r2, .L121
-	add	ip, r2, #24
+.L110:
+	add	ip, r5, #24
 	ldm	ip, {ip, lr}
-	add	r3, r3, r0
-	ldm	r2, {r0, r2}
-	str	r3, [r4, #12]
-	stmib	sp, {r0, ip, lr}
-	str	r2, [sp]
+	ldr	r2, [r5, #8]
+	add	r0, r3, r0
+	ldr	r3, [r5, #12]
+	stmib	sp, {r2, ip}
+	ldr	r1, [r4, #8]
+	str	lr, [sp, #12]
+	str	r3, [sp]
 	add	r2, r4, #24
 	ldm	r2, {r2, r3}
-	ldr	r0, [r4, #4]
-	ldr	r5, .L121+4
+	sub	r1, r1, #180
+	str	r0, [r4, #12]
 	mov	lr, pc
-	bx	r5
+	bx	r9
 	cmp	r0, #0
-	movne	r3, #0
-	strne	r3, [r4, #56]
-.L111:
-	ldr	r2, .L121+8
-	ldr	r3, .L121+12
-	ldr	r0, [r2]
-	ldr	r1, [r3]
+	strne	r10, [r4, #56]
+.L108:
 	ldr	r2, [r4, #8]
 	ldr	r3, [r4, #12]
+	ldr	r0, [r8]
+	ldr	r1, [r7]
 	sub	r2, r2, r0
 	sub	r3, r3, r1
 	stm	r4, {r2, r3}
-	add	sp, sp, #20
+	add	r4, r4, #64
+	cmp	r4, r6
+	bne	.L112
+	add	sp, sp, #16
 	@ sp needed
-	pop	{r4, r5, lr}
+	pop	{r4, r5, r6, r7, r8, r9, r10, lr}
 	bx	lr
-.L113:
-	cmp	r3, #99
-	ble	.L120
-	b	.L114
-.L122:
+.L120:
 	.align	2
-.L121:
-	.word	climber
-	.word	collision
+.L119:
+	.word	spiders
 	.word	vOff
 	.word	hOff
+	.word	climber
+	.word	collision
 	.size	updateSpider, .-updateSpider
 	.align	2
 	.global	updateGame
@@ -750,36 +766,27 @@ updateGame:
 	push	{r4, lr}
 	bl	makeBallsFall
 	bl	updatePlayer
-	ldr	r0, .L131
-	bl	updateRock
-	ldr	r0, .L131+4
-	bl	updateRock
-	ldr	r0, .L131+8
-	bl	updateRock
-	ldr	r0, .L131+12
-	bl	updateRock
-	ldr	r0, .L131+16
-	bl	updateRock
-	ldr	r0, .L131+20
 	bl	updateSpider
-	ldr	r0, .L131+24
-	bl	updateSpider
-	ldr	r0, .L131+28
-	bl	updateSpider
-	ldr	r1, .L131+32
+	ldr	r0, .L129
+	bl	updateRock
+	ldr	r0, .L129+4
+	bl	updateRock
+	ldr	r0, .L129+8
+	bl	updateRock
+	ldr	r1, .L129+12
 	ldr	r3, [r1]
 	cmp	r3, #256
-	bgt	.L124
-	ldr	r3, .L131+36
+	bgt	.L122
+	ldr	r3, .L129+16
 	ldr	r3, [r3]
-.L125:
-	ldr	r1, .L131+40
+.L123:
+	ldr	r1, .L129+20
 	ldr	r2, [r1]
 	cmp	r2, #255
 	suble	r2, r2, #256
 	strle	r2, [r1]
 	mov	r2, #67108864
-	ldr	r1, .L131+44
+	ldr	r1, .L129+24
 	lsl	r3, r3, #16
 	ldrh	r1, [r1]
 	lsr	r3, r3, #16
@@ -787,13 +794,13 @@ updateGame:
 	pop	{r4, lr}
 	strh	r3, [r2, #18]	@ movhi
 	bx	lr
-.L124:
-	ldr	ip, .L131+48
+.L122:
+	ldr	ip, .L129+28
 	ldr	r2, [ip]
-	ldr	r0, .L131+36
+	ldr	r0, .L129+16
 	cmp	r2, #28
 	ldr	r3, [r0]
-	beq	.L125
+	beq	.L123
 	mov	r4, #0
 	mov	lr, #67108864
 	sub	r2, r2, #1
@@ -805,18 +812,13 @@ updateGame:
 	str	r3, [r0]
 	str	r4, [r1]
 	strh	r2, [lr, #8]	@ movhi
-	b	.L125
-.L132:
+	b	.L123
+.L130:
 	.align	2
-.L131:
+.L129:
 	.word	rocks
 	.word	rocks+60
 	.word	rocks+120
-	.word	rocks+180
-	.word	rocks+240
-	.word	spiders
-	.word	spiders+64
-	.word	spiders+128
 	.word	count
 	.word	vOff
 	.word	playerVOff
@@ -825,11 +827,12 @@ updateGame:
 	.size	updateGame, .-updateGame
 	.comm	screenBlock,4,4
 	.comm	playerVOff,4,4
+	.comm	winCount,4,4
 	.comm	count,4,4
 	.comm	loseG,4,4
 	.comm	winG,4,4
 	.comm	spiders,192,4
-	.comm	rocks,300,4
+	.comm	rocks,180,4
 	.comm	climber,56,4
 	.comm	shadowOAM,1024,4
 	.comm	vOff,4,4
