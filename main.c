@@ -27,6 +27,17 @@
 #include "spritesheet.h"
 #include "game.h"
 #include "game2.h"
+#include "sound.h"
+#include "startsong.h"
+#include "gamesong.h"
+#include "gamesong2.h"
+#include "pausesong.h"
+#include "endsong.h"
+#include "backClouds.h"
+#include "frontGuyClimbing.h"
+
+
+
 
 
 // Prototypes
@@ -59,6 +70,10 @@ int state;
 // Button Variables
 unsigned short buttons;
 unsigned short oldButtons;
+
+int vBlankCount;
+int pauseHOff;
+int pauseVOff;
 
 
 
@@ -108,7 +123,10 @@ int main() {
 }
 
 void initialize() {
+    vBlankCount = 0;
     // Set up the first state
+    setupSounds();
+	setupInterrupts();
     goToStart();
 }
 
@@ -129,6 +147,7 @@ void goToStart() {
     REG_DISPCTL = MODE0 | BG0_ENABLE;
     REG_BG0HOFF = hOff;
     REG_BG0VOFF = vOff;
+    playSoundA(startsong, STARTSONGLEN, 1);
 
     state = START;
 
@@ -164,6 +183,8 @@ void goToGame() {
 
     
     REG_DISPCTL = MODE0 | BG0_ENABLE | SPRITE_ENABLE; 
+    stopSound();
+    playSoundA(gamesong, GAMESONGLEN, 1);
 
     state = GAME;
 }
@@ -179,8 +200,11 @@ void game() {
     DMANow(3, shadowOAM, OAM, 512);
 
     // State transitions
-    if (BUTTON_PRESSED(BUTTON_START))
+    if (BUTTON_PRESSED(BUTTON_START)){
+        pauseSound();
         goToPause();
+    }
+
     if (winG)
         goToWin();
     if (loseG)
@@ -203,6 +227,8 @@ void goToGame2() {
 
     
     REG_DISPCTL = MODE0 | BG0_ENABLE | SPRITE_ENABLE; 
+    stopSound();
+    playSoundA(gamesong2, GAMESONG2LEN, 1);
 
     state = GAME2;
 }
@@ -218,8 +244,10 @@ void game2() {
     DMANow(3, shadowOAM, OAM, 512);
 
     // State transitions
-    if (BUTTON_PRESSED(BUTTON_START))
+    if (BUTTON_PRESSED(BUTTON_START)){
+        pauseSound();
         goToPause2();
+    }
     if (winG2)
         goToWin();
     if (loseG2)
@@ -227,57 +255,95 @@ void game2() {
 }
 
 void goToPause() {
-    int hOff = 0;
-    int vOff = 0;
+    pauseHOff = 0;
+    pauseVOff = 0;
+    REG_DISPCTL = MODE0 | BG1_ENABLE | BG0_ENABLE;
 
-    DMANow(3, pauseBGPal, PALETTE, 256);
-    DMANow(3, pauseBGTiles, &CHARBLOCK[0], pauseBGTilesLen / 2);
-    DMANow(3, pauseBGMap, &SCREENBLOCK[28], 1024 * 4);
+    DMANow(3, backCloudsPal, PALETTE, 256);
 
-    REG_BG0CNT = BG_CHARBLOCK(0) | BG_SCREENBLOCK(28) | BG_4BPP | BG_SIZE_SMALL;
+    REG_BG1CNT= BG_CHARBLOCK(0) | BG_SCREENBLOCK(28) | BG_SIZE_WIDE | BG_4BPP; 
+
+    DMANow(3, backCloudsTiles, &CHARBLOCK[0], backCloudsTilesLen / 2);
+    DMANow(3, backCloudsMap, &SCREENBLOCK[28], backCloudsMapLen / 2);
+
+    REG_BG0CNT = BG_CHARBLOCK(1) | BG_SCREENBLOCK(30) | BG_4BPP | BG_SIZE_SMALL;
+
+    DMANow(3, frontGuyClimbingTiles, &CHARBLOCK[1], frontGuyClimbingTilesLen / 2);
+    DMANow(3, frontGuyClimbingMap, &SCREENBLOCK[30], frontGuyClimbingMapLen / 2);
     
-    REG_DISPCTL = MODE0 | BG0_ENABLE;
-    REG_BG0HOFF = hOff;
-    REG_BG0VOFF = vOff;
+
+
+    playSoundA(pausesong, STARTSONGLEN, 1);
 
     state = PAUSE;
 
 }
 
-void pause() {
+void pause() { 
+    if(vBlankCount % 600 == 0) {
+        pauseHOff++;
+    }
+    vBlankCount++;
+
+    REG_BG0HOFF = 0;
+    REG_BG0VOFF = pauseVOff;
+    REG_BG1HOFF = pauseHOff;
+    REG_BG1VOFF = pauseVOff;   
 
 
     // State transitions
-    if (BUTTON_PRESSED(BUTTON_START))
+    if (BUTTON_PRESSED(BUTTON_START)){
+
+        unpauseSound();
         goToGame();
+    }
     else if (BUTTON_PRESSED(BUTTON_SELECT))
         goToStart();
 }
 
 void goToPause2() {
-    int hOff = 0;
-    int vOff = 0;
+    pauseHOff = 0;
+    pauseVOff = 0;
+    REG_DISPCTL = MODE0 | BG1_ENABLE | BG0_ENABLE;
 
-    DMANow(3, pauseBGPal, PALETTE, 256);
-    DMANow(3, pauseBGTiles, &CHARBLOCK[0], pauseBGTilesLen / 2);
-    DMANow(3, pauseBGMap, &SCREENBLOCK[28], 1024 * 4);
+    DMANow(3, backCloudsPal, PALETTE, 256);
 
-    REG_BG0CNT = BG_CHARBLOCK(0) | BG_SCREENBLOCK(28) | BG_4BPP | BG_SIZE_SMALL;
+    REG_BG1CNT= BG_CHARBLOCK(0) | BG_SCREENBLOCK(28) | BG_SIZE_WIDE | BG_4BPP; 
+
+    DMANow(3, backCloudsTiles, &CHARBLOCK[0], backCloudsTilesLen / 2);
+    DMANow(3, backCloudsMap, &SCREENBLOCK[28], backCloudsMapLen / 2);
+
+    REG_BG0CNT = BG_CHARBLOCK(1) | BG_SCREENBLOCK(30) | BG_4BPP | BG_SIZE_SMALL;
+
+    DMANow(3, frontGuyClimbingTiles, &CHARBLOCK[1], frontGuyClimbingTilesLen / 2);
+    DMANow(3, frontGuyClimbingMap, &SCREENBLOCK[30], frontGuyClimbingMapLen / 2);
     
-    REG_DISPCTL = MODE0 | BG0_ENABLE;
-    REG_BG0HOFF = hOff;
-    REG_BG0VOFF = vOff;
+
+
+    playSoundA(pausesong, STARTSONGLEN, 1);
 
     state = PAUSE2;
 
 }
 
 void pause2() {
+    if(vBlankCount % 600 == 0) {    
+        pauseHOff++;
+    }
+    vBlankCount++;
+
+    REG_BG0HOFF = 0;
+    REG_BG0VOFF = pauseVOff;
+    REG_BG1HOFF = pauseHOff;
+    REG_BG1VOFF = pauseVOff;   
 
 
     // State transitions
-    if (BUTTON_PRESSED(BUTTON_START))
+    if (BUTTON_PRESSED(BUTTON_START)){
+
+        unpauseSound();
         goToGame2();
+    }
     else if (BUTTON_PRESSED(BUTTON_SELECT))
         goToStart();
 }
@@ -296,6 +362,8 @@ void goToWin() {
     REG_DISPCTL = MODE0 | BG0_ENABLE;
     REG_BG0HOFF = hOff;
     REG_BG0VOFF = vOff;
+    stopSound();
+    playSoundA(endsong, ENDSONGLEN, 1);
 
     state = WIN;
 
@@ -321,6 +389,8 @@ void goToLose() {
     REG_DISPCTL = MODE0 | BG0_ENABLE;
     REG_BG0HOFF = hOff;
     REG_BG0VOFF = vOff;
+    stopSound();
+    playSoundA(endsong, ENDSONGLEN, 1);
 
     state = LOSE;
 
@@ -354,6 +424,8 @@ void instructions() {
 
     // State transitions
     if (BUTTON_PRESSED(BUTTON_START)) {
+        stopSound();
+		//playSoundA(gamesong, GAMESONGLEN, 1);
         goToGame();
         initGame();
     } else if (BUTTON_PRESSED(BUTTON_SELECT)) {
@@ -384,8 +456,11 @@ void instructions2() {
 
     // State transitions
     if (BUTTON_PRESSED(BUTTON_START)) {
+        stopSound();
+		//playSoundA(gamesong2, GAMESONG2LEN, 1);
         goToGame2();
         initGame2();
+
     } else if (BUTTON_PRESSED(BUTTON_SELECT)) {
         goToStart();
     }

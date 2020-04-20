@@ -163,7 +163,7 @@ extern int winG;
 extern int loseG;
 extern OBJ_ATTR shadowOAM[128];
 extern ANISPRITE climber;
-extern ROCK rocks[3];
+extern ROCK rocks[5];
 int time;
 int timeToNextBall;
 
@@ -180,7 +180,7 @@ void animatePlayer();
 void drawPlayer();
 void drawRocks();
 void drawSpiders();
-void updateRock(ROCK* r);
+void updateRock();
 void makeBallsFall();
 # 3 "game.c" 2
 # 1 "collisions.h" 1
@@ -196,7 +196,7 @@ int hOff;
 int vOff;
 OBJ_ATTR shadowOAM[128];
 ANISPRITE climber;
-ROCK rocks[3];
+ROCK rocks[5];
 SPIDER spiders[3];
 int winG;
 int loseG;
@@ -207,6 +207,8 @@ int winCount;
 int playerVOff;
 int screenBlock;
 int totalVOff;
+
+
 
 void initGame() {
 
@@ -233,9 +235,8 @@ void updateGame() {
     makeBallsFall();
  updatePlayer();
     updateSpider();
+    updateRock();
 
-    for (int i = 0; i < 3; i++)
-  updateRock(&rocks[i]);
 
 
 
@@ -277,6 +278,10 @@ void initPlayer() {
     climber.cdel = 1;
     climber.worldRow = 1024 - climber.height;
     climber.worldCol = 240 / 2;
+    climber.aniCounter = 0;
+    climber.curFrame = 0;
+    climber.numFrames = 6;
+    climber.aniState = 0;
 
 
 }
@@ -289,6 +294,7 @@ void updatePlayer() {
         && collisionsBitmap[((climber.worldRow - climber.rdel)*(256)+(climber.worldCol + climber.width - 1))]){
 
             climber.worldRow -= climber.rdel;
+            animatePlayer();
             winCount--;
 
             if ((vOff > 0 && climber.screenRow < 160 / 2) || climber.worldRow < 384) {
@@ -348,7 +354,6 @@ void updatePlayer() {
     climber.screenCol = climber.worldCol - hOff;
 
 
-
 }
 
 void drawPlayer() {
@@ -362,8 +367,16 @@ void drawPlayer() {
     }
 }
 
+void animatePlayer() {
+    if(climber.aniCounter % 20 == 0) {
+        climber.curFrame = (climber.curFrame + 1) % climber.numFrames;
+    }
+    climber.aniCounter++;
+
+}
+
 void initRocks() {
- for (int i = 0; i < 3; i++) {
+ for (int i = 0; i < 5; i++) {
   rocks[i].worldRow = 0;
   rocks[i].worldCol = 0;
   rocks[i].rdel = 2;
@@ -372,63 +385,83 @@ void initRocks() {
         rocks[i].height = 8;
         rocks[i].width = 8;
         rocks[i].active = 0;
+        rocks[i].aniCounter = 0;
+        rocks[i].curFrame = 0;
+        rocks[i].numFrames = 3;
+        rocks[i].aniState = 2;
  }
 }
 
 void drawRocks() {
 
-    for (int i = 0; i < 3; i++) {
-        if((rocks[i].screenRow < -rocks[i].height) || !rocks[i].active){
+    for (int i = 0; i < 5; i++) {
+        if((rocks[i].worldRow < -rocks[i].height) || !rocks[i].active){
            shadowOAM[2+i].attr0 |= (2<<8);
         }
         else {
             shadowOAM[2+i].attr0 = (0xFF & rocks[i].screenRow) | (0<<14);
             shadowOAM[2+i].attr1 = (0x1FF & rocks[i].screenCol) | (0<<14);
-            shadowOAM[2+i].attr2 = ((0)<<12) | ((0)*32+(2));
+            shadowOAM[2+i].attr2 = ((0)<<12) | ((rocks[i].curFrame)*32+(rocks[i].aniState));
         }
     }
 }
 
-void updateRock(ROCK* r) {
+void updateRock() {
+    for(int i = 0; i < 5; i++) {
 
-    if (r->worldCol < 1) {
-  r->worldCol = 1;
- }
- if (r->worldCol > 256 - r->width) {
-  r->worldCol = 256 - r->width;
- }
+        if (rocks[i].worldCol < 1) {
+      rocks[i].worldCol = 1;
+     }
+     if (rocks[i].worldCol > 256 - rocks[i].width) {
+      rocks[i].worldCol = 256 - rocks[i].width;
+     }
 
 
-    if(r->active) {
-   r->worldRow += r->rdel;
-  if( r->worldRow > 1024 - r->height) {
-   r->active = 0;
-   r->worldRow = -(r->height);
-  }
 
-        if (collision(r->worldCol, r->worldRow, r->width, r->height, climber.worldCol - hOff, climber.worldRow - totalVOff, climber.width, climber.height)) {
-            r->active = 0;
-            loseG = 1;
+
+
+
+        if(rocks[i].active) {
+       rocks[i].worldRow += rocks[i].rdel;
+      if(rocks[i].worldRow > 1024 - rocks[i].height) {
+       rocks[i].active = 0;
+       rocks[i].worldRow = 100;
+      }
+
+        if (collision(rocks[i].worldCol, rocks[i].worldRow, rocks[i].width, rocks[i].height, climber.worldCol - hOff, climber.worldRow - totalVOff, climber.width, climber.height)) {
+            rocks[i].active = 0;
+
+
         }
     }
-    r->screenRow = r->worldRow - vOff;
-    r->screenCol = r->worldCol - hOff;
+    rocks[i].screenRow = rocks[i].worldRow - vOff;
+    rocks[i].screenCol = rocks[i].worldCol - hOff;
+    }
 
 }
 
 void makeBallsFall() {
 
- for (int i = 0; i < 3; i++) {
+ for (int i = 0; i < 5; i++) {
   if (!rocks[i].active) {
             rocks[i].active = 1;
 
-      rocks[i].worldRow = -(rocks[i].height);
-      rocks[i].worldCol = rand()%(240);
+      rocks[i].worldRow = 100;
+      rocks[i].worldCol = rand() % 100 + 100 + hOff;
 
 
    break;
   }
  }
+}
+void animateRocks() {
+    for (int i = 0; i < 5; i++) {
+        if(rocks[i].aniCounter % 100 == 0) {
+            rocks[i].curFrame = (rocks[i].curFrame + 1) % rocks[i].numFrames;
+        }
+        rocks[i].aniCounter++;
+    }
+
 }
 
 
@@ -441,6 +474,7 @@ void initSpiders() {
         spiders[i].rdel = 0;
         spiders[i].worldCol = rand() % 100 + 100 + hOff;
         spiders[i].worldRow = 80 + vOff;
+        spiders[i].aniState = 0;
     }
 
 }
@@ -448,12 +482,12 @@ void initSpiders() {
 void drawSpiders() {
     for (int i = 0; i < 3; i++) {
         if(!spiders[i].active && spiders[i].screenRow > 0){
-           shadowOAM[8+i].attr0 = (2<<8);
+           shadowOAM[120+i].attr0 = (2<<8);
         }
         else {
-            shadowOAM[8+i].attr0 = (0xFF & spiders[i].screenRow) | (0<<14);
-            shadowOAM[8+i].attr1 = (0x1FF & spiders[i].screenCol) | (0<<14);
-            shadowOAM[8+i].attr2 = ((0)<<12) | ((0)*32+(3));
+            shadowOAM[120+i].attr0 = (0xFF & spiders[i].screenRow) | (0<<14);
+            shadowOAM[120+i].attr1 = (0x1FF & spiders[i].screenCol) | (0<<14);
+            shadowOAM[120+i].attr2 = ((0)<<12) | ((spiders[i].aniState)*32+(3));
         }
     }
 }
@@ -465,9 +499,11 @@ void updateSpider() {
         if (spiders[i].active) {
             if(spiders[i].worldCol > 256 - 2) {
                 spiders[i].cdel *= -1;
+                spiders[i].aniState = 0;
             }
             if(spiders[i].worldCol < 100) {
                 spiders[i].cdel *= -1;
+                spiders[i].aniState = 1;
             }
             spiders[i].worldCol += spiders[i].cdel;
 

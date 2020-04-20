@@ -1345,7 +1345,7 @@ extern const unsigned short startBGPal[256];
 # 20 "main.c" 2
 # 1 "loseBG.h" 1
 # 22 "loseBG.h"
-extern const unsigned short loseBGTiles[2000];
+extern const unsigned short loseBGTiles[2592];
 
 
 extern const unsigned short loseBGMap[1024];
@@ -1365,7 +1365,7 @@ extern const unsigned short pauseBGPal[256];
 # 22 "main.c" 2
 # 1 "winbg.h" 1
 # 22 "winbg.h"
-extern const unsigned short winBGTiles[1552];
+extern const unsigned short winBGTiles[2624];
 
 
 extern const unsigned short winBGMap[1024];
@@ -1473,7 +1473,7 @@ extern int winG;
 extern int loseG;
 extern OBJ_ATTR shadowOAM[128];
 extern ANISPRITE climber;
-extern ROCK rocks[3];
+extern ROCK rocks[5];
 int time;
 int timeToNextBall;
 
@@ -1490,7 +1490,7 @@ void animatePlayer();
 void drawPlayer();
 void drawRocks();
 void drawSpiders();
-void updateRock(ROCK* r);
+void updateRock();
 void makeBallsFall();
 # 29 "main.c" 2
 # 1 "game2.h" 1
@@ -1528,6 +1528,81 @@ void updatePlayer2();
 void animatePlayer2();
 void drawPlayer2();
 # 30 "main.c" 2
+# 1 "sound.h" 1
+SOUND soundA;
+SOUND soundB;
+
+
+
+void setupSounds();
+void playSoundA(const signed char* sound, int length, int loops);
+void playSoundB(const signed char* sound, int length, int loops);
+
+void setupInterrupts();
+void interruptHandler();
+
+void pauseSound();
+void unpauseSound();
+void stopSound();
+# 31 "main.c" 2
+# 1 "startsong.h" 1
+
+
+
+
+extern const signed char startsong[1903392];
+# 32 "main.c" 2
+# 1 "gamesong.h" 1
+
+
+
+
+extern const signed char gamesong[2437920];
+# 33 "main.c" 2
+# 1 "gamesong2.h" 1
+
+
+
+
+extern const signed char gamesong2[2439936];
+# 34 "main.c" 2
+# 1 "pausesong.h" 1
+
+
+
+
+extern const signed char pausesong[2932416];
+# 35 "main.c" 2
+# 1 "endsong.h" 1
+
+
+
+
+extern const signed char endsong[664992];
+# 36 "main.c" 2
+# 1 "backClouds.h" 1
+# 22 "backClouds.h"
+extern const unsigned short backCloudsTiles[3584];
+
+
+extern const unsigned short backCloudsMap[2048];
+
+
+extern const unsigned short backCloudsPal[256];
+# 37 "main.c" 2
+# 1 "frontGuyClimbing.h" 1
+# 22 "frontGuyClimbing.h"
+extern const unsigned short frontGuyClimbingTiles[8256];
+
+
+extern const unsigned short frontGuyClimbingMap[1024];
+
+
+extern const unsigned short frontGuyClimbingPal[256];
+# 38 "main.c" 2
+
+
+
 
 
 
@@ -1560,6 +1635,10 @@ int state;
 
 unsigned short buttons;
 unsigned short oldButtons;
+
+int vBlankCount;
+int pauseHOff;
+int pauseVOff;
 
 
 
@@ -1609,7 +1688,10 @@ int main() {
 }
 
 void initialize() {
+    vBlankCount = 0;
 
+    setupSounds();
+ setupInterrupts();
     goToStart();
 }
 
@@ -1630,6 +1712,7 @@ void goToStart() {
     (*(unsigned short *)0x4000000) = 0 | (1<<8);
     (*(volatile unsigned short *)0x04000010) = hOff;
     (*(volatile unsigned short *)0x04000012) = vOff;
+    playSoundA(startsong, 1903392, 1);
 
     state = START;
 
@@ -1665,6 +1748,8 @@ void goToGame() {
 
 
     (*(unsigned short *)0x4000000) = 0 | (1<<8) | (1<<12);
+    stopSound();
+    playSoundA(gamesong, 2437920, 1);
 
     state = GAME;
 }
@@ -1680,8 +1765,11 @@ void game() {
     DMANow(3, shadowOAM, ((OBJ_ATTR*)(0x7000000)), 512);
 
 
-    if ((!(~(oldButtons)&((1<<3))) && (~buttons & ((1<<3)))))
+    if ((!(~(oldButtons)&((1<<3))) && (~buttons & ((1<<3))))){
+        pauseSound();
         goToPause();
+    }
+
     if (winG)
         goToWin();
     if (loseG)
@@ -1704,6 +1792,8 @@ void goToGame2() {
 
 
     (*(unsigned short *)0x4000000) = 0 | (1<<8) | (1<<12);
+    stopSound();
+    playSoundA(gamesong2, 2439936, 1);
 
     state = GAME2;
 }
@@ -1719,8 +1809,10 @@ void game2() {
     DMANow(3, shadowOAM, ((OBJ_ATTR*)(0x7000000)), 512);
 
 
-    if ((!(~(oldButtons)&((1<<3))) && (~buttons & ((1<<3)))))
+    if ((!(~(oldButtons)&((1<<3))) && (~buttons & ((1<<3))))){
+        pauseSound();
         goToPause2();
+    }
     if (winG2)
         goToWin();
     if (loseG2)
@@ -1728,57 +1820,95 @@ void game2() {
 }
 
 void goToPause() {
-    int hOff = 0;
-    int vOff = 0;
+    pauseHOff = 0;
+    pauseVOff = 0;
+    (*(unsigned short *)0x4000000) = 0 | (1<<9) | (1<<8);
 
-    DMANow(3, pauseBGPal, ((unsigned short *)0x5000000), 256);
-    DMANow(3, pauseBGTiles, &((charblock *)0x6000000)[0], 5280 / 2);
-    DMANow(3, pauseBGMap, &((screenblock *)0x6000000)[28], 1024 * 4);
+    DMANow(3, backCloudsPal, ((unsigned short *)0x5000000), 256);
 
-    (*(volatile unsigned short*)0x4000008) = ((0)<<2) | ((28)<<8) | (0<<7) | (0<<14);
+    (*(volatile unsigned short*)0x400000A)= ((0)<<2) | ((28)<<8) | (1<<14) | (0<<7);
 
-    (*(unsigned short *)0x4000000) = 0 | (1<<8);
-    (*(volatile unsigned short *)0x04000010) = hOff;
-    (*(volatile unsigned short *)0x04000012) = vOff;
+    DMANow(3, backCloudsTiles, &((charblock *)0x6000000)[0], 7168 / 2);
+    DMANow(3, backCloudsMap, &((screenblock *)0x6000000)[28], 4096 / 2);
+
+    (*(volatile unsigned short*)0x4000008) = ((1)<<2) | ((30)<<8) | (0<<7) | (0<<14);
+
+    DMANow(3, frontGuyClimbingTiles, &((charblock *)0x6000000)[1], 16512 / 2);
+    DMANow(3, frontGuyClimbingMap, &((screenblock *)0x6000000)[30], 2048 / 2);
+
+
+
+    playSoundA(pausesong, 1903392, 1);
 
     state = PAUSE;
 
 }
 
 void pause() {
+    if(vBlankCount % 600 == 0) {
+        pauseHOff++;
+    }
+    vBlankCount++;
+
+    (*(volatile unsigned short *)0x04000010) = 0;
+    (*(volatile unsigned short *)0x04000012) = pauseVOff;
+    (*(volatile unsigned short *)0x04000014) = pauseHOff;
+    (*(volatile unsigned short *)0x04000016) = pauseVOff;
 
 
 
-    if ((!(~(oldButtons)&((1<<3))) && (~buttons & ((1<<3)))))
+    if ((!(~(oldButtons)&((1<<3))) && (~buttons & ((1<<3))))){
+
+        unpauseSound();
         goToGame();
+    }
     else if ((!(~(oldButtons)&((1<<2))) && (~buttons & ((1<<2)))))
         goToStart();
 }
 
 void goToPause2() {
-    int hOff = 0;
-    int vOff = 0;
+    pauseHOff = 0;
+    pauseVOff = 0;
+    (*(unsigned short *)0x4000000) = 0 | (1<<9) | (1<<8);
 
-    DMANow(3, pauseBGPal, ((unsigned short *)0x5000000), 256);
-    DMANow(3, pauseBGTiles, &((charblock *)0x6000000)[0], 5280 / 2);
-    DMANow(3, pauseBGMap, &((screenblock *)0x6000000)[28], 1024 * 4);
+    DMANow(3, backCloudsPal, ((unsigned short *)0x5000000), 256);
 
-    (*(volatile unsigned short*)0x4000008) = ((0)<<2) | ((28)<<8) | (0<<7) | (0<<14);
+    (*(volatile unsigned short*)0x400000A)= ((0)<<2) | ((28)<<8) | (1<<14) | (0<<7);
 
-    (*(unsigned short *)0x4000000) = 0 | (1<<8);
-    (*(volatile unsigned short *)0x04000010) = hOff;
-    (*(volatile unsigned short *)0x04000012) = vOff;
+    DMANow(3, backCloudsTiles, &((charblock *)0x6000000)[0], 7168 / 2);
+    DMANow(3, backCloudsMap, &((screenblock *)0x6000000)[28], 4096 / 2);
+
+    (*(volatile unsigned short*)0x4000008) = ((1)<<2) | ((30)<<8) | (0<<7) | (0<<14);
+
+    DMANow(3, frontGuyClimbingTiles, &((charblock *)0x6000000)[1], 16512 / 2);
+    DMANow(3, frontGuyClimbingMap, &((screenblock *)0x6000000)[30], 2048 / 2);
+
+
+
+    playSoundA(pausesong, 1903392, 1);
 
     state = PAUSE2;
 
 }
 
 void pause2() {
+    if(vBlankCount % 600 == 0) {
+        pauseHOff++;
+    }
+    vBlankCount++;
+
+    (*(volatile unsigned short *)0x04000010) = 0;
+    (*(volatile unsigned short *)0x04000012) = pauseVOff;
+    (*(volatile unsigned short *)0x04000014) = pauseHOff;
+    (*(volatile unsigned short *)0x04000016) = pauseVOff;
 
 
 
-    if ((!(~(oldButtons)&((1<<3))) && (~buttons & ((1<<3)))))
+    if ((!(~(oldButtons)&((1<<3))) && (~buttons & ((1<<3))))){
+
+        unpauseSound();
         goToGame2();
+    }
     else if ((!(~(oldButtons)&((1<<2))) && (~buttons & ((1<<2)))))
         goToStart();
 }
@@ -1788,7 +1918,7 @@ void goToWin() {
     int vOff = 0;
 
     DMANow(3, winBGPal, ((unsigned short *)0x5000000), 256);
-    DMANow(3, winBGTiles, &((charblock *)0x6000000)[0], 3104 / 2);
+    DMANow(3, winBGTiles, &((charblock *)0x6000000)[0], 5248 / 2);
     DMANow(3, winBGMap, &((screenblock *)0x6000000)[28], 1024 * 4);
 
 
@@ -1797,6 +1927,8 @@ void goToWin() {
     (*(unsigned short *)0x4000000) = 0 | (1<<8);
     (*(volatile unsigned short *)0x04000010) = hOff;
     (*(volatile unsigned short *)0x04000012) = vOff;
+    stopSound();
+    playSoundA(endsong, 664992, 1);
 
     state = WIN;
 
@@ -1813,7 +1945,7 @@ void goToLose() {
     int vOff = 0;
 
     DMANow(3, loseBGPal, ((unsigned short *)0x5000000), 256);
-    DMANow(3, loseBGTiles, &((charblock *)0x6000000)[0], 4000 / 2);
+    DMANow(3, loseBGTiles, &((charblock *)0x6000000)[0], 5184 / 2);
     DMANow(3, loseBGMap, &((screenblock *)0x6000000)[28], 1024 * 4);
 
 
@@ -1822,6 +1954,8 @@ void goToLose() {
     (*(unsigned short *)0x4000000) = 0 | (1<<8);
     (*(volatile unsigned short *)0x04000010) = hOff;
     (*(volatile unsigned short *)0x04000012) = vOff;
+    stopSound();
+    playSoundA(endsong, 664992, 1);
 
     state = LOSE;
 
@@ -1855,6 +1989,8 @@ void instructions() {
 
 
     if ((!(~(oldButtons)&((1<<3))) && (~buttons & ((1<<3))))) {
+        stopSound();
+
         goToGame();
         initGame();
     } else if ((!(~(oldButtons)&((1<<2))) && (~buttons & ((1<<2))))) {
@@ -1885,8 +2021,11 @@ void instructions2() {
 
 
     if ((!(~(oldButtons)&((1<<3))) && (~buttons & ((1<<3))))) {
+        stopSound();
+
         goToGame2();
         initGame2();
+
     } else if ((!(~(oldButtons)&((1<<2))) && (~buttons & ((1<<2))))) {
         goToStart();
     }

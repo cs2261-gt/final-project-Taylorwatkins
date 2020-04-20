@@ -1,7 +1,7 @@
 // Constants
 #define MAPHEIGHT 1024
 #define MAPWIDTH 256
-#define ROCKCOUNT 3
+#define ROCKCOUNT 5
 #define SPIDERCOUNT 3
 
 
@@ -67,6 +67,6 @@ void animatePlayer();
 void drawPlayer();
 void drawRocks();
 void drawSpiders();
-void updateRock(ROCK* r);
+void updateRock();
 void makeBallsFall();
 

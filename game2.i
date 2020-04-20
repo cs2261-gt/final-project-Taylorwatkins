@@ -153,12 +153,21 @@ extern const unsigned short collision2Bitmap[131072];
 # 20 "sportCollision.h"
 extern const unsigned short sportCollisionBitmap[131072];
 # 5 "game2.c" 2
+# 1 "grunt.h" 1
+
+
+
+
+extern const signed char grunt[4234];
+# 6 "game2.c" 2
 
 PLAYER player;
+ANISPRITE nums;
+ANISPRITE nums10;
 int amJumping;
 int onBar;
 int ground;
-int idle = 2;
+int idle = 4;
 
 int hOff;
 int vOff;
@@ -180,6 +189,8 @@ void initGame2() {
 
     onBar = 0;
     initPlayer2();
+    initNums();
+    initNums10();
     winG2 = 0;
     loseG2 = 0;
 
@@ -187,12 +198,19 @@ void initGame2() {
 
 void drawGame2() {
     drawPlayer2();
+    drawNums();
+    drawNums10();
     (*(volatile unsigned short *)0x04000010) = hOff;
     (*(volatile unsigned short *)0x04000012) = vOff;
 }
 
 void updateGame2() {
     updatePlayer2();
+    updateNums();
+
+    updateNums10();
+
+
 }
 
 void initPlayer2() {
@@ -202,9 +220,7 @@ void initPlayer2() {
     player.worldCol = 240 / 2 - player.height / 2;
     player.rdel = 0;
     player.cdel = 1;
-    player.aniCounter = 0;
-    player.curFrame = idle;
-    player.numFrames = 4;
+    player.curFrame = 4;
     player.aniState = 0;
 }
 
@@ -212,7 +228,7 @@ void updatePlayer2() {
     if ((!(~(oldButtons)&((1<<6))) && (~buttons & ((1<<6)))) && !amJumping) {
         player.rdel -= 1700;
         amJumping = 1;
-
+        playSoundB(grunt, 4234, 0);
 
     }
 
@@ -260,12 +276,14 @@ void updatePlayer2() {
         player.rdel = 0;
         onBar = 1;
         amJumping = 0;
+        player.aniState = 2;
     }
 
 
     if(collision2Bitmap[((((player.worldRow+player.rdel) >> 8))*(256)+(player.worldCol))]
         && collision2Bitmap[((((player.worldRow+player.rdel) >> 8))*(256)+(player.worldCol + player.width - 1))]){
         onBar=0;
+        player.aniState = 0;
     }
 
 
@@ -304,5 +322,67 @@ void updatePlayer2() {
 void drawPlayer2() {
     shadowOAM[100].attr0 = (0xFF & player.screenRow) | (0<<14);
     shadowOAM[100].attr1 = (0x1FF & player.screenCol) |(1<<14);
-    shadowOAM[100].attr2 = ((0)<<12) | ((0)*32+(0));
+    shadowOAM[100].attr2 = ((0)<<12) | ((player.aniState)*32+(4));
+}
+
+
+void initNums() {
+    nums.width = 8;
+    nums.height = 8;
+    nums.screenRow = nums.height;
+    nums.screenCol = 20;
+    nums.rdel = 0;
+    nums.cdel = 1;
+    nums.curFrame = 5;
+    nums.aniState = -1;
+    nums.aniCounter = 0;
+    nums.numFrames = 10;
+
+}
+void initNums10() {
+    nums10.width = 8;
+    nums10.height = 8;
+    nums10.screenRow = nums.height;
+    nums10.screenCol = 20 - 8;
+    nums10.rdel = 0;
+    nums10.cdel = 1;
+    nums10.curFrame = 5;
+    nums10.aniState = -1;
+    nums10.aniCounter = 0;
+    nums10.numFrames = 10;
+
+}
+
+
+void drawNums() {
+    shadowOAM[101].attr0 = (0xFF & nums.screenRow) | (0<<14);
+    shadowOAM[101].attr1 = (0x1FF & nums.screenCol) |(0<<14);
+    shadowOAM[101].attr2 = ((0)<<12) | ((nums.aniState)*32+(6));
+}
+
+
+
+void drawNums10() {
+    shadowOAM[102].attr0 = (0xFF & nums10.screenRow) | (0<<14);
+    shadowOAM[102].attr1 = (0x1FF & nums10.screenCol) |(0<<14);
+    shadowOAM[102].attr2 = ((0)<<12) | ((nums10.aniState)*32+(6));
+}
+
+void updateNums() {
+    if(nums.aniCounter % 60 == 0) {
+        nums.aniState = (nums.aniState + 1) % nums.numFrames;
+    }
+    nums.aniCounter++;
+
+}
+
+void updateNums10() {
+    if(nums10.aniCounter % 600 == 0) {
+        nums10.aniState = (nums10.aniState + 1) % nums10.numFrames;
+        if (nums10.aniState == 6){
+            loseG2 = 1;
+        }
+    }
+    nums10.aniCounter++;
+
 }
