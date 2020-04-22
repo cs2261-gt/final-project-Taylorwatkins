@@ -222,7 +222,7 @@ void updateNums() {
 void updateNums10() {
     if(nums10.aniCounter % 600 == 0) {
         nums10.aniState = (nums10.aniState + 1) % nums10.numFrames;
-        if (nums10.aniState == 6){
+        if (nums10.aniState == 2){
             loseG2 = 1;
         }
     }

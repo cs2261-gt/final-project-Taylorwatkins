@@ -30,26 +30,26 @@ backCloudsPal:
 	.short	27482
 	.short	30653
 	.short	30618
-	.short	29455
 	.short	29493
+	.short	29455
 	.short	30583
 	.short	28539
 	.short	19770
-	.short	4261
+	.short	3236
 	.short	14833
-	.short	10572
-	.short	17111
 	.short	7434
-	.short	23018
-	.short	25403
+	.short	25434
+	.short	10605
+	.short	31710
 	.short	19061
-	.short	11662
-	.short	6407
-	.short	22232
-	.short	8522
-	.short	16947
-	.short	12719
 	.short	28335
+	.short	6375
+	.short	25402
+	.short	12719
+	.short	17111
+	.short	16947
+	.short	8523
+	.short	22232
 	.short	0
 	.short	0
 	.short	0
@@ -2369,9 +2369,9 @@ backCloudsTiles:
 	.short	4369
 	.short	28945
 	.short	4369
-	.short	-15087
+	.short	-10991
 	.short	4369
-	.short	-9135
+	.short	-12975
 	.short	4369
 	.short	-16763
 	.short	20753
@@ -2379,12 +2379,12 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	28945
-	.short	-13259
-	.short	-15535
-	.short	-4392
-	.short	-4733
+	.short	-8907
+	.short	-11439
+	.short	-4408
+	.short	-4989
 	.short	-21573
-	.short	-17427
+	.short	-17428
 	.short	-21846
 	.short	-21826
 	.short	-21846
@@ -2394,10 +2394,10 @@ backCloudsTiles:
 	.short	-21846
 	.short	6007
 	.short	4369
-	.short	-13108
-	.short	25916
+	.short	-8739
+	.short	25917
 	.short	-4370
-	.short	-29202
+	.short	-29458
 	.short	-21846
 	.short	-17484
 	.short	-21846
@@ -2412,18 +2412,18 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	4444
+	.short	4445
 	.short	4369
-	.short	30174
+	.short	30158
 	.short	4369
-	.short	-14156
+	.short	-10060
 	.short	4469
-	.short	-8534
+	.short	-12630
 	.short	5688
 	.short	-19286
-	.short	27870
+	.short	28110
 	.short	-21846
-	.short	-12869
+	.short	-9029
 	.short	4369
 	.short	4369
 	.short	4369
@@ -2455,7 +2455,7 @@ backCloudsTiles:
 	.short	4369
 	.short	20753
 	.short	4369
-	.short	-15503
+	.short	-11407
 	.short	4369
 	.short	4369
 	.short	4369
@@ -2467,20 +2467,20 @@ backCloudsTiles:
 	.short	4369
 	.short	24849
 	.short	26481
-	.short	-14746
-	.short	-30525
-	.short	-4643
-	.short	-16659
+	.short	-10650
+	.short	-30509
+	.short	-4916
+	.short	-16660
 	.short	19387
-	.short	-15087
+	.short	-10991
 	.short	-21826
-	.short	-9119
+	.short	-12959
 	.short	-21845
 	.short	-6090
 	.short	-21846
 	.short	-16765
 	.short	-21846
-	.short	-21544
+	.short	-21560
 	.short	-21846
 	.short	-21778
 	.short	-21846
@@ -2505,7 +2505,7 @@ backCloudsTiles:
 	.short	-21846
 	.short	-21846
 	.short	-21846
-	.short	-9302
+	.short	-13398
 	.short	-21846
 	.short	-17750
 	.short	-21846
@@ -2520,21 +2520,21 @@ backCloudsTiles:
 	.short	-21846
 	.short	-21846
 	.short	-21846
-	.short	4476
+	.short	4477
 	.short	4369
-	.short	4557
+	.short	4572
 	.short	4369
 	.short	5518
 	.short	4369
-	.short	31979
+	.short	32235
 	.short	4369
-	.short	23994
+	.short	23738
 	.short	4369
-	.short	-12614
+	.short	-8518
 	.short	4369
 	.short	-29782
 	.short	4375
-	.short	15802
+	.short	15546
 	.short	4375
 	.short	4369
 	.short	4369
@@ -2549,7 +2549,7 @@ backCloudsTiles:
 	.short	4369
 	.short	-31903
 	.short	4369
-	.short	-5946
+	.short	-5930
 	.short	28945
 	.short	-16765
 	.short	4369
@@ -2560,10 +2560,10 @@ backCloudsTiles:
 	.short	4369
 	.short	13655
 	.short	5973
-	.short	-10100
-	.short	15501
-	.short	-17427
-	.short	-8469
+	.short	-14195
+	.short	15756
+	.short	-17428
+	.short	-12565
 	.short	17595
 	.short	-17484
 	.short	17483
@@ -2596,9 +2596,9 @@ backCloudsTiles:
 	.short	4369
 	.short	28945
 	.short	13109
-	.short	-15087
-	.short	-8744
-	.short	-10155
+	.short	-10991
+	.short	-13112
+	.short	-14251
 	.short	-17474
 	.short	4369
 	.short	-6089
@@ -2607,12 +2607,12 @@ backCloudsTiles:
 	.short	20753
 	.short	-21528
 	.short	14097
-	.short	-21827
+	.short	-21828
 	.short	-31215
 	.short	-21842
-	.short	-17067
+	.short	-17323
 	.short	-21846
-	.short	19421
+	.short	19404
 	.short	-21846
 	.short	17595
 	.short	-23484
@@ -2632,22 +2632,22 @@ backCloudsTiles:
 	.short	-21846
 	.short	-21846
 	.short	-21846
-	.short	-12614
+	.short	-8518
 	.short	4374
 	.short	-29014
 	.short	4373
-	.short	-9302
+	.short	-13398
 	.short	4371
-	.short	-9302
-	.short	4380
+	.short	-13398
+	.short	4381
 	.short	-5206
-	.short	4476
+	.short	4477
 	.short	-6998
 	.short	4472
 	.short	-17750
 	.short	4456
 	.short	-17750
-	.short	26461
+	.short	26460
 	.short	4369
 	.short	4369
 	.short	4369
@@ -2694,15 +2694,15 @@ backCloudsTiles:
 	.short	4369
 	.short	20753
 	.short	5939
-	.short	-15003
+	.short	-10907
 	.short	21896
 	.short	-30959
 	.short	17598
 	.short	-6063
 	.short	17483
-	.short	-4809
+	.short	-5065
 	.short	17483
-	.short	-16698
+	.short	-16682
 	.short	17476
 	.short	-16763
 	.short	-1
@@ -2728,8 +2728,8 @@ backCloudsTiles:
 	.short	-1
 	.short	-103
 	.short	-1
-	.short	-12821
-	.short	-28964
+	.short	-8981
+	.short	-28979
 	.short	-17484
 	.short	-5189
 	.short	17476
@@ -2744,7 +2744,7 @@ backCloudsTiles:
 	.short	-1
 	.short	-1
 	.short	-1
-	.short	-16680
+	.short	-16696
 	.short	17483
 	.short	19387
 	.short	17476
@@ -2841,7 +2841,7 @@ backCloudsTiles:
 	.short	-1
 	.short	17476
 	.short	-17750
-	.short	-29634
+	.short	-29378
 	.short	17476
 	.short	-4373
 	.short	17476
@@ -2856,18 +2856,18 @@ backCloudsTiles:
 	.short	17476
 	.short	17476
 	.short	17476
-	.short	23688
+	.short	23944
 	.short	4375
-	.short	-29202
+	.short	-29458
 	.short	4371
-	.short	-8517
-	.short	4460
+	.short	-12613
+	.short	4461
 	.short	-5308
 	.short	29016
 	.short	-19388
-	.short	-14530
+	.short	-10434
 	.short	-19388
-	.short	-9074
+	.short	-12914
 	.short	17476
 	.short	-16661
 	.short	17476
@@ -2878,10 +2878,10 @@ backCloudsTiles:
 	.short	4369
 	.short	25441
 	.short	30293
-	.short	-12925
-	.short	15496
+	.short	-9085
+	.short	15752
 	.short	-5144
-	.short	-8466
+	.short	-12562
 	.short	-17474
 	.short	-5189
 	.short	17483
@@ -2898,9 +2898,9 @@ backCloudsTiles:
 	.short	4369
 	.short	5944
 	.short	4369
-	.short	5005
+	.short	5004
 	.short	4369
-	.short	31966
+	.short	32206
 	.short	4369
 	.short	22763
 	.short	4369
@@ -2921,13 +2921,13 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	13686
-	.short	-30516
-	.short	-15565
-	.short	-30580
-	.short	-15565
-	.short	-30516
+	.short	-30499
+	.short	-11469
+	.short	-30579
+	.short	-11469
+	.short	-30499
 	.short	21299
-	.short	-13261
+	.short	-8909
 	.short	5989
 	.short	21863
 	.short	4369
@@ -2936,14 +2936,14 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	-30516
-	.short	-13176
-	.short	-30584
-	.short	-30579
-	.short	-30584
+	.short	-30499
+	.short	-8824
 	.short	-30584
 	.short	-30580
-	.short	-13108
+	.short	-30584
+	.short	-30584
+	.short	-30579
+	.short	-8739
 	.short	13107
 	.short	25427
 	.short	30577
@@ -2952,12 +2952,12 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	8924
+	.short	8909
 	.short	-26215
-	.short	11656
+	.short	11400
 	.short	8738
 	.short	-30584
-	.short	-10104
+	.short	-14200
 	.short	21845
 	.short	13141
 	.short	4369
@@ -2972,9 +2972,9 @@ backCloudsTiles:
 	.short	-26215
 	.short	-28126
 	.short	-26215
-	.short	11741
+	.short	11468
 	.short	8738
-	.short	-29501
+	.short	-29229
 	.short	-30584
 	.short	26481
 	.short	13141
@@ -3007,10 +3007,10 @@ backCloudsTiles:
 	.short	-26215
 	.short	-26215
 	.short	8738
-	.short	8914
-	.short	-29224
+	.short	8898
 	.short	-29496
-	.short	15413
+	.short	-29224
+	.short	15669
 	.short	22037
 	.short	5905
 	.short	4369
@@ -3021,10 +3021,10 @@ backCloudsTiles:
 	.short	-26215
 	.short	8857
 	.short	10649
-	.short	-30510
-	.short	-11742
-	.short	21448
-	.short	-14200
+	.short	-30526
+	.short	-15838
+	.short	21464
+	.short	-10104
 	.short	4467
 	.short	21299
 	.short	4375
@@ -3037,7 +3037,7 @@ backCloudsTiles:
 	.short	8738
 	.short	-28126
 	.short	-30584
-	.short	-8744
+	.short	-13112
 	.short	21845
 	.short	13109
 	.short	4369
@@ -3052,12 +3052,12 @@ backCloudsTiles:
 	.short	-1
 	.short	-26215
 	.short	-1639
-	.short	-26211
+	.short	-26212
 	.short	-26215
-	.short	-8749
-	.short	8925
-	.short	-15567
-	.short	-13108
+	.short	-13117
+	.short	8908
+	.short	-11471
+	.short	-8739
 	.short	4369
 	.short	30577
 	.short	4369
@@ -3073,7 +3073,7 @@ backCloudsTiles:
 	.short	8738
 	.short	8738
 	.short	-30584
-	.short	-10104
+	.short	-14200
 	.short	21862
 	.short	13109
 	.short	4369
@@ -3088,10 +3088,10 @@ backCloudsTiles:
 	.short	-26215
 	.short	8738
 	.short	8738
-	.short	-8739
-	.short	-8739
-	.short	-13117
 	.short	-13108
+	.short	-13108
+	.short	-8749
+	.short	-8739
 	.short	30577
 	.short	30583
 	.short	4369
@@ -3104,10 +3104,10 @@ backCloudsTiles:
 	.short	-7
 	.short	-26334
 	.short	-26215
-	.short	8925
-	.short	8914
-	.short	-30660
-	.short	-29501
+	.short	8908
+	.short	8898
+	.short	-30659
+	.short	-29229
 	.short	30071
 	.short	13841
 	.short	4369
@@ -3122,10 +3122,10 @@ backCloudsTiles:
 	.short	-26215
 	.short	-26222
 	.short	-26215
-	.short	8749
+	.short	8748
 	.short	8738
-	.short	-30580
-	.short	-8744
+	.short	-30579
+	.short	-13112
 	.short	13142
 	.short	13107
 	.short	-1
@@ -3141,7 +3141,7 @@ backCloudsTiles:
 	.short	8738
 	.short	8738
 	.short	-30584
-	.short	-30516
+	.short	-30499
 	.short	30003
 	.short	21846
 	.short	17663
@@ -3160,21 +3160,21 @@ backCloudsTiles:
 	.short	8738
 	.short	-31403
 	.short	-30584
-	.short	24043
+	.short	23787
 	.short	4369
-	.short	15807
+	.short	15551
 	.short	4369
-	.short	15775
+	.short	15519
 	.short	4369
-	.short	15657
+	.short	15401
 	.short	4369
-	.short	15657
+	.short	15401
 	.short	5905
-	.short	-13022
+	.short	-9182
 	.short	25941
-	.short	15501
+	.short	15756
 	.short	21299
-	.short	-13176
+	.short	-8824
 	.short	21299
 	.short	4369
 	.short	4369
@@ -3255,7 +3255,7 @@ backCloudsTiles:
 	.short	4369
 	.short	13665
 	.short	13585
-	.short	-8909
+	.short	-13261
 	.short	4369
 	.short	4369
 	.short	4369
@@ -3268,10 +3268,10 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	-14203
-	.short	26053
-	.short	-4419
-	.short	-29208
+	.short	-10107
+	.short	26069
+	.short	-4420
+	.short	-29464
 	.short	4369
 	.short	4369
 	.short	4369
@@ -3303,7 +3303,7 @@ backCloudsTiles:
 	.short	4369
 	.short	5905
 	.short	4369
-	.short	15555
+	.short	15827
 	.short	4369
 	.short	4369
 	.short	4369
@@ -3317,18 +3317,18 @@ backCloudsTiles:
 	.short	4369
 	.short	20753
 	.short	4369
-	.short	-14575
+	.short	-10479
 	.short	4369
-	.short	-10991
+	.short	-15087
 	.short	4369
 	.short	4369
 	.short	4369
 	.short	4369
 	.short	24849
 	.short	21845
-	.short	-29615
+	.short	-29359
 	.short	-30584
-	.short	-4733
+	.short	-4989
 	.short	-4418
 	.short	-17432
 	.short	-17750
@@ -3342,35 +3342,35 @@ backCloudsTiles:
 	.short	4369
 	.short	4375
 	.short	4369
-	.short	5980
+	.short	5981
 	.short	4369
-	.short	29581
+	.short	29580
 	.short	4369
 	.short	14571
 	.short	28951
 	.short	-28998
 	.short	20757
 	.short	-5206
-	.short	13676
+	.short	13677
 	.short	4369
 	.short	24849
 	.short	4369
-	.short	-29583
+	.short	-29327
 	.short	28945
-	.short	-18235
-	.short	-16111
-	.short	-20776
+	.short	-18219
+	.short	-12015
+	.short	-20792
 	.short	-7327
 	.short	-21573
-	.short	-21117
+	.short	-21373
 	.short	-21846
-	.short	-21523
+	.short	-21524
 	.short	-21846
 	.short	-21826
 	.short	-21846
-	.short	-8907
+	.short	-13259
 	.short	-17426
-	.short	-17443
+	.short	-17460
 	.short	-21829
 	.short	-21829
 	.short	-21846
@@ -3400,12 +3400,12 @@ backCloudsTiles:
 	.short	-21846
 	.short	-21846
 	.short	-21846
-	.short	-12819
+	.short	-8980
 	.short	4437
 	.short	-19286
-	.short	31966
+	.short	32206
 	.short	-21846
-	.short	-12869
+	.short	-9029
 	.short	-21846
 	.short	-5206
 	.short	-21846
@@ -3417,7 +3417,7 @@ backCloudsTiles:
 	.short	-21846
 	.short	-21846
 	.short	22033
-	.short	-8467
+	.short	-12564
 	.short	-30671
 	.short	-17477
 	.short	-16669
@@ -3443,26 +3443,26 @@ backCloudsTiles:
 	.short	24849
 	.short	30293
 	.short	14097
-	.short	15564
-	.short	-15007
+	.short	15837
+	.short	-10911
 	.short	-30584
-	.short	-15529
+	.short	-11433
 	.short	-30584
 	.short	4369
 	.short	-7407
 	.short	4369
-	.short	-5103
+	.short	-4847
 	.short	21857
 	.short	-18347
 	.short	-30671
 	.short	20104
-	.short	-4730
+	.short	-4986
 	.short	19390
-	.short	-16676
+	.short	-16691
 	.short	17483
 	.short	-16664
 	.short	-1
-	.short	8941
+	.short	8940
 	.short	-26215
 	.short	-21845
 	.short	-21846
@@ -3481,7 +3481,7 @@ backCloudsTiles:
 	.short	-26215
 	.short	-26215
 	.short	-17750
-	.short	-9011
+	.short	-12836
 	.short	-21846
 	.short	-17477
 	.short	-21846
@@ -3587,10 +3587,10 @@ backCloudsTiles:
 	.short	4369
 	.short	28945
 	.short	4369
-	.short	-29610
-	.short	-14991
-	.short	-4392
-	.short	-4733
+	.short	-29354
+	.short	-10895
+	.short	-4408
+	.short	-4989
 	.short	-21573
 	.short	4369
 	.short	4369
@@ -3602,8 +3602,8 @@ backCloudsTiles:
 	.short	4369
 	.short	13654
 	.short	13107
-	.short	-8744
-	.short	-8467
+	.short	-13112
+	.short	-12564
 	.short	-17477
 	.short	-17477
 	.short	-21846
@@ -3618,12 +3618,12 @@ backCloudsTiles:
 	.short	4369
 	.short	30035
 	.short	4369
-	.short	-30499
-	.short	5980
+	.short	-30516
+	.short	5981
 	.short	-5189
-	.short	15502
+	.short	15758
 	.short	-21846
-	.short	-8517
+	.short	-12613
 	.short	4369
 	.short	4369
 	.short	4369
@@ -3640,8 +3640,8 @@ backCloudsTiles:
 	.short	4369
 	.short	5688
 	.short	4369
-	.short	-15530
-	.short	-30516
+	.short	-11434
+	.short	-30499
 	.short	22129
 	.short	21845
 	.short	4369
@@ -3656,10 +3656,10 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	-8824
-	.short	8749
+	.short	-13176
+	.short	8748
 	.short	13653
-	.short	-15044
+	.short	-10947
 	.short	4369
 	.short	4369
 	.short	4369
@@ -3672,9 +3672,9 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	-8926
-	.short	-8739
-	.short	21448
+	.short	-13278
+	.short	-13108
+	.short	21464
 	.short	21845
 	.short	4369
 	.short	4369
@@ -3687,20 +3687,20 @@ backCloudsTiles:
 	.short	4369
 	.short	-31471
 	.short	4369
-	.short	-10127
-	.short	-27939
+	.short	-14223
+	.short	-27956
 	.short	-23303
 	.short	-16843
 	.short	-21852
 	.short	20017
 	.short	-21846
-	.short	-17071
+	.short	-17327
 	.short	-21846
 	.short	20017
 	.short	17578
 	.short	19334
 	.short	17476
-	.short	17645
+	.short	17644
 	.short	17476
 	.short	17598
 	.short	17476
@@ -3735,7 +3735,7 @@ backCloudsTiles:
 	.short	-24577
 	.short	8745
 	.short	8751
-	.short	-13118
+	.short	-8750
 	.short	17476
 	.short	17476
 	.short	17476
@@ -3745,12 +3745,12 @@ backCloudsTiles:
 	.short	-188
 	.short	-26215
 	.short	-26215
-	.short	-8739
-	.short	-11742
+	.short	-13108
+	.short	-15838
 	.short	13107
-	.short	13250
+	.short	13266
 	.short	4369
-	.short	4476
+	.short	4477
 	.short	4369
 	.short	17476
 	.short	-1
@@ -3758,8 +3758,8 @@ backCloudsTiles:
 	.short	10649
 	.short	-5735
 	.short	-32222
-	.short	15837
-	.short	23747
+	.short	15564
+	.short	24019
 	.short	4915
 	.short	5905
 	.short	4369
@@ -3769,10 +3769,10 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	8959
-	.short	11554
+	.short	11298
 	.short	-32222
-	.short	-31860
-	.short	22669
+	.short	-31859
+	.short	22668
 	.short	29046
 	.short	5427
 	.short	4369
@@ -3787,20 +3787,20 @@ backCloudsTiles:
 	.short	4369
 	.short	-31471
 	.short	4369
-	.short	-4665
+	.short	-4905
 	.short	24849
-	.short	-21540
+	.short	-21555
 	.short	-31215
 	.short	-21826
 	.short	-6047
 	.short	-21845
-	.short	-16697
+	.short	-16681
 	.short	-21846
 	.short	-21533
 	.short	-21846
-	.short	-21827
+	.short	-21828
 	.short	-21846
-	.short	-21523
+	.short	-21524
 	.short	-21846
 	.short	-21845
 	.short	-21846
@@ -3832,16 +3832,16 @@ backCloudsTiles:
 	.short	-21846
 	.short	-21846
 	.short	-21846
-	.short	14558
+	.short	14542
 	.short	4375
-	.short	-8518
-	.short	4444
+	.short	-12614
+	.short	4445
 	.short	-19286
-	.short	5582
+	.short	5598
 	.short	-21846
-	.short	27867
+	.short	28107
 	.short	-21846
-	.short	-12870
+	.short	-9030
 	.short	-21846
 	.short	-5206
 	.short	-21846
@@ -3855,9 +3855,9 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	22289
-	.short	-13117
-	.short	-30523
-	.short	-8467
+	.short	-8749
+	.short	-30507
+	.short	-12564
 	.short	-16658
 	.short	-17477
 	.short	-21846
@@ -3872,52 +3872,52 @@ backCloudsTiles:
 	.short	4369
 	.short	5971
 	.short	4369
-	.short	29640
+	.short	29656
 	.short	4369
 	.short	14574
 	.short	4375
 	.short	-28998
 	.short	4373
-	.short	-9302
+	.short	-13398
 	.short	4371
 	.short	4369
-	.short	-18233
+	.short	-18217
 	.short	4369
 	.short	-16765
 	.short	4369
-	.short	-16660
+	.short	-16659
 	.short	4369
 	.short	-24955
 	.short	4369
-	.short	8915
+	.short	8899
 	.short	4369
-	.short	-11556
+	.short	-15667
 	.short	22033
-	.short	-12916
+	.short	-9075
 	.short	13681
-	.short	-13108
+	.short	-8739
 	.short	17483
 	.short	-3004
 	.short	17476
 	.short	-26113
 	.short	-24588
-	.short	-8807
+	.short	-13159
 	.short	10751
-	.short	13789
+	.short	13772
 	.short	-32222
-	.short	5724
-	.short	22749
+	.short	5725
+	.short	22732
 	.short	4375
-	.short	5068
+	.short	5085
 	.short	4369
 	.short	4469
 	.short	4369
 	.short	-26113
 	.short	8953
-	.short	-4711
+	.short	-4967
 	.short	-30686
-	.short	21981
-	.short	21900
+	.short	21964
+	.short	21901
 	.short	4435
 	.short	4439
 	.short	4369
@@ -3928,8 +3928,8 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	-14206
-	.short	30588
+	.short	-10110
+	.short	30589
 	.short	30040
 	.short	4375
 	.short	4437
@@ -3947,16 +3947,16 @@ backCloudsTiles:
 	.short	4369
 	.short	-32495
 	.short	4369
-	.short	-10991
+	.short	-15087
 	.short	4369
-	.short	-5103
+	.short	-4847
 	.short	4369
-	.short	-17055
+	.short	-17311
 	.short	28945
-	.short	20167
+	.short	20183
 	.short	-31919
-	.short	19437
-	.short	-4733
+	.short	19436
+	.short	-4989
 	.short	17595
 	.short	-17432
 	.short	17476
@@ -3993,17 +3993,17 @@ backCloudsTiles:
 	.short	17476
 	.short	17476
 	.short	-5206
-	.short	4476
+	.short	4477
 	.short	-5206
-	.short	4476
+	.short	4477
 	.short	-6998
-	.short	4476
+	.short	4477
 	.short	-6998
-	.short	4380
+	.short	4381
 	.short	-19286
-	.short	13676
+	.short	13677
 	.short	-19388
-	.short	-8738
+	.short	-13106
 	.short	17476
 	.short	-17484
 	.short	17476
@@ -4018,12 +4018,12 @@ backCloudsTiles:
 	.short	4369
 	.short	25907
 	.short	4369
-	.short	-14115
+	.short	-10036
 	.short	4373
 	.short	-4421
 	.short	5976
 	.short	-17596
-	.short	15502
+	.short	15758
 	.short	4369
 	.short	4369
 	.short	4369
@@ -4057,17 +4057,17 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	-16111
+	.short	-12015
 	.short	4369
 	.short	-31215
 	.short	4369
-	.short	-10991
+	.short	-15087
 	.short	4369
-	.short	-11417
+	.short	-15513
 	.short	20753
-	.short	-29501
+	.short	-29229
 	.short	22289
-	.short	-13117
+	.short	-8749
 	.short	20753
 	.short	13109
 	.short	4369
@@ -4079,10 +4079,10 @@ backCloudsTiles:
 	.short	-1646
 	.short	-26209
 	.short	8738
-	.short	-8926
-	.short	-8739
-	.short	23688
-	.short	15560
+	.short	-13278
+	.short	-13108
+	.short	23944
+	.short	15832
 	.short	5973
 	.short	30293
 	.short	4369
@@ -4094,10 +4094,10 @@ backCloudsTiles:
 	.short	-1
 	.short	-26215
 	.short	-26215
-	.short	-8739
-	.short	8925
+	.short	-13108
+	.short	8908
 	.short	21333
-	.short	-29611
+	.short	-29355
 	.short	4369
 	.short	22289
 	.short	4369
@@ -4113,7 +4113,7 @@ backCloudsTiles:
 	.short	8738
 	.short	8738
 	.short	-30584
-	.short	-13176
+	.short	-8824
 	.short	21845
 	.short	30581
 	.short	4369
@@ -4127,9 +4127,9 @@ backCloudsTiles:
 	.short	-26215
 	.short	-26215
 	.short	8738
-	.short	-8926
-	.short	-13108
-	.short	13116
+	.short	-13278
+	.short	-8739
+	.short	13117
 	.short	30583
 	.short	4375
 	.short	4369
@@ -4142,8 +4142,8 @@ backCloudsTiles:
 	.short	-1
 	.short	-26215
 	.short	-26215
-	.short	-8739
-	.short	-8739
+	.short	-13108
+	.short	-13108
 	.short	13107
 	.short	13107
 	.short	4369
@@ -4160,7 +4160,7 @@ backCloudsTiles:
 	.short	-1
 	.short	8738
 	.short	8738
-	.short	-30516
+	.short	-30499
 	.short	-30584
 	.short	13681
 	.short	25907
@@ -4176,12 +4176,12 @@ backCloudsTiles:
 	.short	-1
 	.short	-28126
 	.short	-26215
-	.short	11660
+	.short	11405
 	.short	-26222
 	.short	-31881
-	.short	8925
+	.short	8908
 	.short	22289
-	.short	-30516
+	.short	-30499
 	.short	4369
 	.short	21863
 	.short	17476
@@ -4193,15 +4193,15 @@ backCloudsTiles:
 	.short	-26215
 	.short	-26215
 	.short	-26215
-	.short	-11742
-	.short	-11742
-	.short	-14195
-	.short	-14200
-	.short	30012
+	.short	-15838
+	.short	-15838
+	.short	-10100
+	.short	-10104
+	.short	30013
 	.short	25941
 	.short	4375
 	.short	-19388
-	.short	-29205
+	.short	-29461
 	.short	-1
 	.short	-4417
 	.short	-1
@@ -4209,24 +4209,24 @@ backCloudsTiles:
 	.short	8738
 	.short	8738
 	.short	-30584
-	.short	-8739
-	.short	22355
 	.short	-13108
+	.short	22355
+	.short	-8739
 	.short	4369
 	.short	21847
 	.short	4369
 	.short	4369
-	.short	4444
+	.short	4445
 	.short	4369
-	.short	5576
+	.short	5592
 	.short	4369
-	.short	29581
+	.short	29580
 	.short	6007
-	.short	15501
+	.short	15756
 	.short	21811
-	.short	15560
+	.short	15832
 	.short	21299
-	.short	25916
+	.short	25917
 	.short	21845
 	.short	4471
 	.short	4369
@@ -4273,22 +4273,22 @@ backCloudsTiles:
 	.short	4369
 	.short	22289
 	.short	4369
-	.short	-15529
+	.short	-11433
 	.short	24849
-	.short	-10045
-	.short	-15087
-	.short	-16680
-	.short	-29615
+	.short	-14125
+	.short	-10991
+	.short	-16696
+	.short	-29359
 	.short	19390
 	.short	4369
 	.short	4369
 	.short	4369
 	.short	21863
 	.short	13671
-	.short	-30516
-	.short	-30525
-	.short	-4387
-	.short	-4392
+	.short	-30499
+	.short	-30509
+	.short	-4404
+	.short	-4408
 	.short	-17477
 	.short	-17474
 	.short	-21846
@@ -4301,9 +4301,9 @@ backCloudsTiles:
 	.short	21845
 	.short	30037
 	.short	-30584
-	.short	-14200
+	.short	-10104
 	.short	-4370
-	.short	-8466
+	.short	-12562
 	.short	-17477
 	.short	-17477
 	.short	-21846
@@ -4316,16 +4316,16 @@ backCloudsTiles:
 	.short	4369
 	.short	4375
 	.short	4369
-	.short	30300
+	.short	30301
 	.short	4369
-	.short	15501
+	.short	15756
 	.short	4469
-	.short	-29205
+	.short	-29461
 	.short	5432
 	.short	-5196
-	.short	23694
+	.short	23950
 	.short	-17750
-	.short	-29205
+	.short	-29461
 	.short	-21846
 	.short	-4422
 	.short	4369
@@ -4342,29 +4342,29 @@ backCloudsTiles:
 	.short	4369
 	.short	4451
 	.short	4369
-	.short	5832
+	.short	5848
 	.short	4369
 	.short	4369
 	.short	4369
 	.short	4369
 	.short	20753
 	.short	4369
-	.short	-15087
+	.short	-10991
 	.short	4369
 	.short	-31887
 	.short	4369
 	.short	-6063
 	.short	4369
-	.short	-4666
+	.short	-4906
 	.short	4369
 	.short	-16765
 	.short	24849
-	.short	19420
-	.short	-4667
+	.short	19405
+	.short	-4907
 	.short	-21829
-	.short	-16676
+	.short	-16691
 	.short	-21846
-	.short	-21523
+	.short	-21524
 	.short	-21846
 	.short	-21826
 	.short	-21846
@@ -4376,35 +4376,35 @@ backCloudsTiles:
 	.short	-21846
 	.short	-21846
 	.short	-21846
-	.short	27790
+	.short	28046
 	.short	4369
-	.short	-14101
+	.short	-10005
 	.short	4374
 	.short	-28998
-	.short	4476
+	.short	4477
 	.short	-5206
 	.short	5944
 	.short	-17750
-	.short	5517
+	.short	5516
 	.short	-17750
-	.short	27870
+	.short	28110
 	.short	-21846
 	.short	14571
 	.short	-21846
-	.short	-12870
+	.short	-9030
 	.short	20753
 	.short	-21528
 	.short	14097
-	.short	-23363
-	.short	-14831
+	.short	-23364
+	.short	-10735
 	.short	-21826
 	.short	-31471
 	.short	-21826
 	.short	-31983
 	.short	-21845
-	.short	-9103
+	.short	-12943
 	.short	-21845
-	.short	-5039
+	.short	-4783
 	.short	-21845
 	.short	-6063
 	.short	-21845
@@ -4428,12 +4428,12 @@ backCloudsTiles:
 	.short	4369
 	.short	4456
 	.short	4369
-	.short	26429
+	.short	26428
 	.short	30566
-	.short	-14117
-	.short	-13108
+	.short	-10037
+	.short	-8739
 	.short	-4422
-	.short	-8738
+	.short	-13106
 	.short	-17494
 	.short	-17477
 	.short	-21846
@@ -4448,14 +4448,14 @@ backCloudsTiles:
 	.short	4369
 	.short	30291
 	.short	4369
-	.short	15496
+	.short	15752
 	.short	4373
-	.short	-29202
-	.short	5980
+	.short	-29458
+	.short	5981
 	.short	-4421
-	.short	5576
+	.short	5592
 	.short	-17494
-	.short	23774
+	.short	24014
 	.short	4369
 	.short	4369
 	.short	4369
@@ -4500,23 +4500,23 @@ backCloudsTiles:
 	.short	4471
 	.short	13655
 	.short	30003
-	.short	-29499
-	.short	-14200
-	.short	-4724
+	.short	-29227
+	.short	-10104
+	.short	-4979
 	.short	-4370
 	.short	-6095
 	.short	-21852
-	.short	-17097
+	.short	-17353
 	.short	-21846
-	.short	-16953
+	.short	-17193
 	.short	-21846
-	.short	-16698
+	.short	-16682
 	.short	-21846
 	.short	-16762
 	.short	-21846
 	.short	20101
 	.short	-21846
-	.short	19420
+	.short	19405
 	.short	-21846
 	.short	19390
 	.short	17476
@@ -4537,11 +4537,11 @@ backCloudsTiles:
 	.short	17476
 	.short	17476
 	.short	19114
-	.short	-14101
+	.short	-10005
 	.short	-21846
 	.short	-29004
 	.short	-21846
-	.short	-9286
+	.short	-13382
 	.short	-21846
 	.short	-5206
 	.short	-21846
@@ -4556,16 +4556,16 @@ backCloudsTiles:
 	.short	4369
 	.short	4373
 	.short	4369
-	.short	4476
+	.short	4477
 	.short	4369
 	.short	4440
 	.short	4369
-	.short	30669
+	.short	30684
 	.short	21846
 	.short	13198
-	.short	-13108
-	.short	-8725
 	.short	-8739
+	.short	-13077
+	.short	-13108
 	.short	-17484
 	.short	-5189
 	.short	4369
@@ -4578,11 +4578,11 @@ backCloudsTiles:
 	.short	4369
 	.short	4374
 	.short	4369
-	.short	5980
+	.short	5981
 	.short	4369
 	.short	29576
 	.short	30481
-	.short	14558
+	.short	14542
 	.short	21847
 	.short	4369
 	.short	4369
@@ -4599,7 +4599,7 @@ backCloudsTiles:
 	.short	4369
 	.short	13585
 	.short	4469
-	.short	-29609
+	.short	-29353
 	.short	4369
 	.short	4369
 	.short	4369
@@ -4608,13 +4608,13 @@ backCloudsTiles:
 	.short	4369
 	.short	26385
 	.short	21845
-	.short	-15529
-	.short	-30580
-	.short	-10043
-	.short	-4371
-	.short	-4392
+	.short	-11433
+	.short	-30579
+	.short	-14123
+	.short	-4372
+	.short	-4408
 	.short	-17477
-	.short	-17427
+	.short	-17428
 	.short	17483
 	.short	4369
 	.short	4369
@@ -4624,37 +4624,37 @@ backCloudsTiles:
 	.short	4369
 	.short	5989
 	.short	4369
-	.short	21452
+	.short	21469
 	.short	4375
-	.short	-14115
+	.short	-10036
 	.short	4451
-	.short	-8469
-	.short	5832
+	.short	-12565
+	.short	5848
 	.short	-5189
-	.short	25485
+	.short	25484
 	.short	4369
 	.short	28945
 	.short	4369
 	.short	22289
 	.short	4369
-	.short	-15087
+	.short	-10991
 	.short	4369
-	.short	-29615
+	.short	-29359
 	.short	4369
-	.short	-10185
+	.short	-14281
 	.short	4369
-	.short	-5946
+	.short	-5930
 	.short	4369
-	.short	-4667
+	.short	-4907
 	.short	4369
-	.short	-4731
-	.short	-15530
-	.short	15564
-	.short	-30525
-	.short	-30499
-	.short	-4392
+	.short	-4987
+	.short	-11434
+	.short	15837
+	.short	-30509
+	.short	-30516
+	.short	-4408
 	.short	-4370
-	.short	-17427
+	.short	-17428
 	.short	-17477
 	.short	19390
 	.short	-19388
@@ -4665,14 +4665,14 @@ backCloudsTiles:
 	.short	-7
 	.short	-1
 	.short	4469
-	.short	-14831
-	.short	30012
+	.short	-10735
+	.short	30013
 	.short	-31471
-	.short	23693
+	.short	23948
 	.short	-31977
-	.short	-12818
-	.short	-9101
-	.short	-8517
+	.short	-8978
+	.short	-12941
+	.short	-12613
 	.short	-6088
 	.short	-5196
 	.short	-16658
@@ -4680,9 +4680,9 @@ backCloudsTiles:
 	.short	-17477
 	.short	-1
 	.short	-1
-	.short	-16680
+	.short	-16696
 	.short	-17477
-	.short	-17427
+	.short	-17428
 	.short	17476
 	.short	19390
 	.short	17476
@@ -4745,9 +4745,9 @@ backCloudsTiles:
 	.short	-1
 	.short	-1
 	.short	-28949
-	.short	-14132
+	.short	-10019
 	.short	-5196
-	.short	-8466
+	.short	-12562
 	.short	-17596
 	.short	-5189
 	.short	17476
@@ -4760,12 +4760,12 @@ backCloudsTiles:
 	.short	17476
 	.short	-1
 	.short	-1
-	.short	4444
-	.short	-5947
-	.short	21960
-	.short	-16756
-	.short	-30498
-	.short	-17427
+	.short	4445
+	.short	-5931
+	.short	21976
+	.short	-16755
+	.short	-30514
+	.short	-17428
 	.short	-4421
 	.short	19387
 	.short	-17596
@@ -4793,11 +4793,11 @@ backCloudsTiles:
 	.short	-1
 	.short	-1
 	.short	-17596
-	.short	14558
+	.short	14542
 	.short	-19388
-	.short	-29205
+	.short	-29461
 	.short	17476
-	.short	-8517
+	.short	-12613
 	.short	17476
 	.short	-5196
 	.short	17476
@@ -4812,15 +4812,15 @@ backCloudsTiles:
 	.short	4369
 	.short	4467
 	.short	4369
-	.short	4444
+	.short	4445
 	.short	4369
-	.short	5837
+	.short	5852
 	.short	4369
 	.short	5006
 	.short	4369
-	.short	31966
+	.short	32206
 	.short	4369
-	.short	22750
+	.short	22734
 	.short	4369
 	.short	22766
 	.short	4369
@@ -4851,11 +4851,11 @@ backCloudsTiles:
 	.short	30583
 	.short	8835
 	.short	30037
-	.short	11651
+	.short	11395
 	.short	13107
-	.short	11660
-	.short	-15565
-	.short	-10100
+	.short	11405
+	.short	-11469
+	.short	-14195
 	.short	-1
 	.short	-1
 	.short	-1
@@ -4870,103 +4870,7 @@ backCloudsTiles:
 	.short	-26215
 	.short	8738
 	.short	8738
-	.short	-8739
-	.short	-8739
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-26215
-	.short	-26215
-	.short	-26215
-	.short	-26215
-	.short	-26215
-	.short	-26215
-	.short	8738
-	.short	8738
-	.short	-8739
-	.short	-30499
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-26215
-	.short	-26215
-	.short	-26215
-	.short	-26215
-	.short	-26215
-	.short	-26215
-	.short	8738
-	.short	8738
-	.short	-8744
-	.short	8925
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-26215
-	.short	-26215
-	.short	-26215
-	.short	-26215
-	.short	-26215
-	.short	8857
-	.short	8738
-	.short	-11742
-	.short	-8750
-	.short	-30499
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-26215
-	.short	-26215
-	.short	-26215
-	.short	-26215
-	.short	8738
-	.short	8738
-	.short	-30579
-	.short	-8824
-	.short	29011
-	.short	-13259
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-26215
-	.short	-26215
-	.short	-26215
-	.short	-26215
-	.short	8738
-	.short	8738
-	.short	11741
-	.short	8738
-	.short	-30584
-	.short	-30584
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-1
-	.short	-26215
-	.short	-26215
-	.short	-26215
-	.short	-26215
-	.short	8738
-	.short	8738
-	.short	-8739
-	.short	-8739
-	.short	-30584
+	.short	-13108
 	.short	-13108
 	.short	-1
 	.short	-1
@@ -4978,11 +4882,107 @@ backCloudsTiles:
 	.short	-26215
 	.short	-26215
 	.short	-26215
+	.short	-26215
+	.short	-26215
 	.short	8738
 	.short	8738
-	.short	-30499
+	.short	-13108
+	.short	-30516
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-26215
+	.short	-26215
+	.short	-26215
+	.short	-26215
+	.short	-26215
+	.short	-26215
+	.short	8738
+	.short	8738
+	.short	-13112
+	.short	8908
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-26215
+	.short	-26215
+	.short	-26215
+	.short	-26215
+	.short	-26215
+	.short	8857
+	.short	8738
+	.short	-15838
+	.short	-13118
+	.short	-30516
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-26215
+	.short	-26215
+	.short	-26215
+	.short	-26215
+	.short	8738
+	.short	8738
+	.short	-30580
+	.short	-13176
+	.short	29011
+	.short	-8907
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-26215
+	.short	-26215
+	.short	-26215
+	.short	-26215
+	.short	8738
+	.short	8738
+	.short	11468
+	.short	8738
 	.short	-30584
-	.short	13116
+	.short	-30584
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-26215
+	.short	-26215
+	.short	-26215
+	.short	-26215
+	.short	8738
+	.short	8738
+	.short	-13108
+	.short	-13108
+	.short	-30584
+	.short	-8739
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-1
+	.short	-26215
+	.short	-26215
+	.short	-26215
+	.short	-26215
+	.short	8738
+	.short	8738
+	.short	-30516
+	.short	-30584
+	.short	13117
 	.short	21845
 	.short	-1
 	.short	-1
@@ -4994,10 +4994,10 @@ backCloudsTiles:
 	.short	-26215
 	.short	8857
 	.short	8738
-	.short	-8926
-	.short	-8739
+	.short	-13278
+	.short	-13108
 	.short	-30584
-	.short	-13112
+	.short	-8744
 	.short	26213
 	.short	4375
 	.short	-1
@@ -5010,9 +5010,9 @@ backCloudsTiles:
 	.short	-26215
 	.short	8738
 	.short	8738
-	.short	-8739
+	.short	-13108
 	.short	-30584
-	.short	13260
+	.short	13277
 	.short	13107
 	.short	4369
 	.short	4369
@@ -5026,12 +5026,12 @@ backCloudsTiles:
 	.short	-26215
 	.short	8738
 	.short	-26222
-	.short	-10104
-	.short	8749
+	.short	-14200
+	.short	8748
 	.short	13107
-	.short	11660
+	.short	11405
 	.short	4369
-	.short	-29609
+	.short	-29353
 	.short	-1
 	.short	-1
 	.short	-1
@@ -5046,8 +5046,8 @@ backCloudsTiles:
 	.short	-26215
 	.short	8738
 	.short	8738
-	.short	-8739
-	.short	-30499
+	.short	-13108
+	.short	-30516
 	.short	-1
 	.short	-1
 	.short	-1
@@ -5062,8 +5062,8 @@ backCloudsTiles:
 	.short	-26215
 	.short	8738
 	.short	8738
-	.short	11741
-	.short	-8739
+	.short	11468
+	.short	-13108
 	.short	-1
 	.short	-1
 	.short	-1
@@ -5078,8 +5078,8 @@ backCloudsTiles:
 	.short	-26215
 	.short	8738
 	.short	8738
-	.short	-8739
-	.short	-8739
+	.short	-13108
+	.short	-13108
 	.short	-1
 	.short	-1
 	.short	-1
@@ -5094,8 +5094,8 @@ backCloudsTiles:
 	.short	8857
 	.short	8738
 	.short	8738
-	.short	-8739
-	.short	-30499
+	.short	-13108
+	.short	-30516
 	.short	-1
 	.short	-1
 	.short	-1
@@ -5108,10 +5108,10 @@ backCloudsTiles:
 	.short	10649
 	.short	8738
 	.short	8738
-	.short	-8750
-	.short	-8739
-	.short	-14200
+	.short	-13118
 	.short	-13108
+	.short	-10104
+	.short	-8739
 	.short	22761
 	.short	4369
 	.short	22761
@@ -5120,14 +5120,14 @@ backCloudsTiles:
 	.short	21879
 	.short	14370
 	.short	13109
-	.short	-29406
-	.short	-30516
-	.short	-30510
+	.short	-29662
+	.short	-30499
+	.short	-30526
 	.short	-30584
 	.short	-30584
 	.short	-30584
-	.short	-13108
-	.short	-30580
+	.short	-8739
+	.short	-30579
 	.short	4369
 	.short	4369
 	.short	4369
@@ -5136,10 +5136,10 @@ backCloudsTiles:
 	.short	4369
 	.short	30003
 	.short	22129
-	.short	15560
+	.short	15832
 	.short	13109
-	.short	-14200
-	.short	-29492
+	.short	-10104
+	.short	-29219
 	.short	-30584
 	.short	-30584
 	.short	-30584
@@ -5152,14 +5152,14 @@ backCloudsTiles:
 	.short	4369
 	.short	30293
 	.short	4369
-	.short	21308
+	.short	21309
 	.short	4375
-	.short	15564
+	.short	15837
 	.short	30565
-	.short	-13176
+	.short	-8824
 	.short	21811
-	.short	-13176
-	.short	13116
+	.short	-8824
+	.short	13117
 	.short	4369
 	.short	4369
 	.short	4369
@@ -5192,8 +5192,8 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	-15565
-	.short	-30516
+	.short	-11469
+	.short	-30499
 	.short	13141
 	.short	13107
 	.short	4369
@@ -5224,8 +5224,8 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	-13108
-	.short	21452
+	.short	-8739
+	.short	21469
 	.short	22295
 	.short	4469
 	.short	4369
@@ -5240,7 +5240,7 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	-29501
+	.short	-29229
 	.short	-30584
 	.short	22129
 	.short	21845
@@ -5257,7 +5257,7 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	-30584
-	.short	21448
+	.short	21464
 	.short	21845
 	.short	4469
 	.short	4369
@@ -5321,7 +5321,7 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	-15503
+	.short	-11407
 	.short	4369
 	.short	22289
 	.short	4369
@@ -5336,8 +5336,8 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	-30580
-	.short	13772
+	.short	-30579
+	.short	13789
 	.short	21845
 	.short	4469
 	.short	4369
@@ -5352,9 +5352,9 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	-30580
-	.short	-13176
-	.short	-13259
+	.short	-30579
+	.short	-8824
+	.short	-8907
 	.short	4469
 	.short	4369
 	.short	4369
@@ -5368,7 +5368,7 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	-30516
+	.short	-30499
 	.short	-30584
 	.short	26209
 	.short	21845
@@ -5384,8 +5384,8 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	-14200
-	.short	21452
+	.short	-10104
+	.short	21469
 	.short	30309
 	.short	4369
 	.short	4369
@@ -5417,9 +5417,9 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	26385
-	.short	-29501
+	.short	-29229
 	.short	4369
-	.short	-15561
+	.short	-11465
 	.short	4369
 	.short	21873
 	.short	4369
@@ -5434,10 +5434,10 @@ backCloudsTiles:
 	.short	4369
 	.short	-30584
 	.short	-30584
-	.short	-30580
-	.short	-13112
-	.short	-13261
-	.short	21308
+	.short	-30579
+	.short	-8744
+	.short	-8909
+	.short	21309
 	.short	5745
 	.short	4369
 	.short	4369
@@ -5448,9 +5448,9 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	-13108
+	.short	-8739
 	.short	13107
-	.short	21308
+	.short	21309
 	.short	13109
 	.short	4469
 	.short	21873
@@ -5494,24 +5494,24 @@ backCloudsTiles:
 	.short	4369
 	.short	4470
 	.short	4369
-	.short	29640
+	.short	29656
 	.short	4369
 	.short	14574
 	.short	4373
 	.short	-28998
 	.short	4371
-	.short	-9302
-	.short	4476
+	.short	-13398
+	.short	4477
 	.short	-17750
-	.short	6094
+	.short	6110
 	.short	-17750
-	.short	4558
+	.short	4574
 	.short	19114
-	.short	4558
+	.short	4574
 	.short	19114
 	.short	21428
 	.short	-21846
-	.short	-8524
+	.short	-12620
 	.short	4369
 	.short	4369
 	.short	4369
@@ -5523,8 +5523,8 @@ backCloudsTiles:
 	.short	4369
 	.short	4375
 	.short	21301
-	.short	5468
-	.short	-8739
+	.short	5469
+	.short	-13108
 	.short	22766
 	.short	-17477
 	.short	-28997
@@ -5542,7 +5542,7 @@ backCloudsTiles:
 	.short	4369
 	.short	26195
 	.short	4369
-	.short	23693
+	.short	23948
 	.short	4373
 	.short	4369
 	.short	4369
@@ -5575,7 +5575,7 @@ backCloudsTiles:
 	.short	-24577
 	.short	-26215
 	.short	-26215
-	.short	-11623
+	.short	-15719
 	.short	17476
 	.short	-5196
 	.short	17476
@@ -5585,24 +5585,24 @@ backCloudsTiles:
 	.short	-1
 	.short	8745
 	.short	10655
-	.short	-10110
-	.short	-11735
-	.short	22104
 	.short	-14206
+	.short	-15831
+	.short	22104
+	.short	-10110
 	.short	4373
-	.short	30013
+	.short	30012
 	.short	4369
-	.short	-14098
+	.short	-10002
 	.short	14131
-	.short	-11735
-	.short	13256
-	.short	-11742
-	.short	13256
-	.short	-29219
+	.short	-15831
+	.short	13272
+	.short	-15838
+	.short	13272
+	.short	-29492
 	.short	26195
-	.short	-13108
+	.short	-8739
 	.short	4470
-	.short	25948
+	.short	25949
 	.short	4369
 	.short	4369
 	.short	4369
@@ -5625,10 +5625,10 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	8738
-	.short	-14302
-	.short	-30499
+	.short	-10206
+	.short	-30516
 	.short	21896
-	.short	21957
+	.short	21973
 	.short	4437
 	.short	4369
 	.short	4369
@@ -5640,7 +5640,7 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	4380
+	.short	4381
 	.short	4369
 	.short	4375
 	.short	4369
@@ -5677,14 +5677,14 @@ backCloudsTiles:
 	.short	4369
 	.short	26129
 	.short	22289
-	.short	-30580
-	.short	-10143
+	.short	-30579
+	.short	-14239
 	.short	-5138
 	.short	-16762
 	.short	-21845
-	.short	-21524
+	.short	-21523
 	.short	-21846
-	.short	-21827
+	.short	-21828
 	.short	-21846
 	.short	-21938
 	.short	-21846
@@ -5694,16 +5694,16 @@ backCloudsTiles:
 	.short	4369
 	.short	5432
 	.short	4369
-	.short	14558
+	.short	14542
 	.short	4375
 	.short	-28997
 	.short	4467
 	.short	-5206
 	.short	4440
 	.short	-17750
-	.short	5838
+	.short	5854
 	.short	-21846
-	.short	29659
+	.short	29643
 	.short	4369
 	.short	4369
 	.short	4369
@@ -5729,29 +5729,29 @@ backCloudsTiles:
 	.short	4369
 	.short	30295
 	.short	28945
-	.short	-13117
+	.short	-8749
 	.short	22289
-	.short	-30580
+	.short	-30579
 	.short	13681
-	.short	-30580
+	.short	-30579
 	.short	13665
-	.short	-30516
+	.short	-30499
 	.short	4369
-	.short	-16111
+	.short	-12015
 	.short	22289
-	.short	-14507
+	.short	-10411
 	.short	-31983
 	.short	-6008
-	.short	-10223
+	.short	-14319
 	.short	19438
-	.short	-4813
+	.short	-5069
 	.short	17595
-	.short	-16680
+	.short	-16696
 	.short	17595
-	.short	-4387
+	.short	-4404
 	.short	-26210
-	.short	-10104
-	.short	8749
+	.short	-14200
+	.short	8748
 	.short	-21845
 	.short	-21846
 	.short	-21845
@@ -5767,7 +5767,7 @@ backCloudsTiles:
 	.short	-26215
 	.short	-26215
 	.short	8738
-	.short	8749
+	.short	8748
 	.short	-21846
 	.short	-28998
 	.short	-21846
@@ -5782,39 +5782,39 @@ backCloudsTiles:
 	.short	-17596
 	.short	-26215
 	.short	-4567
-	.short	-8739
-	.short	-14115
-	.short	-30504
-	.short	30152
+	.short	-13108
+	.short	-10036
+	.short	-30520
+	.short	30168
 	.short	-5189
-	.short	-14114
+	.short	-10034
 	.short	17578
-	.short	-8517
+	.short	-12613
 	.short	19114
 	.short	-5196
 	.short	-19388
 	.short	-5189
 	.short	-4421
 	.short	-4370
-	.short	-30579
-	.short	-10104
+	.short	-30580
+	.short	-14200
 	.short	22099
-	.short	-15531
+	.short	-11435
 	.short	4369
 	.short	4369
 	.short	4373
 	.short	4369
-	.short	5948
+	.short	5949
 	.short	4369
-	.short	29581
+	.short	29580
 	.short	4369
-	.short	14558
+	.short	14542
 	.short	30309
-	.short	-14114
-	.short	21308
-	.short	-30579
-	.short	13260
-	.short	-13108
+	.short	-10034
+	.short	21309
+	.short	-30580
+	.short	13277
+	.short	-8739
 	.short	21811
 	.short	4369
 	.short	4369
@@ -5849,7 +5849,7 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	13107
-	.short	-13108
+	.short	-8739
 	.short	4375
 	.short	5991
 	.short	4369
@@ -5864,8 +5864,8 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	-13176
-	.short	-13108
+	.short	-8824
+	.short	-8739
 	.short	5718
 	.short	4369
 	.short	4369
@@ -5880,7 +5880,7 @@ backCloudsTiles:
 	.short	4369
 	.short	4369
 	.short	4369
-	.short	15564
+	.short	15837
 	.short	25907
 	.short	4369
 	.short	4369

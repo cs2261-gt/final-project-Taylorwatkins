@@ -1,18 +1,17 @@
-/*So far I have created both proposed games with win and lose states
-  I have also created more detailed sprites but do not have the 
-  animation done yet. Also in the speed game, though you can win
-  or lose I still need to implement a game timer as proposed. 
-  I have instruction sheets but here's how to play: Once on the 
-  splash screen press the left key for the sport climb (outdoor) 
-  or press the right key for the speed game (indoor). For sport: 
-  attempt to get to the top of the XL screen without getting hit 
-  by any obstacles. for the speed: you use the same 3 keys but the up key 
-  makes you jump. I have a few bugs. In the sport game, the collision with 
-  the rocks aren't really working as they should, and in the the sport game 
-  the player can go above the screen which I need the fix. Also the collision
-  bitmap for the sport game is really really off. 
-  And I never got the chance to tell you that I don't climb competitively its
-  just a hobby that I miss since we're in quarentine :( */
+/*In this milestone I finalized all the backgrounds. I made a pause screen
+with a scrolling background. I fixed the rock fall collisions. I added a
+cheat to the sport game. If you press a all the spiders disappear. I also 
+added a timer to the speed game. I have two sprites with more than 3 frames
+of animation, the sport climber and the numbers in the speed game, all other
+sprites have two animation states except for the rocks which just have one. 
+I add all of the sound for the game. I have 5 looping songs and 1 non looping
+sound, a grunt in the speed game. I may add the scream for when the sport player
+dies but it's not a priority right now. I also implemented alpha blending in 
+the sport game when the player "falls" off the edge of the mountain. I really want
+to get an A on this assignment so if you have any suggestions please let me know.
+Also for some reason, all the sprites in the game alpha blend when I have alpha
+blend off for the spiders and rocks, so if that's a quick fix for that that you 
+know of i'd really appreciate a solution. Thank you */
 #include <stdlib.h>
 #include <stdio.h>
 #include "myLib.h"
@@ -170,7 +169,7 @@ void start() {
 void goToGame() {
     DMANow(3, gameBGXLPal, PALETTE, 256);
     DMANow(3, gameBGXLTiles, &CHARBLOCK[0], gameBGXLTilesLen / 2);
-    DMANow(3, gameBGXLMap, &SCREENBLOCK[28], 1024 * 4);
+    DMANow(3, gameBGXLMap, &SCREENBLOCK[28], gameBGXLMapLen / 2);
     
 
 
@@ -179,6 +178,7 @@ void goToGame() {
     DMANow(3, spritesheetPal, SPRITEPALETTE, 256);
     DMANow(3, spritesheetTiles, &CHARBLOCK[4], spritesheetTilesLen / 2);
 
+    REG_BLDCNT = BLD_OBJa | BLD_WHITE;
 	hideSprites();
 
     
@@ -214,7 +214,7 @@ void game() {
 void goToGame2() {
     DMANow(3, gameBGPal, PALETTE, 256);
     DMANow(3, gameBGTiles, &CHARBLOCK[0], gameBGTilesLen / 2);
-    DMANow(3, gameBGMap, &SCREENBLOCK[28], 1024 * 4);
+    DMANow(3, gameBGMap, &SCREENBLOCK[28], gameBGMapLen / 2);
     
 
 
@@ -280,7 +280,7 @@ void goToPause() {
 }
 
 void pause() { 
-    if(vBlankCount % 600 == 0) {
+    if(vBlankCount % 900 == 0) {
         pauseHOff++;
     }
     vBlankCount++;
@@ -327,7 +327,7 @@ void goToPause2() {
 }
 
 void pause2() {
-    if(vBlankCount % 600 == 0) {    
+    if(vBlankCount % 900 == 0) {    
         pauseHOff++;
     }
     vBlankCount++;
@@ -426,8 +426,9 @@ void instructions() {
     if (BUTTON_PRESSED(BUTTON_START)) {
         stopSound();
 		//playSoundA(gamesong, GAMESONGLEN, 1);
-        goToGame();
         initGame();
+        goToGame();
+        //initGame();
     } else if (BUTTON_PRESSED(BUTTON_SELECT)) {
         goToStart();
     }

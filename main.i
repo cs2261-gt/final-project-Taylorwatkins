@@ -2,7 +2,7 @@
 # 1 "<built-in>"
 # 1 "<command-line>"
 # 1 "main.c"
-# 16 "main.c"
+# 15 "main.c"
 # 1 "/opt/devkitpro/devkitARM/arm-none-eabi/include/stdlib.h" 1 3
 # 10 "/opt/devkitpro/devkitARM/arm-none-eabi/include/stdlib.h" 3
 # 1 "/opt/devkitpro/devkitARM/arm-none-eabi/include/machine/ieeefp.h" 1 3
@@ -811,7 +811,7 @@ extern long double _strtold_r (struct _reent *, const char *restrict, char **res
 extern long double strtold (const char *restrict, char **restrict);
 # 336 "/opt/devkitpro/devkitARM/arm-none-eabi/include/stdlib.h" 3
 
-# 17 "main.c" 2
+# 16 "main.c" 2
 # 1 "/opt/devkitpro/devkitARM/arm-none-eabi/include/stdio.h" 1 3
 # 36 "/opt/devkitpro/devkitARM/arm-none-eabi/include/stdio.h" 3
 # 1 "/opt/devkitpro/devkitARM/lib/gcc/arm-none-eabi/9.1.0/include/stddef.h" 1 3 4
@@ -1222,7 +1222,7 @@ _putchar_unlocked(int _c)
 }
 # 797 "/opt/devkitpro/devkitARM/arm-none-eabi/include/stdio.h" 3
 
-# 18 "main.c" 2
+# 17 "main.c" 2
 # 1 "myLib.h" 1
 
 
@@ -1233,9 +1233,9 @@ _putchar_unlocked(int _c)
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
-# 64 "myLib.h"
+# 72 "myLib.h"
 extern unsigned short *videoBuffer;
-# 85 "myLib.h"
+# 93 "myLib.h"
 typedef struct {
  u16 tileimg[8192];
 } charblock;
@@ -1278,7 +1278,7 @@ typedef struct {
 
 
 extern OBJ_ATTR shadowOAM[];
-# 157 "myLib.h"
+# 165 "myLib.h"
 void hideSprites();
 
 
@@ -1302,10 +1302,10 @@ typedef struct {
     int numFrames;
     int hide;
 } ANISPRITE;
-# 200 "myLib.h"
+# 208 "myLib.h"
 extern unsigned short oldButtons;
 extern unsigned short buttons;
-# 211 "myLib.h"
+# 219 "myLib.h"
 typedef volatile struct {
     volatile const void *src;
     volatile void *dst;
@@ -1314,9 +1314,9 @@ typedef volatile struct {
 
 
 extern DMA *dma;
-# 251 "myLib.h"
+# 259 "myLib.h"
 void DMANow(int channel, volatile const void *src, volatile void *dst, unsigned int cnt);
-# 342 "myLib.h"
+# 350 "myLib.h"
 typedef struct{
     const unsigned char* data;
     int length;
@@ -1332,7 +1332,7 @@ typedef struct{
 
 
 int collision(int colA, int rowA, int widthA, int heightA, int colB, int rowB, int widthB, int heightB);
-# 19 "main.c" 2
+# 18 "main.c" 2
 # 1 "startbg.h" 1
 # 22 "startbg.h"
 extern const unsigned short startBGTiles[3424];
@@ -1342,7 +1342,7 @@ extern const unsigned short startBGMap[1024];
 
 
 extern const unsigned short startBGPal[256];
-# 20 "main.c" 2
+# 19 "main.c" 2
 # 1 "loseBG.h" 1
 # 22 "loseBG.h"
 extern const unsigned short loseBGTiles[2592];
@@ -1352,7 +1352,7 @@ extern const unsigned short loseBGMap[1024];
 
 
 extern const unsigned short loseBGPal[256];
-# 21 "main.c" 2
+# 20 "main.c" 2
 # 1 "pausebg.h" 1
 # 22 "pausebg.h"
 extern const unsigned short pauseBGTiles[2640];
@@ -1362,7 +1362,7 @@ extern const unsigned short pauseBGMap[1024];
 
 
 extern const unsigned short pauseBGPal[256];
-# 22 "main.c" 2
+# 21 "main.c" 2
 # 1 "winbg.h" 1
 # 22 "winbg.h"
 extern const unsigned short winBGTiles[2624];
@@ -1372,7 +1372,7 @@ extern const unsigned short winBGMap[1024];
 
 
 extern const unsigned short winBGPal[256];
-# 23 "main.c" 2
+# 22 "main.c" 2
 # 1 "gameBGXL.h" 1
 # 22 "gameBGXL.h"
 extern const unsigned short gameBGXLTiles[14240];
@@ -1382,7 +1382,7 @@ extern const unsigned short gameBGXLMap[4096];
 
 
 extern const unsigned short gameBGXLPal[256];
-# 24 "main.c" 2
+# 23 "main.c" 2
 # 1 "gameBG.h" 1
 # 22 "gameBG.h"
 extern const unsigned short gameBGTiles[2992];
@@ -1392,7 +1392,7 @@ extern const unsigned short gameBGMap[2048];
 
 
 extern const unsigned short gameBGPal[256];
-# 25 "main.c" 2
+# 24 "main.c" 2
 # 1 "instructionBG.h" 1
 # 22 "instructionBG.h"
 extern const unsigned short instructionBGTiles[4832];
@@ -1402,7 +1402,7 @@ extern const unsigned short instructionBGMap[1024];
 
 
 extern const unsigned short instructionBGPal[256];
-# 26 "main.c" 2
+# 25 "main.c" 2
 # 1 "instructionBG2.h" 1
 # 22 "instructionBG2.h"
 extern const unsigned short instructionBG2Tiles[3904];
@@ -1412,14 +1412,14 @@ extern const unsigned short instructionBG2Map[1024];
 
 
 extern const unsigned short instructionBG2Pal[256];
-# 27 "main.c" 2
+# 26 "main.c" 2
 # 1 "spritesheet.h" 1
 # 21 "spritesheet.h"
 extern const unsigned short spritesheetTiles[16384];
 
 
 extern const unsigned short spritesheetPal[256];
-# 28 "main.c" 2
+# 27 "main.c" 2
 # 1 "game.h" 1
 
 
@@ -1492,7 +1492,7 @@ void drawRocks();
 void drawSpiders();
 void updateRock();
 void makeBallsFall();
-# 29 "main.c" 2
+# 28 "main.c" 2
 # 1 "game2.h" 1
 
 
@@ -1527,7 +1527,7 @@ void initPlayer2();
 void updatePlayer2();
 void animatePlayer2();
 void drawPlayer2();
-# 30 "main.c" 2
+# 29 "main.c" 2
 # 1 "sound.h" 1
 SOUND soundA;
 SOUND soundB;
@@ -1544,42 +1544,42 @@ void interruptHandler();
 void pauseSound();
 void unpauseSound();
 void stopSound();
-# 31 "main.c" 2
+# 30 "main.c" 2
 # 1 "startsong.h" 1
 
 
 
 
 extern const signed char startsong[1903392];
-# 32 "main.c" 2
+# 31 "main.c" 2
 # 1 "gamesong.h" 1
 
 
 
 
 extern const signed char gamesong[2437920];
-# 33 "main.c" 2
+# 32 "main.c" 2
 # 1 "gamesong2.h" 1
 
 
 
 
 extern const signed char gamesong2[2439936];
-# 34 "main.c" 2
+# 33 "main.c" 2
 # 1 "pausesong.h" 1
 
 
 
 
 extern const signed char pausesong[2932416];
-# 35 "main.c" 2
+# 34 "main.c" 2
 # 1 "endsong.h" 1
 
 
 
 
 extern const signed char endsong[664992];
-# 36 "main.c" 2
+# 35 "main.c" 2
 # 1 "backClouds.h" 1
 # 22 "backClouds.h"
 extern const unsigned short backCloudsTiles[3584];
@@ -1589,17 +1589,17 @@ extern const unsigned short backCloudsMap[2048];
 
 
 extern const unsigned short backCloudsPal[256];
-# 37 "main.c" 2
+# 36 "main.c" 2
 # 1 "frontGuyClimbing.h" 1
 # 22 "frontGuyClimbing.h"
-extern const unsigned short frontGuyClimbingTiles[8256];
+extern const unsigned short frontGuyClimbingTiles[7120];
 
 
 extern const unsigned short frontGuyClimbingMap[1024];
 
 
 extern const unsigned short frontGuyClimbingPal[256];
-# 38 "main.c" 2
+# 37 "main.c" 2
 
 
 
@@ -1735,7 +1735,7 @@ void start() {
 void goToGame() {
     DMANow(3, gameBGXLPal, ((unsigned short *)0x5000000), 256);
     DMANow(3, gameBGXLTiles, &((charblock *)0x6000000)[0], 28480 / 2);
-    DMANow(3, gameBGXLMap, &((screenblock *)0x6000000)[28], 1024 * 4);
+    DMANow(3, gameBGXLMap, &((screenblock *)0x6000000)[28], 8192 / 2);
 
 
 
@@ -1744,6 +1744,7 @@ void goToGame() {
     DMANow(3, spritesheetPal, ((unsigned short *)0x5000200), 256);
     DMANow(3, spritesheetTiles, &((charblock *)0x6000000)[4], 32768 / 2);
 
+    (*(volatile unsigned short*)0x04000050) = (1<<4) | (1<<7);
  hideSprites();
 
 
@@ -1779,7 +1780,7 @@ void game() {
 void goToGame2() {
     DMANow(3, gameBGPal, ((unsigned short *)0x5000000), 256);
     DMANow(3, gameBGTiles, &((charblock *)0x6000000)[0], 5984 / 2);
-    DMANow(3, gameBGMap, &((screenblock *)0x6000000)[28], 1024 * 4);
+    DMANow(3, gameBGMap, &((screenblock *)0x6000000)[28], 4096 / 2);
 
 
 
@@ -1833,7 +1834,7 @@ void goToPause() {
 
     (*(volatile unsigned short*)0x4000008) = ((1)<<2) | ((30)<<8) | (0<<7) | (0<<14);
 
-    DMANow(3, frontGuyClimbingTiles, &((charblock *)0x6000000)[1], 16512 / 2);
+    DMANow(3, frontGuyClimbingTiles, &((charblock *)0x6000000)[1], 14240 / 2);
     DMANow(3, frontGuyClimbingMap, &((screenblock *)0x6000000)[30], 2048 / 2);
 
 
@@ -1845,7 +1846,7 @@ void goToPause() {
 }
 
 void pause() {
-    if(vBlankCount % 600 == 0) {
+    if(vBlankCount % 900 == 0) {
         pauseHOff++;
     }
     vBlankCount++;
@@ -1880,7 +1881,7 @@ void goToPause2() {
 
     (*(volatile unsigned short*)0x4000008) = ((1)<<2) | ((30)<<8) | (0<<7) | (0<<14);
 
-    DMANow(3, frontGuyClimbingTiles, &((charblock *)0x6000000)[1], 16512 / 2);
+    DMANow(3, frontGuyClimbingTiles, &((charblock *)0x6000000)[1], 14240 / 2);
     DMANow(3, frontGuyClimbingMap, &((screenblock *)0x6000000)[30], 2048 / 2);
 
 
@@ -1892,7 +1893,7 @@ void goToPause2() {
 }
 
 void pause2() {
-    if(vBlankCount % 600 == 0) {
+    if(vBlankCount % 900 == 0) {
         pauseHOff++;
     }
     vBlankCount++;
@@ -1991,8 +1992,9 @@ void instructions() {
     if ((!(~(oldButtons)&((1<<3))) && (~buttons & ((1<<3))))) {
         stopSound();
 
-        goToGame();
         initGame();
+        goToGame();
+
     } else if ((!(~(oldButtons)&((1<<2))) && (~buttons & ((1<<2))))) {
         goToStart();
     }

@@ -18,6 +18,8 @@ int winCount;
 int playerVOff;
 int screenBlock;
 int totalVOff;
+int blendCount;
+int evy;
 
 
 
@@ -33,6 +35,9 @@ void initGame() {
     winG = 0;
     loseG = 0;
     winCount = 1024;
+    evy = 0;
+    blendCount = 0;
+    REG_BLDY = BLD_EY((evy));
 
     initPlayer();
     initRocks();
@@ -52,19 +57,26 @@ void updateGame() {
 /*     for (int i = 0; i < SPIDERCOUNT; i++)
 		updateSpider(&spiders[i]); */
 
-    if (count > 256 && screenBlock != 28) { // don't decrement tracker if at the end of map
+    //only when vOff becomes 0
+    if (vOff < 0 && screenBlock >= 28) { // don't decrement tracker if at the end of map
 		//change where BG0 looks for maps
 		screenBlock--;
 		count = 0;
 		vOff += 256;
+		totalVOff += 256;
+		
 		REG_BG0CNT = BG_CHARBLOCK(0) | BG_SCREENBLOCK(screenBlock) | BG_SIZE_TALL; 
         	
 	   
 	}
 
-    if (playerVOff < 256) {
-        playerVOff -= 256;
-    }
+    // if (playerVOff < 256) {
+    //     playerVOff -= 256;
+    // }
+
+    // if(playerVOff>256){
+    // 	playerVOff -= 256;
+    // }
 
 	REG_BG0HOFF = hOff;
 	REG_BG0VOFF = vOff;
@@ -108,7 +120,14 @@ void updatePlayer() {
             animatePlayer();
             winCount--;
 
-            if ((vOff > 0 && climber.screenRow < SCREENHEIGHT / 2) || climber.worldRow < 384) { // weird hack to get bg to move once you reach last screenblock - 384 is 512 - 256/2
+          //   if ((vOff > 0 && climber.screenRow < SCREENHEIGHT / 2) || climber.worldRow < 384) { // weird hack to get bg to move once you reach last screenblock - 384 is 512 - 256/2
+          //       count++; 
+		        // vOff--;
+          //       totalVOff--; 
+          //       playerVOff--;
+                
+          //   }
+            if ( climber.screenRow < SCREENHEIGHT / 2) { // weird hack to get bg to move once you reach last screenblock - 384 is 512 - 256/2
                 count++; 
 		        vOff--;
                 totalVOff--; 
@@ -141,7 +160,8 @@ void updatePlayer() {
         }
         if (!(collisionLoseBitmap[OFFSET(climber.worldCol, climber.worldRow, MAPWIDTH)]
         && collisionLoseBitmap[OFFSET(climber.worldCol, climber.worldRow + climber.height - 1, MAPWIDTH)])) {
-            loseG = 1;
+            alphaBlend();
+
         } 
     }
     if(BUTTON_HELD(BUTTON_RIGHT)) {
@@ -172,7 +192,7 @@ void drawPlayer() {
     if (climber.hide) {
         shadowOAM[0].attr0 |= ATTR0_HIDE;
     } else {
-        shadowOAM[0].attr0 = (ROWMASK & climber.screenRow) | ATTR0_SQUARE;
+        shadowOAM[0].attr0 = (ROWMASK & climber.screenRow) | ATTR0_SQUARE | ATTR0_BLEND;
         shadowOAM[0].attr1 = (COLMASK & climber.screenCol) | ATTR1_SMALL;
         shadowOAM[0].attr2 = ATTR2_PALROW(0) | ATTR2_TILEID(climber.aniState * 2, climber.curFrame * 2);
     }
@@ -184,6 +204,20 @@ void animatePlayer() {
     }
     climber.aniCounter++;
 
+}
+
+
+void alphaBlend() {
+
+    if (blendCount % 20 && evy < 16) {
+        evy++;
+    }
+    blendCount++;
+    if (evy == 16) {
+        loseG = 1;
+    }  
+    //evy = 16;
+    REG_BLDY = BLD_EY((evy));
 }
 
 void initRocks() {
@@ -206,16 +240,17 @@ void initRocks() {
 void drawRocks() {
     //ROCK rocks = r;
     for (int i = 0; i < ROCKCOUNT; i++) {
-        if((rocks[i].worldRow < -rocks[i].height) || !rocks[i].active){
+        if((rocks[i].worldRow < -rocks[i].height) || !rocks[i].active || rocks[i].screenRow<0 || rocks[i].screenRow>160){
            shadowOAM[2+i].attr0 |= ATTR0_HIDE; 
         }
         else {
-            shadowOAM[2+i].attr0 = (ROWMASK & rocks[i].screenRow) | ATTR0_SQUARE;
+            shadowOAM[2+i].attr0 = (ROWMASK & rocks[i].screenRow) | ATTR0_SQUARE | ATTR0_NOBLEND;
             shadowOAM[2+i].attr1 = (COLMASK & rocks[i].screenCol) | ATTR1_TINY;
             shadowOAM[2+i].attr2 = ATTR2_PALROW(0) | ATTR2_TILEID(rocks[i].aniState, rocks[i].curFrame);
         } 
     }
 }
+
 
 void updateRock() {
     for(int i = 0; i < ROCKCOUNT; i++) {
@@ -226,10 +261,11 @@ void updateRock() {
 	    if (rocks[i].worldCol > MAPWIDTH - rocks[i].width) {
 		    rocks[i].worldCol = MAPWIDTH - rocks[i].width;
 	    }
-/*     if (!(collisionsBitmap[OFFSET(rocks[i].worldCol, rocks[i].worldRow, MAPWIDTH)]
+     if (!(collisionsBitmap[OFFSET(rocks[i].worldCol, rocks[i].worldRow, MAPWIDTH)]
         && collisionsBitmap[OFFSET(rocks[i].worldCol, rocks[i].worldRow + rocks[i].height - 1, MAPWIDTH)])) {
             animateRocks();
-    } */
+            rocks[i].active = 0;
+    } 
 
 	//Make the balls fall
         if(rocks[i].active) {
@@ -239,9 +275,9 @@ void updateRock() {
 			    rocks[i].worldRow = 100;
 		    } 
 		//Check for collision with player 
-        if (collision(rocks[i].worldCol, rocks[i].worldRow, rocks[i].width, rocks[i].height, climber.worldCol - hOff, climber.worldRow - totalVOff, climber.width, climber.height)) {
+        if (collision(rocks[i].screenCol, rocks[i].screenRow, rocks[i].width, rocks[i].height, climber.screenCol, climber.screenRow, climber.width, climber.height)) {
             rocks[i].active = 0;
-            //loseG = 1;
+            loseG = 1;
             
         }
     } 
@@ -258,7 +294,7 @@ void makeBallsFall() {
             rocks[i].active = 1;
 			// Position the new ball					
    			rocks[i].worldRow = 100;				
-   			rocks[i].worldCol = rand() % 100 + 100 + hOff;
+   			rocks[i].worldCol = rand() % 100 + 80 + hOff;
 			// Take the ball out of the pool
 			// Break out of the loop
 			break;
@@ -296,7 +332,7 @@ void drawSpiders() {
            shadowOAM[120+i].attr0 = ATTR0_HIDE; 
         }
         else {
-            shadowOAM[120+i].attr0 = (ROWMASK & spiders[i].screenRow) | ATTR0_SQUARE;
+            shadowOAM[120+i].attr0 = (ROWMASK & spiders[i].screenRow) | ATTR0_SQUARE | ATTR0_NOBLEND;
             shadowOAM[120+i].attr1 = (COLMASK & spiders[i].screenCol) | ATTR1_TINY;
             shadowOAM[120+i].attr2 = ATTR2_PALROW(0) | ATTR2_TILEID(3, spiders[i].aniState);
         } 
@@ -321,6 +357,9 @@ void updateSpider() {
             if (collision(spiders[i].screenCol, spiders[i].screenRow, spiders[i].width, spiders[i].height, climber.worldCol - hOff, climber.worldRow - totalVOff, climber.width, climber.height)) {
                 spiders[i].active = 0;
                 loseG = 1;
+            }
+            if (BUTTON_PRESSED(BUTTON_A)) {
+                spiders[i].active = 0;
             }
         }
 

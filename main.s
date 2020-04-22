@@ -163,11 +163,13 @@ goToGame:
 	bx	r4
 	mov	r0, #3
 	ldr	r1, .L16+32
-	ldr	r2, .L16+36
 	mov	r3, #16384
+	ldr	r2, .L16+36
 	mov	lr, pc
 	bx	r4
+	mov	r2, #144
 	ldr	r3, .L16+40
+	strh	r2, [r5, #80]	@ movhi
 	mov	lr, pc
 	bx	r3
 	mov	r2, #4352
@@ -230,7 +232,7 @@ goToGame2:
 	ldr	r1, .L20+8
 	mov	lr, pc
 	bx	r4
-	mov	r3, #4096
+	mov	r3, #2048
 	mov	r0, #3
 	ldr	r2, .L20+12
 	ldr	r1, .L20+16
@@ -330,27 +332,27 @@ goToPause:
 	mov	lr, pc
 	bx	r4
 	ldr	r2, .L24+28
-	mov	r3, #8256
-	strh	r2, [r5, #8]	@ movhi
 	mov	r0, #3
-	ldr	r2, .L24+32
-	ldr	r1, .L24+36
+	strh	r2, [r5, #8]	@ movhi
+	ldr	r3, .L24+32
+	ldr	r2, .L24+36
+	ldr	r1, .L24+40
 	mov	lr, pc
 	bx	r4
 	mov	r3, #1024
 	mov	r0, #3
-	ldr	r2, .L24+40
-	ldr	r1, .L24+44
+	ldr	r2, .L24+44
+	ldr	r1, .L24+48
 	mov	lr, pc
 	bx	r4
 	mov	r2, #1
-	ldr	r3, .L24+48
-	ldr	r1, .L24+52
-	ldr	r0, .L24+56
+	ldr	r3, .L24+52
+	ldr	r1, .L24+56
+	ldr	r0, .L24+60
 	mov	lr, pc
 	bx	r3
 	mov	r2, #3
-	ldr	r3, .L24+60
+	ldr	r3, .L24+64
 	pop	{r4, r5, r6, lr}
 	str	r2, [r3]
 	bx	lr
@@ -365,6 +367,7 @@ goToPause:
 	.word	100720640
 	.word	backCloudsMap
 	.word	7684
+	.word	7120
 	.word	100679680
 	.word	frontGuyClimbingTiles
 	.word	100724736
@@ -391,7 +394,7 @@ pause:
 	mla	r3, r1, r3, r2
 	ldr	ip, .L40+12
 	ldr	r2, .L40+16
-	cmp	ip, r3, ror #3
+	cmp	ip, r3, ror #2
 	ldr	r3, [r2]
 	addcs	r3, r3, #1
 	strcs	r3, [r2]
@@ -434,9 +437,9 @@ pause:
 	.align	2
 .L40:
 	.word	vBlankCount
-	.word	28633112
-	.word	-1775253149
-	.word	7158278
+	.word	9544368
+	.word	-2023406815
+	.word	4772184
 	.word	pauseHOff
 	.word	pauseVOff
 	.word	oldButtons
@@ -484,27 +487,27 @@ goToPause2:
 	mov	lr, pc
 	bx	r4
 	ldr	r2, .L44+28
-	mov	r3, #8256
-	strh	r2, [r5, #8]	@ movhi
 	mov	r0, #3
-	ldr	r2, .L44+32
-	ldr	r1, .L44+36
+	strh	r2, [r5, #8]	@ movhi
+	ldr	r3, .L44+32
+	ldr	r2, .L44+36
+	ldr	r1, .L44+40
 	mov	lr, pc
 	bx	r4
 	mov	r3, #1024
 	mov	r0, #3
-	ldr	r2, .L44+40
-	ldr	r1, .L44+44
+	ldr	r2, .L44+44
+	ldr	r1, .L44+48
 	mov	lr, pc
 	bx	r4
 	mov	r2, #1
-	ldr	r3, .L44+48
-	ldr	r1, .L44+52
-	ldr	r0, .L44+56
+	ldr	r3, .L44+52
+	ldr	r1, .L44+56
+	ldr	r0, .L44+60
 	mov	lr, pc
 	bx	r3
 	mov	r2, #4
-	ldr	r3, .L44+60
+	ldr	r3, .L44+64
 	pop	{r4, r5, r6, lr}
 	str	r2, [r3]
 	bx	lr
@@ -519,6 +522,7 @@ goToPause2:
 	.word	100720640
 	.word	backCloudsMap
 	.word	7684
+	.word	7120
 	.word	100679680
 	.word	frontGuyClimbingTiles
 	.word	100724736
@@ -545,7 +549,7 @@ pause2:
 	mla	r3, r1, r3, r2
 	ldr	ip, .L60+12
 	ldr	r2, .L60+16
-	cmp	ip, r3, ror #3
+	cmp	ip, r3, ror #2
 	ldr	r3, [r2]
 	addcs	r3, r3, #1
 	strcs	r3, [r2]
@@ -588,9 +592,9 @@ pause2:
 	.align	2
 .L60:
 	.word	vBlankCount
-	.word	28633112
-	.word	-1775253149
-	.word	7158278
+	.word	9544368
+	.word	-2023406815
+	.word	4772184
 	.word	pauseHOff
 	.word	pauseVOff
 	.word	oldButtons
@@ -973,36 +977,35 @@ instructions:
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
-	ldr	r3, .L125
+	ldr	r3, .L124
 	ldrh	r3, [r3]
 	tst	r3, #8
 	beq	.L112
-	ldr	r2, .L125+4
+	ldr	r2, .L124+4
 	ldrh	r2, [r2]
 	tst	r2, #8
-	beq	.L124
+	beq	.L123
 .L112:
 	tst	r3, #4
 	bxeq	lr
-	ldr	r3, .L125+4
+	ldr	r3, .L124+4
 	ldrh	r3, [r3]
 	tst	r3, #4
 	bxne	lr
 	b	goToStart
-.L124:
+.L123:
 	push	{r4, lr}
-	ldr	r3, .L125+8
+	ldr	r3, .L124+8
 	mov	lr, pc
 	bx	r3
-	bl	goToGame
-	ldr	r3, .L125+12
+	ldr	r3, .L124+12
 	mov	lr, pc
 	bx	r3
 	pop	{r4, lr}
-	bx	lr
-.L126:
-	.align	2
+	b	goToGame
 .L125:
+	.align	2
+.L124:
 	.word	oldButtons
 	.word	buttons
 	.word	stopSound
@@ -1020,22 +1023,22 @@ goToInstructions2:
 	@ frame_needed = 0, uses_anonymous_args = 0
 	push	{r4, lr}
 	mov	r3, #256
-	ldr	r4, .L129
+	ldr	r4, .L128
 	mov	r2, #83886080
 	mov	r0, #3
-	ldr	r1, .L129+4
+	ldr	r1, .L128+4
 	mov	lr, pc
 	bx	r4
 	mov	r3, #3904
 	mov	r2, #100663296
 	mov	r0, #3
-	ldr	r1, .L129+8
+	ldr	r1, .L128+8
 	mov	lr, pc
 	bx	r4
 	mov	r3, #4096
 	mov	r0, #3
-	ldr	r2, .L129+12
-	ldr	r1, .L129+16
+	ldr	r2, .L128+12
+	ldr	r1, .L128+16
 	mov	lr, pc
 	bx	r4
 	mov	r3, #67108864
@@ -1043,7 +1046,7 @@ goToInstructions2:
 	mov	r2, #0
 	mov	ip, #256
 	mov	r0, #8
-	ldr	r1, .L129+20
+	ldr	r1, .L128+20
 	strh	lr, [r3, #8]	@ movhi
 	strh	ip, [r3]	@ movhi
 	strh	r2, [r3, #16]	@ movhi
@@ -1051,9 +1054,9 @@ goToInstructions2:
 	strh	r2, [r3, #18]	@ movhi
 	str	r0, [r1]
 	bx	lr
-.L130:
-	.align	2
 .L129:
+	.align	2
+.L128:
 	.word	DMANow
 	.word	instructionBG2Pal
 	.word	instructionBG2Tiles
@@ -1072,34 +1075,34 @@ start:
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
 	push	{r4, lr}
-	ldr	r4, .L143
+	ldr	r4, .L142
 	ldrh	r3, [r4]
 	tst	r3, #32
-	beq	.L132
-	ldr	r2, .L143+4
+	beq	.L131
+	ldr	r2, .L142+4
 	ldrh	r2, [r2]
 	tst	r2, #32
-	beq	.L141
-.L132:
+	beq	.L140
+.L131:
 	tst	r3, #16
-	beq	.L131
-	ldr	r3, .L143+4
+	beq	.L130
+	ldr	r3, .L142+4
 	ldrh	r3, [r3]
 	tst	r3, #16
-	beq	.L142
-.L131:
+	beq	.L141
+.L130:
 	pop	{r4, lr}
 	bx	lr
-.L142:
+.L141:
 	pop	{r4, lr}
 	b	goToInstructions2
-.L141:
+.L140:
 	bl	goToInstructions
 	ldrh	r3, [r4]
-	b	.L132
-.L144:
-	.align	2
+	b	.L131
 .L143:
+	.align	2
+.L142:
 	.word	oldButtons
 	.word	buttons
 	.size	start, .-start
@@ -1113,36 +1116,36 @@ instructions2:
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
-	ldr	r3, .L159
+	ldr	r3, .L158
 	ldrh	r3, [r3]
 	tst	r3, #8
-	beq	.L146
-	ldr	r2, .L159+4
+	beq	.L145
+	ldr	r2, .L158+4
 	ldrh	r2, [r2]
 	tst	r2, #8
-	beq	.L158
-.L146:
+	beq	.L157
+.L145:
 	tst	r3, #4
 	bxeq	lr
-	ldr	r3, .L159+4
+	ldr	r3, .L158+4
 	ldrh	r3, [r3]
 	tst	r3, #4
 	bxne	lr
 	b	goToStart
-.L158:
+.L157:
 	push	{r4, lr}
-	ldr	r3, .L159+8
+	ldr	r3, .L158+8
 	mov	lr, pc
 	bx	r3
 	bl	goToGame2
-	ldr	r3, .L159+12
+	ldr	r3, .L158+12
 	mov	lr, pc
 	bx	r3
 	pop	{r4, lr}
 	bx	lr
-.L160:
-	.align	2
 .L159:
+	.align	2
+.L158:
 	.word	oldButtons
 	.word	buttons
 	.word	stopSound
@@ -1161,37 +1164,36 @@ main:
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
 	mov	r1, #0
-	ldr	r2, .L179
+	ldr	r2, .L178
 	push	{r4, r7, fp, lr}
-	ldr	r3, .L179+4
+	ldr	r3, .L178+4
 	str	r1, [r2]
-	ldr	r6, .L179+8
+	ldr	r6, .L178+8
 	mov	lr, pc
 	bx	r3
-	ldr	r7, .L179+12
-	ldr	r3, .L179+16
+	ldr	r7, .L178+12
+	ldr	r3, .L178+16
 	mov	lr, pc
 	bx	r3
-	ldr	r3, .L179+20
+	ldr	r3, .L178+20
 	mov	lr, pc
 	bx	r3
-	ldr	r5, .L179+24
+	ldr	r5, .L178+24
 	ldr	r2, [r6]
 	ldrh	r0, [r7]
-	ldr	fp, .L179+28
-	ldr	r10, .L179+32
-	ldr	r9, .L179+36
-	ldr	r8, .L179+40
-	ldr	r4, .L179+44
-.L163:
+	ldr	fp, .L178+28
+	ldr	r10, .L178+32
+	ldr	r9, .L178+36
+	ldr	r8, .L178+40
+	ldr	r4, .L178+44
+.L162:
 	strh	r0, [r5]	@ movhi
 	ldrh	r3, [r4, #48]
 	strh	r3, [r7]	@ movhi
 	cmp	r2, #8
 	ldrls	pc, [pc, r2, asl #2]
-	b	.L175
-.L165:
-	.word	.L173
+	b	.L174
+.L164:
 	.word	.L172
 	.word	.L171
 	.word	.L170
@@ -1199,76 +1201,77 @@ main:
 	.word	.L168
 	.word	.L167
 	.word	.L166
-	.word	.L164
-.L164:
-	ldr	r3, .L179+48
+	.word	.L165
+	.word	.L163
+.L163:
+	ldr	r3, .L178+48
 	mov	lr, pc
 	bx	r3
 	ldr	r2, [r6]
 	ldrh	r0, [r7]
-	b	.L163
+	b	.L162
+.L165:
+	ldr	r3, .L178+52
+	mov	lr, pc
+	bx	r3
+	ldr	r2, [r6]
+	ldrh	r0, [r7]
+	b	.L162
 .L166:
-	ldr	r3, .L179+52
+	tst	r0, #8
+	beq	.L174
+	ldr	r3, .L178+56
 	mov	lr, pc
 	bx	r3
 	ldr	r2, [r6]
 	ldrh	r0, [r7]
-	b	.L163
+	b	.L162
 .L167:
 	tst	r0, #8
-	beq	.L175
-	ldr	r3, .L179+56
+	beq	.L174
+	ldr	r3, .L178+60
 	mov	lr, pc
 	bx	r3
 	ldr	r2, [r6]
 	ldrh	r0, [r7]
-	b	.L163
+	b	.L162
 .L168:
-	tst	r0, #8
-	beq	.L175
-	ldr	r3, .L179+60
+	ldr	r3, .L178+64
 	mov	lr, pc
 	bx	r3
 	ldr	r2, [r6]
 	ldrh	r0, [r7]
-	b	.L163
+	b	.L162
 .L169:
-	ldr	r3, .L179+64
-	mov	lr, pc
-	bx	r3
-	ldr	r2, [r6]
-	ldrh	r0, [r7]
-	b	.L163
-.L170:
 	mov	lr, pc
 	bx	r8
 	ldr	r2, [r6]
 	ldrh	r0, [r7]
-	b	.L163
-.L171:
+	b	.L162
+.L170:
 	mov	lr, pc
 	bx	r9
 	ldr	r2, [r6]
 	ldrh	r0, [r7]
-	b	.L163
-.L172:
+	b	.L162
+.L171:
 	mov	lr, pc
 	bx	r10
 	ldr	r2, [r6]
 	ldrh	r0, [r7]
-	b	.L163
-.L173:
+	b	.L162
+.L172:
 	mov	lr, pc
 	bx	fp
 	ldr	r2, [r6]
 	ldrh	r0, [r7]
-	b	.L163
-.L175:
+	b	.L162
+.L174:
 	mov	r0, r3
-	b	.L163
-.L180:
-	.align	2
+	b	.L162
 .L179:
+	.align	2
+.L178:
 	.word	vBlankCount
 	.word	setupSounds
 	.word	state

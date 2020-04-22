@@ -10,9 +10,9 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
-# 64 "myLib.h"
+# 72 "myLib.h"
 extern unsigned short *videoBuffer;
-# 85 "myLib.h"
+# 93 "myLib.h"
 typedef struct {
  u16 tileimg[8192];
 } charblock;
@@ -55,7 +55,7 @@ typedef struct {
 
 
 extern OBJ_ATTR shadowOAM[];
-# 157 "myLib.h"
+# 165 "myLib.h"
 void hideSprites();
 
 
@@ -79,10 +79,10 @@ typedef struct {
     int numFrames;
     int hide;
 } ANISPRITE;
-# 200 "myLib.h"
+# 208 "myLib.h"
 extern unsigned short oldButtons;
 extern unsigned short buttons;
-# 211 "myLib.h"
+# 219 "myLib.h"
 typedef volatile struct {
     volatile const void *src;
     volatile void *dst;
@@ -91,9 +91,9 @@ typedef volatile struct {
 
 
 extern DMA *dma;
-# 251 "myLib.h"
+# 259 "myLib.h"
 void DMANow(int channel, volatile const void *src, volatile void *dst, unsigned int cnt);
-# 342 "myLib.h"
+# 350 "myLib.h"
 typedef struct{
     const unsigned char* data;
     int length;
@@ -207,6 +207,8 @@ int winCount;
 int playerVOff;
 int screenBlock;
 int totalVOff;
+int blendCount;
+int evy;
 
 
 
@@ -222,6 +224,9 @@ void initGame() {
     winG = 0;
     loseG = 0;
     winCount = 1024;
+    evy = 0;
+    blendCount = 0;
+    (*(volatile unsigned short*)0x04000054) = (((evy))<<0);
 
     initPlayer();
     initRocks();
@@ -241,20 +246,19 @@ void updateGame() {
 
 
 
-    if (count > 256 && screenBlock != 28) {
+
+    if (vOff < 0 && screenBlock >= 28) {
 
   screenBlock--;
   count = 0;
   vOff += 256;
+  totalVOff += 256;
+
   (*(volatile unsigned short*)0x4000008) = ((0)<<2) | ((screenBlock)<<8) | (2<<14);
 
 
  }
-
-    if (playerVOff < 256) {
-        playerVOff -= 256;
-    }
-
+# 81 "game.c"
  (*(volatile unsigned short *)0x04000010) = hOff;
  (*(volatile unsigned short *)0x04000012) = vOff;
 
@@ -296,8 +300,8 @@ void updatePlayer() {
             climber.worldRow -= climber.rdel;
             animatePlayer();
             winCount--;
-
-            if ((vOff > 0 && climber.screenRow < 160 / 2) || climber.worldRow < 384) {
+# 130 "game.c"
+            if ( climber.screenRow < 160 / 2) {
                 count++;
           vOff--;
                 totalVOff--;
@@ -330,7 +334,8 @@ void updatePlayer() {
         }
         if (!(collisionLoseBitmap[((climber.worldRow)*(256)+(climber.worldCol))]
         && collisionLoseBitmap[((climber.worldRow + climber.height - 1)*(256)+(climber.worldCol))])) {
-            loseG = 1;
+            alphaBlend();
+
         }
     }
     if((~((*(volatile unsigned short *)0x04000130)) & ((1<<4)))) {
@@ -361,7 +366,7 @@ void drawPlayer() {
     if (climber.hide) {
         shadowOAM[0].attr0 |= (2<<8);
     } else {
-        shadowOAM[0].attr0 = (0xFF & climber.screenRow) | (0<<14);
+        shadowOAM[0].attr0 = (0xFF & climber.screenRow) | (0<<14) | (1<<10);
         shadowOAM[0].attr1 = (0x1FF & climber.screenCol) | (1<<14);
         shadowOAM[0].attr2 = ((0)<<12) | ((climber.curFrame * 2)*32+(climber.aniState * 2));
     }
@@ -373,6 +378,20 @@ void animatePlayer() {
     }
     climber.aniCounter++;
 
+}
+
+
+void alphaBlend() {
+
+    if (blendCount % 20 && evy < 16) {
+        evy++;
+    }
+    blendCount++;
+    if (evy == 16) {
+        loseG = 1;
+    }
+
+    (*(volatile unsigned short*)0x04000054) = (((evy))<<0);
 }
 
 void initRocks() {
@@ -395,16 +414,17 @@ void initRocks() {
 void drawRocks() {
 
     for (int i = 0; i < 5; i++) {
-        if((rocks[i].worldRow < -rocks[i].height) || !rocks[i].active){
+        if((rocks[i].worldRow < -rocks[i].height) || !rocks[i].active || rocks[i].screenRow<0 || rocks[i].screenRow>160){
            shadowOAM[2+i].attr0 |= (2<<8);
         }
         else {
-            shadowOAM[2+i].attr0 = (0xFF & rocks[i].screenRow) | (0<<14);
+            shadowOAM[2+i].attr0 = (0xFF & rocks[i].screenRow) | (0<<14) | (0<<10);
             shadowOAM[2+i].attr1 = (0x1FF & rocks[i].screenCol) | (0<<14);
             shadowOAM[2+i].attr2 = ((0)<<12) | ((rocks[i].curFrame)*32+(rocks[i].aniState));
         }
     }
 }
+
 
 void updateRock() {
     for(int i = 0; i < 5; i++) {
@@ -415,10 +435,11 @@ void updateRock() {
      if (rocks[i].worldCol > 256 - rocks[i].width) {
       rocks[i].worldCol = 256 - rocks[i].width;
      }
-
-
-
-
+     if (!(collisionsBitmap[((rocks[i].worldRow)*(256)+(rocks[i].worldCol))]
+        && collisionsBitmap[((rocks[i].worldRow + rocks[i].height - 1)*(256)+(rocks[i].worldCol))])) {
+            animateRocks();
+            rocks[i].active = 0;
+    }
 
 
         if(rocks[i].active) {
@@ -428,9 +449,9 @@ void updateRock() {
        rocks[i].worldRow = 100;
       }
 
-        if (collision(rocks[i].worldCol, rocks[i].worldRow, rocks[i].width, rocks[i].height, climber.worldCol - hOff, climber.worldRow - totalVOff, climber.width, climber.height)) {
+        if (collision(rocks[i].screenCol, rocks[i].screenRow, rocks[i].width, rocks[i].height, climber.screenCol, climber.screenRow, climber.width, climber.height)) {
             rocks[i].active = 0;
-
+            loseG = 1;
 
         }
     }
@@ -447,7 +468,7 @@ void makeBallsFall() {
             rocks[i].active = 1;
 
       rocks[i].worldRow = 100;
-      rocks[i].worldCol = rand() % 100 + 100 + hOff;
+      rocks[i].worldCol = rand() % 100 + 80 + hOff;
 
 
    break;
@@ -485,7 +506,7 @@ void drawSpiders() {
            shadowOAM[120+i].attr0 = (2<<8);
         }
         else {
-            shadowOAM[120+i].attr0 = (0xFF & spiders[i].screenRow) | (0<<14);
+            shadowOAM[120+i].attr0 = (0xFF & spiders[i].screenRow) | (0<<14) | (0<<10);
             shadowOAM[120+i].attr1 = (0x1FF & spiders[i].screenCol) | (0<<14);
             shadowOAM[120+i].attr2 = ((0)<<12) | ((spiders[i].aniState)*32+(3));
         }
@@ -510,6 +531,9 @@ void updateSpider() {
             if (collision(spiders[i].screenCol, spiders[i].screenRow, spiders[i].width, spiders[i].height, climber.worldCol - hOff, climber.worldRow - totalVOff, climber.width, climber.height)) {
                 spiders[i].active = 0;
                 loseG = 1;
+            }
+            if ((!(~(oldButtons)&((1<<0))) && (~buttons & ((1<<0))))) {
+                spiders[i].active = 0;
             }
         }
 

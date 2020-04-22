@@ -502,7 +502,7 @@ updateGame2:
 	add	r0, r0, #1
 	mov	lr, pc
 	bx	r3
-	cmp	r1, #6
+	cmp	r1, #2
 	moveq	r2, #1
 	ldreq	r3, .L68+32
 	str	r1, [r6, #36]
@@ -761,7 +761,7 @@ updateNums10:
 	add	r0, r0, #1
 	mov	lr, pc
 	bx	r3
-	cmp	r1, #6
+	cmp	r1, #2
 	moveq	r2, #1
 	ldreq	r3, .L97+20
 	str	r1, [r5, #36]
