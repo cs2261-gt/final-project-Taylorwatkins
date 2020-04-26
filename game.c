@@ -2,6 +2,7 @@
 #include "game.h"
 #include "collisions.h"
 #include "collisionLose.h"
+#include "falling.h"
 // Variables
 int hOff;
 int vOff;
@@ -208,13 +209,16 @@ void animatePlayer() {
 
 
 void alphaBlend() {
+    //playSoundB(falling, FALLINGLEN, 0);
 
     if (blendCount % 20 && evy < 16) {
         evy++;
     }
     blendCount++;
+    //playSoundB(falling, FALLINGLEN, 0);
     if (evy == 16) {
         loseG = 1;
+        //playSoundB(falling, FALLINGLEN, 0);
     }  
     //evy = 16;
     REG_BLDY = BLD_EY((evy));
@@ -244,7 +248,7 @@ void drawRocks() {
            shadowOAM[2+i].attr0 |= ATTR0_HIDE; 
         }
         else {
-            shadowOAM[2+i].attr0 = (ROWMASK & rocks[i].screenRow) | ATTR0_SQUARE | ATTR0_NOBLEND;
+            shadowOAM[2+i].attr0 = (ROWMASK & rocks[i].screenRow) | ATTR0_SQUARE;
             shadowOAM[2+i].attr1 = (COLMASK & rocks[i].screenCol) | ATTR1_TINY;
             shadowOAM[2+i].attr2 = ATTR2_PALROW(0) | ATTR2_TILEID(rocks[i].aniState, rocks[i].curFrame);
         } 
@@ -332,7 +336,7 @@ void drawSpiders() {
            shadowOAM[120+i].attr0 = ATTR0_HIDE; 
         }
         else {
-            shadowOAM[120+i].attr0 = (ROWMASK & spiders[i].screenRow) | ATTR0_SQUARE | ATTR0_NOBLEND;
+            shadowOAM[120+i].attr0 = (ROWMASK & spiders[i].screenRow) | ATTR0_SQUARE;
             shadowOAM[120+i].attr1 = (COLMASK & spiders[i].screenCol) | ATTR1_TINY;
             shadowOAM[120+i].attr2 = ATTR2_PALROW(0) | ATTR2_TILEID(3, spiders[i].aniState);
         } 

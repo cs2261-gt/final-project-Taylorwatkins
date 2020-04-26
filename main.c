@@ -34,9 +34,7 @@ know of i'd really appreciate a solution. Thank you */
 #include "endsong.h"
 #include "backClouds.h"
 #include "frontGuyClimbing.h"
-
-
-
+#include "falling.h"
 
 
 // Prototypes
@@ -391,6 +389,7 @@ void goToLose() {
     REG_BG0VOFF = vOff;
     stopSound();
     playSoundA(endsong, ENDSONGLEN, 1);
+    playSoundB(falling, FALLINGLEN, 0);
 
     state = LOSE;
 

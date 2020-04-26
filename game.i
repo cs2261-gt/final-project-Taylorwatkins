@@ -191,6 +191,13 @@ extern const unsigned short collisionsBitmap[262144];
 # 20 "collisionLose.h"
 extern const unsigned short collisionLoseBitmap[262144];
 # 5 "game.c" 2
+# 1 "falling.h" 1
+
+
+
+
+extern const signed char falling[33120];
+# 6 "game.c" 2
 
 int hOff;
 int vOff;
@@ -258,7 +265,7 @@ void updateGame() {
 
 
  }
-# 81 "game.c"
+# 82 "game.c"
  (*(volatile unsigned short *)0x04000010) = hOff;
  (*(volatile unsigned short *)0x04000012) = vOff;
 
@@ -300,7 +307,7 @@ void updatePlayer() {
             climber.worldRow -= climber.rdel;
             animatePlayer();
             winCount--;
-# 130 "game.c"
+# 131 "game.c"
             if ( climber.screenRow < 160 / 2) {
                 count++;
           vOff--;
@@ -383,12 +390,15 @@ void animatePlayer() {
 
 void alphaBlend() {
 
+
     if (blendCount % 20 && evy < 16) {
         evy++;
     }
     blendCount++;
+
     if (evy == 16) {
         loseG = 1;
+
     }
 
     (*(volatile unsigned short*)0x04000054) = (((evy))<<0);
@@ -418,7 +428,7 @@ void drawRocks() {
            shadowOAM[2+i].attr0 |= (2<<8);
         }
         else {
-            shadowOAM[2+i].attr0 = (0xFF & rocks[i].screenRow) | (0<<14) | (0<<10);
+            shadowOAM[2+i].attr0 = (0xFF & rocks[i].screenRow) | (0<<14);
             shadowOAM[2+i].attr1 = (0x1FF & rocks[i].screenCol) | (0<<14);
             shadowOAM[2+i].attr2 = ((0)<<12) | ((rocks[i].curFrame)*32+(rocks[i].aniState));
         }
@@ -506,7 +516,7 @@ void drawSpiders() {
            shadowOAM[120+i].attr0 = (2<<8);
         }
         else {
-            shadowOAM[120+i].attr0 = (0xFF & spiders[i].screenRow) | (0<<14) | (0<<10);
+            shadowOAM[120+i].attr0 = (0xFF & spiders[i].screenRow) | (0<<14);
             shadowOAM[120+i].attr1 = (0x1FF & spiders[i].screenCol) | (0<<14);
             shadowOAM[120+i].attr2 = ((0)<<12) | ((spiders[i].aniState)*32+(3));
         }

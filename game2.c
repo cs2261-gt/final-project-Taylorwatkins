@@ -69,11 +69,19 @@ void initPlayer2() {
 
 void updatePlayer2() {
     if (BUTTON_PRESSED(BUTTON_UP) && !amJumping) {
-        player.rdel -= JUMPPOWER;
+        if (BUTTON_HELD(BUTTON_A)) {
+            player.rdel -= (JUMPPOWER + 300);
+        } else {
+            player.rdel -= JUMPPOWER;
+        }
+        //player.rdel -= JUMPPOWER;
         amJumping = 1;
         playSoundB(grunt, GRUNTLEN, 0);
         
     }
+
+
+
 
     //Vertical Camera Movement
     if(player.rdel > 0){
@@ -222,7 +230,7 @@ void updateNums() {
 void updateNums10() {
     if(nums10.aniCounter % 600 == 0) {
         nums10.aniState = (nums10.aniState + 1) % nums10.numFrames;
-        if (nums10.aniState == 2){
+        if (nums10.aniState == 3){
             loseG2 = 1;
         }
     }

@@ -1600,9 +1600,13 @@ extern const unsigned short frontGuyClimbingMap[1024];
 
 extern const unsigned short frontGuyClimbingPal[256];
 # 37 "main.c" 2
+# 1 "falling.h" 1
 
 
 
+
+extern const signed char falling[17137];
+# 38 "main.c" 2
 
 
 
@@ -1957,6 +1961,7 @@ void goToLose() {
     (*(volatile unsigned short *)0x04000012) = vOff;
     stopSound();
     playSoundA(endsong, 664992, 1);
+    playSoundB(falling, 17137, 0);
 
     state = LOSE;
 

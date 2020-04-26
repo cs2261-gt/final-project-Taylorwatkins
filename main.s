@@ -712,31 +712,37 @@ goToLose:
 	ldr	r1, .L72+8
 	mov	lr, pc
 	bx	r4
-	mov	r3, #4096
 	mov	r0, #3
+	mov	r3, #4096
 	ldr	r2, .L72+12
 	ldr	r1, .L72+16
 	mov	lr, pc
 	bx	r4
 	mov	r3, #67108864
-	mov	r2, #0
-	mov	r0, #7168
-	mov	r1, #256
-	strh	r0, [r3, #8]	@ movhi
-	strh	r1, [r3]	@ movhi
-	strh	r2, [r3, #16]	@ movhi
-	ldr	r1, .L72+20
-	strh	r2, [r3, #18]	@ movhi
+	mov	r4, #0
+	mov	r1, #7168
+	mov	r2, #256
+	strh	r1, [r3, #8]	@ movhi
+	strh	r2, [r3]	@ movhi
+	strh	r4, [r3, #16]	@ movhi
+	ldr	r2, .L72+20
+	strh	r4, [r3, #18]	@ movhi
 	mov	lr, pc
-	bx	r1
+	bx	r2
 	mov	r2, #1
-	ldr	r3, .L72+24
-	ldr	r1, .L72+28
-	ldr	r0, .L72+32
+	ldr	r1, .L72+24
+	ldr	r0, .L72+28
+	ldr	r3, .L72+32
+	mov	lr, pc
+	bx	r3
+	mov	r2, r4
+	ldr	r3, .L72+36
+	ldr	r1, .L72+40
+	ldr	r0, .L72+44
 	mov	lr, pc
 	bx	r3
 	mov	r2, #6
-	ldr	r3, .L72+36
+	ldr	r3, .L72+48
 	pop	{r4, lr}
 	str	r2, [r3]
 	bx	lr
@@ -749,9 +755,12 @@ goToLose:
 	.word	100720640
 	.word	loseBGMap
 	.word	stopSound
-	.word	playSoundA
 	.word	664992
 	.word	endsong
+	.word	playSoundA
+	.word	playSoundB
+	.word	17137
+	.word	falling
 	.word	state
 	.size	goToLose, .-goToLose
 	.align	2

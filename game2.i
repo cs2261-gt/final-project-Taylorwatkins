@@ -10,9 +10,9 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
-# 64 "myLib.h"
+# 72 "myLib.h"
 extern unsigned short *videoBuffer;
-# 85 "myLib.h"
+# 93 "myLib.h"
 typedef struct {
  u16 tileimg[8192];
 } charblock;
@@ -55,7 +55,7 @@ typedef struct {
 
 
 extern OBJ_ATTR shadowOAM[];
-# 157 "myLib.h"
+# 165 "myLib.h"
 void hideSprites();
 
 
@@ -79,10 +79,10 @@ typedef struct {
     int numFrames;
     int hide;
 } ANISPRITE;
-# 200 "myLib.h"
+# 208 "myLib.h"
 extern unsigned short oldButtons;
 extern unsigned short buttons;
-# 211 "myLib.h"
+# 219 "myLib.h"
 typedef volatile struct {
     volatile const void *src;
     volatile void *dst;
@@ -91,9 +91,9 @@ typedef volatile struct {
 
 
 extern DMA *dma;
-# 251 "myLib.h"
+# 259 "myLib.h"
 void DMANow(int channel, volatile const void *src, volatile void *dst, unsigned int cnt);
-# 342 "myLib.h"
+# 350 "myLib.h"
 typedef struct{
     const unsigned char* data;
     int length;
@@ -226,11 +226,19 @@ void initPlayer2() {
 
 void updatePlayer2() {
     if ((!(~(oldButtons)&((1<<6))) && (~buttons & ((1<<6)))) && !amJumping) {
-        player.rdel -= 1700;
+        if ((~((*(volatile unsigned short *)0x04000130)) & ((1<<0)))) {
+            player.rdel -= (1700 + 300);
+        } else {
+            player.rdel -= 1700;
+        }
+
         amJumping = 1;
         playSoundB(grunt, 4234, 0);
 
     }
+
+
+
 
 
     if(player.rdel > 0){
