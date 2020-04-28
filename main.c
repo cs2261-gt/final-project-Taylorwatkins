@@ -1,17 +1,8 @@
-/*In this milestone I finalized all the backgrounds. I made a pause screen
-with a scrolling background. I fixed the rock fall collisions. I added a
-cheat to the sport game. If you press a all the spiders disappear. I also 
-added a timer to the speed game. I have two sprites with more than 3 frames
-of animation, the sport climber and the numbers in the speed game, all other
-sprites have two animation states except for the rocks which just have one. 
-I add all of the sound for the game. I have 5 looping songs and 1 non looping
-sound, a grunt in the speed game. I may add the scream for when the sport player
-dies but it's not a priority right now. I also implemented alpha blending in 
-the sport game when the player "falls" off the edge of the mountain. I really want
-to get an A on this assignment so if you have any suggestions please let me know.
-Also for some reason, all the sprites in the game alpha blend when I have alpha
-blend off for the spiders and rocks, so if that's a quick fix for that that you 
-know of i'd really appreciate a solution. Thank you */
+/*This is the final iterations of this game and I want to thank all the 
+TAs that helped me out because I wouldn't have been able to do it without
+them. This final project should be playable without any instructions. To 
+know the cheat, I put it as a comment on the game.c and game2.c files.
+Again, thank you so much. */
 #include <stdlib.h>
 #include <stdio.h>
 #include "myLib.h"
@@ -35,6 +26,7 @@ know of i'd really appreciate a solution. Thank you */
 #include "backClouds.h"
 #include "frontGuyClimbing.h"
 #include "falling.h"
+
 
 
 // Prototypes

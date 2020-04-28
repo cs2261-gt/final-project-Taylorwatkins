@@ -1,3 +1,4 @@
+//Cheat: Press a while jumping and you can jump a little bit higher
 #include "myLib.h"
 #include "game2.h"
 #include "collision2.h"
@@ -26,8 +27,6 @@ int winG2;
 void initGame2() {
     hOff = 0;
     vOff = 512 - SCREENHEIGHT - 1;
-    // ground = (SCREENHEIGHT / 2 + vOff);
-    //ground = 512 - player.height;
     amJumping = 1;
 
     onBar = 0;
@@ -74,7 +73,6 @@ void updatePlayer2() {
         } else {
             player.rdel -= JUMPPOWER;
         }
-        //player.rdel -= JUMPPOWER;
         amJumping = 1;
         playSoundB(grunt, GRUNTLEN, 0);
         
@@ -180,7 +178,7 @@ void drawPlayer2() {
 void initNums() {
     nums.width = 8;
     nums.height = 8;
-    nums.screenRow = nums.height; //+ vOff;
+    nums.screenRow = nums.height; 
     nums.screenCol = 20; 
     nums.rdel = 0;
     nums.cdel = 1;
@@ -193,7 +191,7 @@ void initNums() {
 void initNums10() {
     nums10.width = 8;
     nums10.height = 8;
-    nums10.screenRow = nums.height; //+ vOff;
+    nums10.screenRow = nums.height; 
     nums10.screenCol = 20 - 8; 
     nums10.rdel = 0;
     nums10.cdel = 1;
@@ -235,5 +233,6 @@ void updateNums10() {
         }
     }
     nums10.aniCounter++;
+
 
 }

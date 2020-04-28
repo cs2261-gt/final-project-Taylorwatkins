@@ -144,6 +144,12 @@ void initPlayer2();
 void updatePlayer2();
 void animatePlayer2();
 void drawPlayer2();
+void initNums();
+void initNums10();
+void drawNums();
+void drawNums10();
+void updateNums();
+void updateNums10();
 # 3 "game2.c" 2
 # 1 "collision2.h" 1
 # 20 "collision2.h"
@@ -392,5 +398,6 @@ void updateNums10() {
         }
     }
     nums10.aniCounter++;
+
 
 }

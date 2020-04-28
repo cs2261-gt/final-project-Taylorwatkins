@@ -1,3 +1,4 @@
+//Cheat: press a and all the spiders disappear
 #include "myLib.h"
 #include "game.h"
 #include "collisions.h"
@@ -12,8 +13,6 @@ ROCK rocks[ROCKCOUNT];
 SPIDER spiders[SPIDERCOUNT];
 int winG;
 int loseG;
-int time;
-int timeToNextBall;
 int count;
 int winCount;
 int playerVOff;
@@ -21,6 +20,7 @@ int screenBlock;
 int totalVOff;
 int blendCount;
 int evy;
+
 
 
 
@@ -55,8 +55,7 @@ void updateGame() {
     updateRock();
 
     
-/*     for (int i = 0; i < SPIDERCOUNT; i++)
-		updateSpider(&spiders[i]); */
+
 
     //only when vOff becomes 0
     if (vOff < 0 && screenBlock >= 28) { // don't decrement tracker if at the end of map
@@ -71,13 +70,7 @@ void updateGame() {
 	   
 	}
 
-    // if (playerVOff < 256) {
-    //     playerVOff -= 256;
-    // }
 
-    // if(playerVOff>256){
-    // 	playerVOff -= 256;
-    // }
 
 	REG_BG0HOFF = hOff;
 	REG_BG0VOFF = vOff;
@@ -91,8 +84,7 @@ void drawGame() {
 	drawSpiders();
 
 
-    //REG_BG0HOFF = hOff;
-    //REG_BG0VOFF = vOff;
+
 }
 
 void initPlayer() {
@@ -121,13 +113,6 @@ void updatePlayer() {
             animatePlayer();
             winCount--;
 
-          //   if ((vOff > 0 && climber.screenRow < SCREENHEIGHT / 2) || climber.worldRow < 384) { // weird hack to get bg to move once you reach last screenblock - 384 is 512 - 256/2
-          //       count++; 
-		        // vOff--;
-          //       totalVOff--; 
-          //       playerVOff--;
-                
-          //   }
             if ( climber.screenRow < SCREENHEIGHT / 2) { // weird hack to get bg to move once you reach last screenblock - 384 is 512 - 256/2
                 count++; 
 		        vOff--;
@@ -209,18 +194,14 @@ void animatePlayer() {
 
 
 void alphaBlend() {
-    //playSoundB(falling, FALLINGLEN, 0);
 
     if (blendCount % 20 && evy < 16) {
         evy++;
     }
     blendCount++;
-    //playSoundB(falling, FALLINGLEN, 0);
     if (evy == 16) {
         loseG = 1;
-        //playSoundB(falling, FALLINGLEN, 0);
     }  
-    //evy = 16;
     REG_BLDY = BLD_EY((evy));
 }
 
@@ -265,11 +246,6 @@ void updateRock() {
 	    if (rocks[i].worldCol > MAPWIDTH - rocks[i].width) {
 		    rocks[i].worldCol = MAPWIDTH - rocks[i].width;
 	    }
-     if (!(collisionsBitmap[OFFSET(rocks[i].worldCol, rocks[i].worldRow, MAPWIDTH)]
-        && collisionsBitmap[OFFSET(rocks[i].worldCol, rocks[i].worldRow + rocks[i].height - 1, MAPWIDTH)])) {
-            animateRocks();
-            rocks[i].active = 0;
-    } 
 
 	//Make the balls fall
         if(rocks[i].active) {
@@ -304,15 +280,6 @@ void makeBallsFall() {
 			break;
 		}
 	}
-}
-void animateRocks() {
-    for (int i = 0; i < ROCKCOUNT; i++) {
-        if(rocks[i].aniCounter % 100 == 0) {
-            rocks[i].curFrame = (rocks[i].curFrame + 1) % rocks[i].numFrames;
-        }
-        rocks[i].aniCounter++;
-    }
-
 }
 
 

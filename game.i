@@ -182,6 +182,7 @@ void drawRocks();
 void drawSpiders();
 void updateRock();
 void makeBallsFall();
+void alphaBlend();
 # 3 "game.c" 2
 # 1 "collisions.h" 1
 # 20 "collisions.h"
@@ -196,7 +197,7 @@ extern const unsigned short collisionLoseBitmap[262144];
 
 
 
-extern const signed char falling[33120];
+extern const signed char falling[17137];
 # 6 "game.c" 2
 
 int hOff;
@@ -216,6 +217,7 @@ int screenBlock;
 int totalVOff;
 int blendCount;
 int evy;
+
 
 
 
@@ -253,7 +255,6 @@ void updateGame() {
 
 
 
-
     if (vOff < 0 && screenBlock >= 28) {
 
   screenBlock--;
@@ -265,7 +266,9 @@ void updateGame() {
 
 
  }
-# 82 "game.c"
+
+
+
  (*(volatile unsigned short *)0x04000010) = hOff;
  (*(volatile unsigned short *)0x04000012) = vOff;
 
@@ -276,7 +279,6 @@ void drawGame() {
     drawPlayer();
  drawRocks();
  drawSpiders();
-
 
 
 
@@ -307,7 +309,7 @@ void updatePlayer() {
             climber.worldRow -= climber.rdel;
             animatePlayer();
             winCount--;
-# 131 "game.c"
+
             if ( climber.screenRow < 160 / 2) {
                 count++;
           vOff--;
@@ -390,17 +392,13 @@ void animatePlayer() {
 
 void alphaBlend() {
 
-
     if (blendCount % 20 && evy < 16) {
         evy++;
     }
     blendCount++;
-
     if (evy == 16) {
         loseG = 1;
-
     }
-
     (*(volatile unsigned short*)0x04000054) = (((evy))<<0);
 }
 
@@ -445,11 +443,6 @@ void updateRock() {
      if (rocks[i].worldCol > 256 - rocks[i].width) {
       rocks[i].worldCol = 256 - rocks[i].width;
      }
-     if (!(collisionsBitmap[((rocks[i].worldRow)*(256)+(rocks[i].worldCol))]
-        && collisionsBitmap[((rocks[i].worldRow + rocks[i].height - 1)*(256)+(rocks[i].worldCol))])) {
-            animateRocks();
-            rocks[i].active = 0;
-    }
 
 
         if(rocks[i].active) {
@@ -484,15 +477,6 @@ void makeBallsFall() {
    break;
   }
  }
-}
-void animateRocks() {
-    for (int i = 0; i < 5; i++) {
-        if(rocks[i].aniCounter % 100 == 0) {
-            rocks[i].curFrame = (rocks[i].curFrame + 1) % rocks[i].numFrames;
-        }
-        rocks[i].aniCounter++;
-    }
-
 }
 
 

@@ -1405,7 +1405,7 @@ extern const unsigned short instructionBGPal[256];
 # 25 "main.c" 2
 # 1 "instructionBG2.h" 1
 # 22 "instructionBG2.h"
-extern const unsigned short instructionBG2Tiles[3904];
+extern const unsigned short instructionBG2Tiles[4544];
 
 
 extern const unsigned short instructionBG2Map[1024];
@@ -1607,6 +1607,7 @@ extern const unsigned short frontGuyClimbingPal[256];
 
 extern const signed char falling[17137];
 # 38 "main.c" 2
+
 
 
 
@@ -2010,7 +2011,7 @@ void goToInstructions2() {
     int vOff = 0;
 
     DMANow(3, instructionBG2Pal, ((unsigned short *)0x5000000), 256);
-    DMANow(3, instructionBG2Tiles, &((charblock *)0x6000000)[0], 7808 / 2);
+    DMANow(3, instructionBG2Tiles, &((charblock *)0x6000000)[0], 9088 / 2);
     DMANow(3, instructionBG2Map, &((screenblock *)0x6000000)[28], 1024 * 4);
 
     (*(volatile unsigned short*)0x4000008) = ((0)<<2) | ((28)<<8) | (0<<7) | (0<<14);

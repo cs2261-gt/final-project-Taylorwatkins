@@ -69,4 +69,6 @@ void drawRocks();
 void drawSpiders();
 void updateRock();
 void makeBallsFall();
+void alphaBlend();
+
 
