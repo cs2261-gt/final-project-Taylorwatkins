@@ -9,6 +9,14 @@ typedef unsigned int u32;
 // Common Macros
 #define OFFSET(col,row,rowlen) ((row)*(rowlen)+(col))
 
+//Alpha Blending
+#define REG_BLDCNT (*(volatile unsigned short*)0x04000050)
+#define BLD_OBJa (1<<4)
+#define BLD_WHITE (1<<7)
+#define REG_BLDY (*(volatile unsigned short*)0x04000054)
+#define BLD_EY(num) ((num)<<0)
+
+
 // ================================= DISPLAY ==================================
 
 // Display Control Register
